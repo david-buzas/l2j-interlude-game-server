@@ -39,6 +39,7 @@ public class GeoData
 		{
 			if (Config.GEODATA > 0)
 			{
+				_log.info("Geodata Engine: Enabled.");
 				_instance = GeoEngine.getInstance();
 			}
 			else

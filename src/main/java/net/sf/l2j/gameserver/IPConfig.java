@@ -49,7 +49,7 @@ public class IPConfig implements IXmlReader {
 	
 	private static final Logger LOG = Logger.getLogger(IPConfig.class.getName());
 	
-	private static final String IP_CONFIG_FILE = "./config/ipconfig.xml";
+	private static final String IP_CONFIG_FILE = "./config/default-ipconfig.xml";
 	
 	private final List<String> _subnets = new ArrayList<>(5);
 	

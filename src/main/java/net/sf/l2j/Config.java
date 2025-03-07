@@ -31,6 +31,8 @@ import java.util.logging.Logger;
 import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
+import static net.sf.l2j.config.Configuration.*;
+
 /**
  * This class contains global server configuration.<br>
  * It has static final fields initialized from configuration files.<br>
@@ -50,7 +52,7 @@ public final class Config {
 	public static boolean TEST_SERVER;
 	
 	/** Game Server ports */
-	public static int PORT_GAME;
+	public static int PORT_GAME = server().getGameserverPort();
 	/** Login Server port */
 	public static int PORT_LOGIN;
 	/** Login Server bind ip */
@@ -60,22 +62,22 @@ public final class Config {
 	/** Number of seconds the IP ban will last, default 10 minutes */
 	public static int LOGIN_BLOCK_AFTER_BAN;
 	/** Hostname of the Game Server */
-	public static String GAMESERVER_HOSTNAME;
+	public static String GAMESERVER_HOSTNAME = server().getGameserverHostname();
 	
 	// Access to database
 	/** Driver to access to database */
-	public static String DATABASE_DRIVER;
+	public static String DATABASE_DRIVER = server().getDriver();
 	/** Path to access to database */
-	public static String DATABASE_URL;
+	public static String DATABASE_URL = server().getURL();
 	/** Database login */
-	public static String DATABASE_LOGIN;
+	public static String DATABASE_LOGIN = server().getLogin();
 	/** Database password */
-	public static String DATABASE_PASSWORD;
+	public static String DATABASE_PASSWORD = server().getPassword();
 	/** Maximum number of connections to the database */
-	public static int DATABASE_MAX_CONNECTIONS;
+	public static int DATABASE_MAX_CONNECTIONS = server().getMaximumDbConnections();
 	
 	/** Maximum number of players allowed to play simultaneously on server */
-	public static int MAXIMUM_ONLINE_USERS;
+	public static int MAXIMUM_ONLINE_USERS = server().getMaximumOnlineUsers();
 	
 	// Setting for serverList
 	/** Displays [] in front of server name ? */
@@ -105,11 +107,11 @@ public final class Config {
 	public static boolean AUTO_LOOT_HERBS;
 	
 	/** Character name template */
-	public static String CNAME_TEMPLATE;
+	public static String CNAME_TEMPLATE = server().getCnameTemplate();
 	/** Pet name template */
-	public static String PET_NAME_TEMPLATE;
+	public static String PET_NAME_TEMPLATE = server().getPetNameTemplate();
 	/** Maximum number of characters per account */
-	public static int MAX_CHARACTERS_NUMBER_PER_ACCOUNT;
+	public static int MAX_CHARACTERS_NUMBER_PER_ACCOUNT = server().getCharMaxNumber();
 	
 	/** Global chat state */
 	public static String DEFAULT_GLOBAL_CHAT;
@@ -626,9 +628,9 @@ public final class Config {
 	
 	// protocol revision
 	/** Minimal protocol revision */
-	public static int MIN_PROTOCOL_REVISION;
+	public static int MIN_PROTOCOL_REVISION = server().getMinProtocolRevision();
 	/** Maximal protocol revision */
-	public static int MAX_PROTOCOL_REVISION;
+	public static int MAX_PROTOCOL_REVISION = server().getMaxProtocolRevision();
 	
 	// random animation interval
 	/** Minimal time between 2 animations of a NPC */
@@ -705,9 +707,9 @@ public final class Config {
 	public static boolean CHECK_KNOWN;
 	
 	/** Game Server login port */
-	public static int GAME_SERVER_LOGIN_PORT;
+	public static int GAME_SERVER_LOGIN_PORT = server().getLoginPort();
 	/** Game Server login Host */
-	public static String GAME_SERVER_LOGIN_HOST;
+	public static String GAME_SERVER_LOGIN_HOST = server().getLoginHost();
 	public static int PATH_NODE_RADIUS;
 	public static int NEW_NODE_ID;
 	public static int SELECTED_NODE_ID;
@@ -995,14 +997,14 @@ public final class Config {
 	public static boolean ACCEPT_NEW_GAMESERVER;
 	
 	/** Server ID used with the HexID */
-	public static int SERVER_ID;
+	public static int SERVER_ID = hexID().getServerID();
 	/** Hexadecimal ID of the game server */
 	public static byte[] HEX_ID;
 	
 	/** Accept alternate ID for server ? */
-	public static boolean ACCEPT_ALTERNATE_ID;
+	public static boolean ACCEPT_ALTERNATE_ID = server().getAcceptAlternateID();
 	/** ID for request to the server */
-	public static int REQUEST_ID;
+	public static int REQUEST_ID = server().getRequestServerID();
 	public static boolean RESERVE_HOST_ON_LOGIN = false;
 	
 	public static int MINIMUM_UPDATE_DISTANCE;
@@ -1123,7 +1125,7 @@ public final class Config {
 	public static int CH_FRONT2_FEE;
 	
 	/** GeoData 0/1/2 */
-	public static int GEODATA;
+	public static int GEODATA = options().getGeoData();
 	/** Force loading GeoData to physical memory */
 	public static boolean FORCE_GEODATA;
 	public static boolean ACCEPT_GEOEDITOR_CONN;
@@ -1147,32 +1149,32 @@ public final class Config {
 			InputStream is = new FileInputStream(new File(CONFIGURATION_FILE));
 			serverSettings.load(is);
 			is.close();
-			
-			GAMESERVER_HOSTNAME = serverSettings.getProperty("GameserverHostname");
-			PORT_GAME = Integer.parseInt(serverSettings.getProperty("GameserverPort", "7777"));
-			
-			GAME_SERVER_LOGIN_PORT = Integer.parseInt(serverSettings.getProperty("LoginPort", "9014"));
-			GAME_SERVER_LOGIN_HOST = serverSettings.getProperty("LoginHost", "127.0.0.1");
-			
-			REQUEST_ID = Integer.parseInt(serverSettings.getProperty("RequestServerID", "0"));
-			ACCEPT_ALTERNATE_ID = Boolean.parseBoolean(serverSettings.getProperty("AcceptAlternateID", "True"));
-			
-			DATABASE_DRIVER = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
-			DATABASE_URL = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jdb");
-			DATABASE_LOGIN = serverSettings.getProperty("Login", "root");
-			DATABASE_PASSWORD = serverSettings.getProperty("Password", "");
-			DATABASE_MAX_CONNECTIONS = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "10"));
-			
+
+//			GAMESERVER_HOSTNAME = server().getGameserverHostname();
+//			PORT_GAME = server().getGameserverPort();
+
+//			GAME_SERVER_LOGIN_PORT = Integer.parseInt(serverSettings.getProperty("LoginPort", "9014"));
+//			GAME_SERVER_LOGIN_HOST = serverSettings.getProperty("LoginHost", "127.0.0.1");
+
+//			REQUEST_ID = Integer.parseInt(serverSettings.getProperty("RequestServerID", "0"));
+//			ACCEPT_ALTERNATE_ID = Boolean.parseBoolean(serverSettings.getProperty("AcceptAlternateID", "True"));
+
+//			DATABASE_DRIVER = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
+//			DATABASE_URL = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jdb");
+//			DATABASE_LOGIN = serverSettings.getProperty("Login", "root");
+//			DATABASE_PASSWORD = serverSettings.getProperty("Password", "");
+//			DATABASE_MAX_CONNECTIONS = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "10"));
+
 			DATAPACK_ROOT = new File(serverSettings.getProperty("DatapackRoot", ".")).getCanonicalFile();
 			
-			CNAME_TEMPLATE = serverSettings.getProperty("CnameTemplate", ".*");
-			PET_NAME_TEMPLATE = serverSettings.getProperty("PetNameTemplate", ".*");
+//			CNAME_TEMPLATE = serverSettings.getProperty("CnameTemplate", ".*");
+//			PET_NAME_TEMPLATE = serverSettings.getProperty("PetNameTemplate", ".*");
 			
-			MAX_CHARACTERS_NUMBER_PER_ACCOUNT = Integer.parseInt(serverSettings.getProperty("CharMaxNumber", "0"));
-			MAXIMUM_ONLINE_USERS = Integer.parseInt(serverSettings.getProperty("MaximumOnlineUsers", "100"));
+//			MAX_CHARACTERS_NUMBER_PER_ACCOUNT = Integer.parseInt(serverSettings.getProperty("CharMaxNumber", "0"));
+//			MAXIMUM_ONLINE_USERS = Integer.parseInt(serverSettings.getProperty("MaximumOnlineUsers", "100"));
 			
-			MIN_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MinProtocolRevision", "660"));
-			MAX_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MaxProtocolRevision", "665"));
+//			MIN_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MinProtocolRevision", "660"));
+//			MAX_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MaxProtocolRevision", "665"));
 			
 			if (MIN_PROTOCOL_REVISION > MAX_PROTOCOL_REVISION) {
 				throw new Error("MinProtocolRevision is bigger than MaxProtocolRevision in server configuration file.");
@@ -1301,7 +1303,7 @@ public final class Config {
 			GRID_NEIGHBOR_TURNON_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOnTime", "30"));
 			GRID_NEIGHBOR_TURNOFF_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOffTime", "300"));
 			
-			GEODATA = Integer.parseInt(optionsSettings.getProperty("GeoData", "0"));
+//			GEODATA = Integer.parseInt(optionsSettings.getProperty("GeoData", "0"));
 			FORCE_GEODATA = Boolean.parseBoolean(optionsSettings.getProperty("ForceGeoData", "True"));
 			ACCEPT_GEOEDITOR_CONN = Boolean.parseBoolean(optionsSettings.getProperty("AcceptGeoeditorConn", "False"));
 			
@@ -1945,8 +1947,8 @@ public final class Config {
 			InputStream is = new FileInputStream(HEXID_FILE);
 			Settings.load(is);
 			is.close();
-			SERVER_ID = Integer.parseInt(Settings.getProperty("ServerID"));
-			HEX_ID = new BigInteger(Settings.getProperty("HexID"), 16).toByteArray();
+//			SERVER_ID = Integer.parseInt(Settings.getProperty("ServerID"));
+			HEX_ID = new BigInteger(hexID().getHexID(), 16).toByteArray();
 		} catch (Exception e) {
 			_log.warning("Could not load HexID file (" + HEXID_FILE + "). Hopefully login will give us one.");
 		}
