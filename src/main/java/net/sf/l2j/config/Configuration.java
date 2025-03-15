@@ -17,6 +17,8 @@ public class Configuration {
 
     private static final IDFactoryConfiguration idFactory = ConfigFactory.create(IDFactoryConfiguration.class);
 
+    private static final OtherConfiguration other = ConfigFactory.create(OtherConfiguration.class);
+
     public static ServerConfiguration server() {
         return server;
     }
@@ -43,5 +45,9 @@ public class Configuration {
 
     public static IDFactoryConfiguration idFactory() {
         return idFactory;
+    }
+
+    public static OtherConfiguration other() {
+        return other;
     }
 }

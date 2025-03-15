@@ -256,11 +256,11 @@ public final class Config {
 	public static boolean LOG_ITEMS = options().getLogItems();
 	
 	/** Alternative privileges for admin */
-	public static boolean ALT_PRIVILEGES_ADMIN;
+	public static boolean ALT_PRIVILEGES_ADMIN = other().getAltPrivilegesAdmin();
 	/** Alternative secure check privileges */
-	public static boolean ALT_PRIVILEGES_SECURE_CHECK;
+	public static boolean ALT_PRIVILEGES_SECURE_CHECK = other().getAltPrivilegesSecureCheck();
 	/** Alternative default level for privileges */
-	public static int ALT_PRIVILEGES_DEFAULT_LEVEL;
+	public static int ALT_PRIVILEGES_DEFAULT_LEVEL = other().getAltPrivilegesDefaultLevel();
 	
 	/** Olympiad Competition Starting time */
 	public static int ALT_OLY_START_TIME;
@@ -563,8 +563,8 @@ public final class Config {
 	public static boolean ALLOW_MANOR = options().getAllowManor();
 	
 	/** Jail config **/
-	public static boolean JAIL_IS_PVP;
-	public static boolean JAIL_DISABLE_CHAT;
+	public static boolean JAIL_IS_PVP = other().getJailIsPvp();
+	public static boolean JAIL_DISABLE_CHAT = other().getJailDisableChat();
 	
 	/** Enumeration describing values for Allowing the use of L2Walker client */
 	public static enum L2WalkerAllowed {
@@ -620,11 +620,11 @@ public final class Config {
 	
 	// Pets
 	/** Speed of Weverns */
-	public static int WYVERN_SPEED;
+	public static int WYVERN_SPEED = other().getWyvernSpeed();
 	/** Speed of Striders */
-	public static int STRIDER_SPEED;
+	public static int STRIDER_SPEED = other().getStriderSpeed();
 	/** Allow Wyvern Upgrader ? */
-	public static boolean ALLOW_WYVERN_UPGRADER;
+	public static boolean ALLOW_WYVERN_UPGRADER = other().getAllowWyvernUpgrader();
 	
 	// protocol revision
 	/** Minimal protocol revision */
@@ -702,8 +702,7 @@ public final class Config {
 	public static final String SEVENSIGNS_FILE = "./config/sevensigns.properties";
 	public static final String CLANHALL_CONFIG_FILE = "./config/clanhall.properties";
 	public static final String L2JMOD_CONFIG_FILE = "./config/l2jmods.properties";
-	public static int MAX_ITEM_IN_PACKET;
-	
+
 	public static boolean CHECK_KNOWN = options().getCheckKnownList();
 	
 	/** Game Server login port */
@@ -727,7 +726,7 @@ public final class Config {
 	 */
 	public static boolean FORCE_INVENTORY_UPDATE = options().getForceInventoryUpdate();
 	/** Disable the use of guards against agressive monsters ? */
-	public static boolean ALLOW_GUARDS;
+	public static boolean ALLOW_GUARDS = other().getAllowGuards();
 	/** Allow use Event Managers for change occupation ? */
 	public static boolean ALLOW_CLASS_MASTERS;
 	/** Time between 2 updates of IP */
@@ -741,21 +740,23 @@ public final class Config {
 	
 	// Inventory slots limit
 	/** Maximum inventory slots limits for non dwarf characters */
-	public static int INVENTORY_MAXIMUM_NO_DWARF;
+	public static int INVENTORY_MAXIMUM_NO_DWARF = other().getMaximumSlotsForNoDwarf();
 	/** Maximum inventory slots limits for dwarf characters */
-	public static int INVENTORY_MAXIMUM_DWARF;
+	public static int INVENTORY_MAXIMUM_DWARF = other().getMaximumSlotsForDwarf();
 	/** Maximum inventory slots limits for GM */
-	public static int INVENTORY_MAXIMUM_GM;
+	public static int INVENTORY_MAXIMUM_GM = other().getMaximumSlotsForGMPlayer();
+
+	public static int MAX_ITEM_IN_PACKET = Math.max(INVENTORY_MAXIMUM_NO_DWARF, Math.max(INVENTORY_MAXIMUM_DWARF, INVENTORY_MAXIMUM_GM));
 	
 	// Warehouse slots limits
 	/** Maximum inventory slots limits for non dwarf warehouse */
-	public static int WAREHOUSE_SLOTS_NO_DWARF;
+	public static int WAREHOUSE_SLOTS_NO_DWARF = other().getMaximumWarehouseSlotsForNoDwarf();
 	/** Maximum inventory slots limits for dwarf warehouse */
-	public static int WAREHOUSE_SLOTS_DWARF;
+	public static int WAREHOUSE_SLOTS_DWARF = other().getMaximumWarehouseSlotsForDwarf();
 	/** Maximum inventory slots limits for clan warehouse */
-	public static int WAREHOUSE_SLOTS_CLAN;
+	public static int WAREHOUSE_SLOTS_CLAN = other().getMaximumWarehouseSlotsForClan();
 	/** Maximum inventory slots limits for freight */
-	public static int FREIGHT_SLOTS;
+	public static int FREIGHT_SLOTS = other().getMaximumFreightSlots();
 	
 	// Karma System Variables
 	/** Minimum karma gain/loss */
@@ -783,12 +784,12 @@ public final class Config {
 	public static List<Integer> KARMA_LIST_NONDROPPABLE_ITEMS = new FastList<>();
 	
 	/** List of items that cannot be dropped (seperated by ",") */
-	public static String NONDROPPABLE_ITEMS;
+	public static String NONDROPPABLE_ITEMS = other().getListOfNonDroppableItems();
 	/** List of items that cannot be dropped */
 	public static List<Integer> LIST_NONDROPPABLE_ITEMS = new FastList<>();
 	
 	/** List of NPCs that rent pets (seperated by ",") */
-	public static String PET_RENT_NPC;
+	public static String PET_RENT_NPC = other().getListPetRentNpc();
 	/** List of NPCs that rent pets */
 	public static List<Integer> LIST_PET_RENT_NPC = new FastList<>();
 	
@@ -902,51 +903,51 @@ public final class Config {
 	 * Allow lesser effects to be canceled if stronger effects are used when effects of the same stack group are used.<br>
 	 * New effects that are added will be canceled if they are of lesser priority to the old one.
 	 */
-	public static boolean EFFECT_CANCELING;
+	public static boolean EFFECT_CANCELING = other().getCancelLesserEffect();
 	
 	/** Auto-delete invalid quest data ? */
 	public static boolean AUTODELETE_INVALID_QUEST_DATA = options().getAutoDeleteInvalidQuestData();
 	
 	/** Chance that an item will succesfully be enchanted */
-	public static int ENCHANT_CHANCE_WEAPON;
-	public static int ENCHANT_CHANCE_ARMOR;
-	public static int ENCHANT_CHANCE_JEWELRY;
+	public static int ENCHANT_CHANCE_WEAPON = other().getEnchantChanceWeapon();
+	public static int ENCHANT_CHANCE_ARMOR = other().getEnchantChanceArmor();
+	public static int ENCHANT_CHANCE_JEWELRY = other().getEnchantChanceJewelry();
 	/** Maximum level of enchantment */
-	public static int ENCHANT_MAX_WEAPON;
-	public static int ENCHANT_MAX_ARMOR;
-	public static int ENCHANT_MAX_JEWELRY;
+	public static int ENCHANT_MAX_WEAPON = other().getEnchantMaxWeapon();
+	public static int ENCHANT_MAX_ARMOR = other().getEnchantMaxArmor();
+	public static int ENCHANT_MAX_JEWELRY = other().getEnchantMaxJewelry();
 	/** maximum level of safe enchantment for normal items */
-	public static int ENCHANT_SAFE_MAX;
+	public static int ENCHANT_SAFE_MAX = other().getEnchantSafeMax();
 	/** maximum level of safe enchantment for full body armor */
-	public static int ENCHANT_SAFE_MAX_FULL;
+	public static int ENCHANT_SAFE_MAX_FULL = other().getEnchantSafeMaxFull();
 	
 	// Character multipliers
 	/** Multiplier for character HP regeneration */
-	public static double HP_REGEN_MULTIPLIER;
+	public static double HP_REGEN_MULTIPLIER = other().getHpRegenMultiplier() / 100;
 	/** Mutilplier for character MP regeneration */
-	public static double MP_REGEN_MULTIPLIER;
+	public static double MP_REGEN_MULTIPLIER = other().getMpRegenMultiplier() / 100;
 	/** Multiplier for character CP regeneration */
-	public static double CP_REGEN_MULTIPLIER;
+	public static double CP_REGEN_MULTIPLIER = other().getCpRegenMultiplier() / 100;
 	
 	// Raid Boss multipliers
 	/** Multiplier for Raid boss HP regeneration */
-	public static double RAID_HP_REGEN_MULTIPLIER;
+	public static double RAID_HP_REGEN_MULTIPLIER = other().getRaidHpRegenMultiplier() / 100;
 	/** Mulitplier for Raid boss MP regeneration */
-	public static double RAID_MP_REGEN_MULTIPLIER;
+	public static double RAID_MP_REGEN_MULTIPLIER = other().getRaidMpRegenMultiplier() / 100;
 	/** Multiplier for Raid boss defense multiplier */
-	public static double RAID_DEFENCE_MULTIPLIER;
+	public static double RAID_DEFENCE_MULTIPLIER = other().getRaidDefenceMultiplier() / 100;
 	/** Raid Boss Minin Spawn Timer */
-	public static double RAID_MINION_RESPAWN_TIMER;
+	public static double RAID_MINION_RESPAWN_TIMER = other().getRaidMinionRespawnTime();
 	/** Mulitplier for Raid boss minimum time respawn */
-	public static float RAID_MIN_RESPAWN_MULTIPLIER;
+	public static float RAID_MIN_RESPAWN_MULTIPLIER = other().getRaidMinRespawnMultiplier();
 	/** Mulitplier for Raid boss maximum time respawn */
-	public static float RAID_MAX_RESPAWN_MULTIPLIER;
+	public static float RAID_MAX_RESPAWN_MULTIPLIER = other().getRaidMaxRespawnMultiplier();
 	/** Amount of adenas when starting a new character */
-	public static int STARTING_ADENA;
+	public static int STARTING_ADENA = other().getStartingAdena();
 	
 	/** Deep Blue Mobs' Drop Rules Enabled */
-	public static boolean DEEPBLUE_DROP_RULES;
-	public static int UNSTUCK_INTERVAL;
+	public static boolean DEEPBLUE_DROP_RULES = other().getUseDeepBlueDropRules();
+	public static int UNSTUCK_INTERVAL = other().getUnstuckInterval();
 	
 	/** Is telnet enabled ? */
 	public static boolean IS_TELNET_ENABLED = telnet().getEnableTelnet();
@@ -961,37 +962,37 @@ public final class Config {
 	public static String LIST_OF_HOSTS = telnet().getListOfHosts();
 	
 	/** Death Penalty chance */
-	public static int DEATH_PENALTY_CHANCE;
+	public static int DEATH_PENALTY_CHANCE = other().getDeathPenaltyChance();
 	
 	/** Player Protection control */
-	public static int PLAYER_SPAWN_PROTECTION;
-	public static int PLAYER_FAKEDEATH_UP_PROTECTION;
+	public static int PLAYER_SPAWN_PROTECTION = other().getPlayerSpawnProtection();
+	public static int PLAYER_FAKEDEATH_UP_PROTECTION = other().getPlayerFakeDeathUpProtection();
 	
 	/** Define Party XP cutoff point method - Possible values: level and percentage */
-	public static String PARTY_XP_CUTOFF_METHOD;
+	public static String PARTY_XP_CUTOFF_METHOD = other().getPartyXpCutoffMethod();
 	/** Define the cutoff point value for the "level" method */
-	public static int PARTY_XP_CUTOFF_LEVEL;
+	public static int PARTY_XP_CUTOFF_LEVEL = other().getPartyXpCutoffLevel();
 	/** Define the cutoff point value for the "percentage" method */
-	public static double PARTY_XP_CUTOFF_PERCENT;
+	public static double PARTY_XP_CUTOFF_PERCENT = other().getPartyXpCutoffPercent();
 	
 	/** Percent CP is restore on respawn */
-	public static double RESPAWN_RESTORE_CP;
+	public static double RESPAWN_RESTORE_CP = other().getRespawnRestoreCP() / 100;
 	/** Percent HP is restore on respawn */
-	public static double RESPAWN_RESTORE_HP;
+	public static double RESPAWN_RESTORE_HP = other().getRespawnRestoreHP() / 100;
 	/** Percent MP is restore on respawn */
-	public static double RESPAWN_RESTORE_MP;
+	public static double RESPAWN_RESTORE_MP = other().getRespawnRestoreMP() / 100;
 	/** Allow randomizing of the respawn point in towns. */
-	public static boolean RESPAWN_RANDOM_ENABLED;
+	public static boolean RESPAWN_RANDOM_ENABLED = other().getRespawnRandomInTown();
 	/** The maximum offset from the base respawn point to allow. */
-	public static int RESPAWN_RANDOM_MAX_OFFSET;
+	public static int RESPAWN_RANDOM_MAX_OFFSET = other().getRespawnRandomMaxOffset();
 	
 	/** Maximum number of available slots for pvt stores (sell/buy) - Dwarves */
-	public static int MAX_PVTSTORE_SLOTS_DWARF;
+	public static int MAX_PVTSTORE_SLOTS_DWARF = other().getMaxPvtStoreSlotsDwarf();
 	/** Maximum number of available slots for pvt stores (sell/buy) - Others */
-	public static int MAX_PVTSTORE_SLOTS_OTHER;
+	public static int MAX_PVTSTORE_SLOTS_OTHER = other().getMaxPvtStoreSlotsOther();
 	
 	/** Store skills cooltime on char exit/relogin */
-	public static boolean STORE_SKILL_COOLTIME;
+	public static boolean STORE_SKILL_COOLTIME = other().getStoreSkillCooltime();
 	/** Show licence or not just after login (if false, will directly go to the Server List */
 	public static boolean SHOW_LICENCE;
 	/** Force GameGuard authorization in loginserver */
@@ -1020,34 +1021,34 @@ public final class Config {
 	public static int KNOWNLIST_FORGET_DELAY = options().getKnownListForgetDelay();
 	public static int MINIMUN_UPDATE_TIME = options().getMinimumUpdateTime();
 	
-	public static boolean ANNOUNCE_MAMMON_SPAWN;
+	public static boolean ANNOUNCE_MAMMON_SPAWN = other().getAnnounceMammonSpawn();
 	public static boolean LAZY_CACHE = options().getLazyCache();
 	
 	/** Enable colored name for GM ? */
-	public static boolean GM_NAME_COLOR_ENABLED;
+	public static boolean GM_NAME_COLOR_ENABLED = other().getGMNameColorEnabled();
 	/** Color of GM name */
-	public static int GM_NAME_COLOR;
+	public static int GM_NAME_COLOR = Integer.decode("0x" + other().getGMNameColor());
 	/** Color of admin name */
-	public static int ADMIN_NAME_COLOR;
+	public static int ADMIN_NAME_COLOR = Integer.decode("0x" + other().getAdminNameColor());
 	/** Place an aura around the GM ? */
-	public static boolean GM_HERO_AURA;
+	public static boolean GM_HERO_AURA = other().getGMHeroAura();
 	/** Set the GM invulnerable at startup ? */
-	public static boolean GM_STARTUP_INVULNERABLE;
+	public static boolean GM_STARTUP_INVULNERABLE = other().getGMStartupInvulnerable();
 	/** Set the GM invisible at startup ? */
-	public static boolean GM_STARTUP_INVISIBLE;
+	public static boolean GM_STARTUP_INVISIBLE = other().getGMStartupInvisible();
 	/** Set silence to GM at startup ? */
-	public static boolean GM_STARTUP_SILENCE;
+	public static boolean GM_STARTUP_SILENCE = other().getGMStartupSilence();
 	/** Add GM in the GM list at startup ? */
-	public static boolean GM_STARTUP_AUTO_LIST;
+	public static boolean GM_STARTUP_AUTO_LIST = other().getGMStartupAutoList();
 	/** Change the way admin panel is shown */
-	public static String GM_ADMIN_MENU_STYLE;
+	public static String GM_ADMIN_MENU_STYLE = other().getGMAdminMenuStyle();
 	
 	/** Allow petition ? */
-	public static boolean PETITIONING_ALLOWED;
+	public static boolean PETITIONING_ALLOWED = other().getPetitioningAllowed();
 	/** Maximum number of petitions per player */
-	public static int MAX_PETITIONS_PER_PLAYER;
+	public static int MAX_PETITIONS_PER_PLAYER = other().getMaxPetitionsPerPlayer();
 	/** Maximum number of petitions pending */
-	public static int MAX_PETITIONS_PENDING;
+	public static int MAX_PETITIONS_PENDING = other().getMaxPetitionsPending();
 	
 	/** Bypass exploit protection ? */
 	public static boolean BYPASS_VALIDATION = options().getBypassValidation();
@@ -1169,125 +1170,15 @@ public final class Config {
 		for (String id : PROTECTED_ITEMS.split(",")) {
 			LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
 		}
-		
-		// other
-		try {
-			Properties otherSettings = new Properties();
-			InputStream is = new FileInputStream(new File(OTHER_CONFIG_FILE));
-			otherSettings.load(is);
-			is.close();
-			
-			DEEPBLUE_DROP_RULES = Boolean.parseBoolean(otherSettings.getProperty("UseDeepBlueDropRules", "True"));
-			ALLOW_GUARDS = Boolean.valueOf(otherSettings.getProperty("AllowGuards", "False"));
-			EFFECT_CANCELING = Boolean.valueOf(otherSettings.getProperty("CancelLesserEffect", "True"));
-			WYVERN_SPEED = Integer.parseInt(otherSettings.getProperty("WyvernSpeed", "100"));
-			STRIDER_SPEED = Integer.parseInt(otherSettings.getProperty("StriderSpeed", "80"));
-			ALLOW_WYVERN_UPGRADER = Boolean.valueOf(otherSettings.getProperty("AllowWyvernUpgrader", "False"));
-			
-			/* Inventory slots limits */
-			INVENTORY_MAXIMUM_NO_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumSlotsForNoDwarf", "80"));
-			INVENTORY_MAXIMUM_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumSlotsForDwarf", "100"));
-			INVENTORY_MAXIMUM_GM = Integer.parseInt(otherSettings.getProperty("MaximumSlotsForGMPlayer", "250"));
-			MAX_ITEM_IN_PACKET = Math.max(INVENTORY_MAXIMUM_NO_DWARF, Math.max(INVENTORY_MAXIMUM_DWARF, INVENTORY_MAXIMUM_GM));
-			
-			/* Inventory slots limits */
-			WAREHOUSE_SLOTS_NO_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumWarehouseSlotsForNoDwarf", "100"));
-			WAREHOUSE_SLOTS_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumWarehouseSlotsForDwarf", "120"));
-			WAREHOUSE_SLOTS_CLAN = Integer.parseInt(otherSettings.getProperty("MaximumWarehouseSlotsForClan", "150"));
-			FREIGHT_SLOTS = Integer.parseInt(otherSettings.getProperty("MaximumFreightSlots", "20"));
-			
-			/* chance to enchant an item over +3 */
-			ENCHANT_CHANCE_WEAPON = Integer.parseInt(otherSettings.getProperty("EnchantChanceWeapon", "68"));
-			ENCHANT_CHANCE_ARMOR = Integer.parseInt(otherSettings.getProperty("EnchantChanceArmor", "52"));
-			ENCHANT_CHANCE_JEWELRY = Integer.parseInt(otherSettings.getProperty("EnchantChanceJewelry", "54"));
-			/* limit on enchant */
-			ENCHANT_MAX_WEAPON = Integer.parseInt(otherSettings.getProperty("EnchantMaxWeapon", "255"));
-			ENCHANT_MAX_ARMOR = Integer.parseInt(otherSettings.getProperty("EnchantMaxArmor", "255"));
-			ENCHANT_MAX_JEWELRY = Integer.parseInt(otherSettings.getProperty("EnchantMaxJewelry", "255"));
-			/* limit of safe enchant normal */
-			ENCHANT_SAFE_MAX = Integer.parseInt(otherSettings.getProperty("EnchantSafeMax", "3"));
-			/* limit of safe enchant full */
-			ENCHANT_SAFE_MAX_FULL = Integer.parseInt(otherSettings.getProperty("EnchantSafeMaxFull", "4"));
-			
-			/* if different from 100 (ie 100%) heal rate is modified acordingly */
-			HP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("HpRegenMultiplier", "100")) / 100;
-			MP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("MpRegenMultiplier", "100")) / 100;
-			CP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("CpRegenMultiplier", "100")) / 100;
-			
-			RAID_HP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidHpRegenMultiplier", "100")) / 100;
-			RAID_MP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidMpRegenMultiplier", "100")) / 100;
-			RAID_DEFENCE_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidDefenceMultiplier", "100")) / 100;
-			RAID_MINION_RESPAWN_TIMER = Integer.parseInt(otherSettings.getProperty("RaidMinionRespawnTime", "300000"));
-			RAID_MIN_RESPAWN_MULTIPLIER = Float.parseFloat(otherSettings.getProperty("RaidMinRespawnMultiplier", "1.0"));
-			RAID_MAX_RESPAWN_MULTIPLIER = Float.parseFloat(otherSettings.getProperty("RaidMaxRespawnMultiplier", "1.0"));
-			
-			STARTING_ADENA = Integer.parseInt(otherSettings.getProperty("StartingAdena", "100"));
-			UNSTUCK_INTERVAL = Integer.parseInt(otherSettings.getProperty("UnstuckInterval", "300"));
-			
-			/* Player protection after teleport or login */
-			PLAYER_SPAWN_PROTECTION = Integer.parseInt(otherSettings.getProperty("PlayerSpawnProtection", "0"));
-			
-			/* Player protection after recovering from fake death (works against mobs only) */
-			PLAYER_FAKEDEATH_UP_PROTECTION = Integer.parseInt(otherSettings.getProperty("PlayerFakeDeathUpProtection", "0"));
-			
-			/* Defines some Party XP related values */
-			PARTY_XP_CUTOFF_METHOD = otherSettings.getProperty("PartyXpCutoffMethod", "percentage");
-			PARTY_XP_CUTOFF_PERCENT = Double.parseDouble(otherSettings.getProperty("PartyXpCutoffPercent", "3."));
-			PARTY_XP_CUTOFF_LEVEL = Integer.parseInt(otherSettings.getProperty("PartyXpCutoffLevel", "30"));
-			
-			/* Amount of HP, MP, and CP is restored */
-			RESPAWN_RESTORE_CP = Double.parseDouble(otherSettings.getProperty("RespawnRestoreCP", "0")) / 100;
-			RESPAWN_RESTORE_HP = Double.parseDouble(otherSettings.getProperty("RespawnRestoreHP", "70")) / 100;
-			RESPAWN_RESTORE_MP = Double.parseDouble(otherSettings.getProperty("RespawnRestoreMP", "70")) / 100;
-			
-			RESPAWN_RANDOM_ENABLED = Boolean.parseBoolean(otherSettings.getProperty("RespawnRandomInTown", "False"));
-			RESPAWN_RANDOM_MAX_OFFSET = Integer.parseInt(otherSettings.getProperty("RespawnRandomMaxOffset", "50"));
-			
-			/* Maximum number of available slots for pvt stores */
-			MAX_PVTSTORE_SLOTS_DWARF = Integer.parseInt(otherSettings.getProperty("MaxPvtStoreSlotsDwarf", "5"));
-			MAX_PVTSTORE_SLOTS_OTHER = Integer.parseInt(otherSettings.getProperty("MaxPvtStoreSlotsOther", "4"));
-			
-			STORE_SKILL_COOLTIME = Boolean.parseBoolean(otherSettings.getProperty("StoreSkillCooltime", "true"));
-			
-			PET_RENT_NPC = otherSettings.getProperty("ListPetRentNpc", "30827");
-			LIST_PET_RENT_NPC = new FastList<>();
-			for (String id : PET_RENT_NPC.split(",")) {
-				LIST_PET_RENT_NPC.add(Integer.parseInt(id));
-			}
-			NONDROPPABLE_ITEMS = otherSettings.getProperty("ListOfNonDroppableItems", "1147,425,1146,461,10,2368,7,6,2370,2369,5598");
-			
-			LIST_NONDROPPABLE_ITEMS = new FastList<>();
-			for (String id : NONDROPPABLE_ITEMS.split(",")) {
-				LIST_NONDROPPABLE_ITEMS.add(Integer.parseInt(id));
-			}
-			
-			ANNOUNCE_MAMMON_SPAWN = Boolean.parseBoolean(otherSettings.getProperty("AnnounceMammonSpawn", "True"));
-			
-			ALT_PRIVILEGES_ADMIN = Boolean.parseBoolean(otherSettings.getProperty("AltPrivilegesAdmin", "False"));
-			ALT_PRIVILEGES_SECURE_CHECK = Boolean.parseBoolean(otherSettings.getProperty("AltPrivilegesSecureCheck", "True"));
-			ALT_PRIVILEGES_DEFAULT_LEVEL = Integer.parseInt(otherSettings.getProperty("AltPrivilegesDefaultLevel", "100"));
-			
-			GM_NAME_COLOR_ENABLED = Boolean.parseBoolean(otherSettings.getProperty("GMNameColorEnabled", "False"));
-			GM_NAME_COLOR = Integer.decode("0x" + otherSettings.getProperty("GMNameColor", "FFFF00"));
-			ADMIN_NAME_COLOR = Integer.decode("0x" + otherSettings.getProperty("AdminNameColor", "00FF00"));
-			GM_HERO_AURA = Boolean.parseBoolean(otherSettings.getProperty("GMHeroAura", "True"));
-			GM_STARTUP_INVULNERABLE = Boolean.parseBoolean(otherSettings.getProperty("GMStartupInvulnerable", "True"));
-			GM_STARTUP_INVISIBLE = Boolean.parseBoolean(otherSettings.getProperty("GMStartupInvisible", "True"));
-			GM_STARTUP_SILENCE = Boolean.parseBoolean(otherSettings.getProperty("GMStartupSilence", "True"));
-			GM_STARTUP_AUTO_LIST = Boolean.parseBoolean(otherSettings.getProperty("GMStartupAutoList", "True"));
-			GM_ADMIN_MENU_STYLE = otherSettings.getProperty("GMAdminMenuStyle", "modern");
-			
-			PETITIONING_ALLOWED = Boolean.parseBoolean(otherSettings.getProperty("PetitioningAllowed", "True"));
-			MAX_PETITIONS_PER_PLAYER = Integer.parseInt(otherSettings.getProperty("MaxPetitionsPerPlayer", "5"));
-			MAX_PETITIONS_PENDING = Integer.parseInt(otherSettings.getProperty("MaxPetitionsPending", "25"));
-			
-			JAIL_IS_PVP = Boolean.valueOf(otherSettings.getProperty("JailIsPvp", "True"));
-			JAIL_DISABLE_CHAT = Boolean.valueOf(otherSettings.getProperty("JailDisableChat", "True"));
-			
-			DEATH_PENALTY_CHANCE = Integer.parseInt(otherSettings.getProperty("DeathPenaltyChance", "20"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + OTHER_CONFIG_FILE + " File.");
+
+		LIST_PET_RENT_NPC = new FastList<>();
+		for (String id : PET_RENT_NPC.split(",")) {
+			LIST_PET_RENT_NPC.add(Integer.parseInt(id));
+		}
+
+		LIST_NONDROPPABLE_ITEMS = new FastList<>();
+		for (String id : NONDROPPABLE_ITEMS.split(",")) {
+			LIST_NONDROPPABLE_ITEMS.add(Integer.parseInt(id));
 		}
 		
 		// alternative settings
