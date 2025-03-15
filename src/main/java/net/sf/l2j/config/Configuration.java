@@ -13,6 +13,8 @@ public class Configuration {
 
     private static final L2JModsConfiguration l2JMods = ConfigFactory.create(L2JModsConfiguration.class);
 
+    private static final TelnetConfiguration telnet = ConfigFactory.create(TelnetConfiguration.class);
+
     public static ServerConfiguration server() {
         return server;
     }
@@ -21,9 +23,19 @@ public class Configuration {
         return options;
     }
 
-    public static HexIDConfiguration hexID() { return hexID; }
+    public static HexIDConfiguration hexID() {
+        return hexID;
+    }
 
-    public static RatesConfiguration rates() { return rates; }
+    public static RatesConfiguration rates() {
+        return rates;
+    }
 
-    public static L2JModsConfiguration l2JMods() { return l2JMods; }
+    public static L2JModsConfiguration l2JMods() {
+        return l2JMods;
+    }
+
+    public static TelnetConfiguration telnet() {
+        return telnet;
+    }
 }

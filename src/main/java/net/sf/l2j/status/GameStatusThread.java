@@ -115,12 +115,7 @@ public class GameStatusThread extends Thread {
 		}
 		
 		try {
-			Properties telnetSettings = new Properties();
-			InputStream telnetIS = new FileInputStream(new File(Config.TELNET_FILE));
-			telnetSettings.load(telnetIS);
-			telnetIS.close();
-			
-			String HostList = telnetSettings.getProperty("ListOfHosts", "127.0.0.1,localhost");
+			String HostList = Config.LIST_OF_HOSTS;
 			
 			if (Config.DEVELOPER) {
 				telnetOutput(3, "Comparing ip to list...");

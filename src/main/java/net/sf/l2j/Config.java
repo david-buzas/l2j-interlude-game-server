@@ -949,7 +949,16 @@ public final class Config {
 	public static int UNSTUCK_INTERVAL;
 	
 	/** Is telnet enabled ? */
-	public static boolean IS_TELNET_ENABLED;
+	public static boolean IS_TELNET_ENABLED = telnet().getEnableTelnet();
+
+	/** Telnet bind port */
+	public static int STATUS_PORT = telnet().getStatusPort();
+
+	/** Telnet password */
+	public static String STATUS_PW = telnet().getStatusPW();
+
+	/** Telnet hosts whitelist */
+	public static String LIST_OF_HOSTS = telnet().getListOfHosts();
 	
 	/** Death Penalty chance */
 	public static int DEATH_PENALTY_CHANCE;

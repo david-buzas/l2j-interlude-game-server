@@ -66,13 +66,9 @@ public class Status extends Thread {
 	
 	public Status() throws IOException {
 		super("Status");
-		Properties telnetSettings = new Properties();
-		InputStream is = new FileInputStream(new File(Config.TELNET_FILE));
-		telnetSettings.load(is);
-		is.close();
 		
-		_statusPort = Integer.parseInt(telnetSettings.getProperty("StatusPort", "12345"));
-		_statusPw = telnetSettings.getProperty("StatusPW");
+		_statusPort = Config.STATUS_PORT;
+		_statusPw = Config.STATUS_PW;
 		
 		if (_statusPw == null) {
 			System.out.println("Server's Telnet Function Has No Password Defined!");
