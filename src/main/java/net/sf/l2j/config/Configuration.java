@@ -9,6 +9,10 @@ public class Configuration {
 
     private static final HexIDConfiguration hexID = ConfigFactory.create(HexIDConfiguration.class);
 
+    private static final RatesConfiguration rates = ConfigFactory.create(RatesConfiguration.class);
+
+    private static final L2JModsConfiguration l2JMods = ConfigFactory.create(L2JModsConfiguration.class);
+
     public static ServerConfiguration server() {
         return server;
     }
@@ -18,4 +22,8 @@ public class Configuration {
     }
 
     public static HexIDConfiguration hexID() { return hexID; }
+
+    public static RatesConfiguration rates() { return rates; }
+
+    public static L2JModsConfiguration l2JMods() { return l2JMods; }
 }

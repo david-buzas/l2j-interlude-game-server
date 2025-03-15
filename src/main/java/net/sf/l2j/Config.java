@@ -42,14 +42,14 @@ import static net.sf.l2j.config.Configuration.*;
 public final class Config {
 	protected static final Logger _log = Logger.getLogger(Config.class.getName());
 	/** Debug/release mode */
-	public static boolean DEBUG;
+	public static boolean DEBUG = options().getDebug();
 	/** Enable/disable assertions */
-	public static boolean ASSERT;
+	public static boolean ASSERT = options().getAssert();
 	/** Enable/disable code 'in progress' */
-	public static boolean DEVELOPER;
+	public static boolean DEVELOPER = options().getDeveloper();
 	
 	/** Set if this server is a test server used for development */
-	public static boolean TEST_SERVER;
+	public static boolean TEST_SERVER = options().getTestServer();
 	
 	/** Game Server ports */
 	public static int PORT_GAME = server().getGameserverPort();
@@ -81,26 +81,26 @@ public final class Config {
 	
 	// Setting for serverList
 	/** Displays [] in front of server name ? */
-	public static boolean SERVER_LIST_BRACKET;
+	public static boolean SERVER_LIST_BRACKET = options().getServerListBrackets();
 	/** Displays a clock next to the server name ? */
-	public static boolean SERVER_LIST_CLOCK;
+	public static boolean SERVER_LIST_CLOCK = options().getServerListClock();
 	/** Display test server in the list of servers ? */
-	public static boolean SERVER_LIST_TESTSERVER;
+	public static boolean SERVER_LIST_TESTSERVER = options().getTestServer();
 	/** Set the server as gm only at startup ? */
-	public static boolean SERVER_GMONLY;
+	public static boolean SERVER_GMONLY = options().getServerGMOnly();
 	
 	// Thread pools size
 	/** Thread pool size effect */
-	public static int THREAD_P_EFFECTS;
+	public static int THREAD_P_EFFECTS = options().getThreadPoolSizeEffects();
 	/** Thread pool size general */
-	public static int THREAD_P_GENERAL;
+	public static int THREAD_P_GENERAL = options().getThreadPoolSizeGeneral();
 	/** Packet max thread */
-	public static int GENERAL_PACKET_THREAD_CORE_SIZE;
-	public static int IO_PACKET_THREAD_CORE_SIZE;
+	public static int GENERAL_PACKET_THREAD_CORE_SIZE = options().getGeneralPacketThreadCoreSize();
+	public static int IO_PACKET_THREAD_CORE_SIZE = options().getUrgentPacketThreadCoreSize();
 	/** General max thread */
-	public static int GENERAL_THREAD_CORE_SIZE;
+	public static int GENERAL_THREAD_CORE_SIZE = options().getGeneralThreadCoreSize();
 	/** AI max thread */
-	public static int AI_MAX_THREAD;
+	public static int AI_MAX_THREAD = options().getAiMaxThread();
 	
 	/** Accept auto-loot ? */
 	public static boolean AUTO_LOOT;
@@ -114,11 +114,11 @@ public final class Config {
 	public static int MAX_CHARACTERS_NUMBER_PER_ACCOUNT = server().getCharMaxNumber();
 	
 	/** Global chat state */
-	public static String DEFAULT_GLOBAL_CHAT;
+	public static String DEFAULT_GLOBAL_CHAT = options().getGlobalChat();
 	/** Trade chat state */
-	public static String DEFAULT_TRADE_CHAT;
+	public static String DEFAULT_TRADE_CHAT = options().getTradeChat();
 	/** For test servers - everybody has admin rights */
-	public static boolean EVERYBODY_HAS_ADMIN_RIGHTS;
+	public static boolean EVERYBODY_HAS_ADMIN_RIGHTS = options().getEverybodyHasAdminRights();
 	/** Alternative game crafting */
 	public static boolean ALT_GAME_CREATION;
 	/** Alternative game crafting speed mutiplier - default 0 (fastest but still not instant) */
@@ -251,9 +251,9 @@ public final class Config {
 	/** Spell Book needet to enchant skill */
 	public static boolean ES_SP_BOOK_NEEDED;
 	/** Logging Chat Window */
-	public static boolean LOG_CHAT;
+	public static boolean LOG_CHAT = options().getLogChat();
 	/** Logging Item Window */
-	public static boolean LOG_ITEMS;
+	public static boolean LOG_ITEMS = options().getLogItems();
 	
 	/** Alternative privileges for admin */
 	public static boolean ALT_PRIVILEGES_ADMIN;
@@ -432,31 +432,31 @@ public final class Config {
 	
 	/* Rate control */
 	/** Rate for eXperience Point rewards */
-	public static float RATE_XP;
+	public static float RATE_XP = rates().getRateXp();
 	/** Rate for Skill Point rewards */
-	public static float RATE_SP;
+	public static float RATE_SP = rates().getRateSp();
 	/** Rate for party eXperience Point rewards */
-	public static float RATE_PARTY_XP;
+	public static float RATE_PARTY_XP = rates().getRatePartyXp();
 	/** Rate for party Skill Point rewards */
-	public static float RATE_PARTY_SP;
+	public static float RATE_PARTY_SP = rates().getRatePartySp();
 	/** Rate for Quest rewards (XP and SP) */
-	public static float RATE_QUESTS_REWARD;
+	public static float RATE_QUESTS_REWARD = rates().getRateQuestsReward();
 	/** Rate for drop adena */
-	public static float RATE_DROP_ADENA;
+	public static float RATE_DROP_ADENA = rates().getRateDropAdena();
 	/** Rate for cost of consumable */
-	public static float RATE_CONSUMABLE_COST;
+	public static float RATE_CONSUMABLE_COST = rates().getRateConsumableCost();
 	/** Rate for dropped items */
-	public static float RATE_DROP_ITEMS;
+	public static float RATE_DROP_ITEMS = rates().getRateDropItems();
 	/** Rate for spoiled items */
-	public static float RATE_DROP_SPOIL;
+	public static float RATE_DROP_SPOIL = rates().getRateDropSpoil();
 	/** Rate for manored items */
-	public static int RATE_DROP_MANOR;
+	public static int RATE_DROP_MANOR = rates().getRateDropManor();
 	/** Rate for quest items */
-	public static float RATE_DROP_QUEST;
+	public static float RATE_DROP_QUEST = rates().getRateDropQuest();
 	/** Rate for karma and experience lose */
-	public static float RATE_KARMA_EXP_LOST;
+	public static float RATE_KARMA_EXP_LOST = rates().getRateKarmaExpLost();
 	/** Rate siege guards prices */
-	public static float RATE_SIEGE_GUARDS_PRICE;
+	public static float RATE_SIEGE_GUARDS_PRICE = rates().getRateSiegeGuardsPrice();
 	/*
 	 * Alternative Xp/Sp rewards, if not 0, then calculated as 2^((mob.level-player.level) / coef), A few examples for "AltGameExponentXp = 5." and "AltGameExponentSp = 3." diff = 0 (player and mob has the same level), XP bonus rate = 1, SP bonus rate = 1 diff = 3 (mob is 3 levels above), XP bonus
 	 * rate = 1.52, SP bonus rate = 2 diff = 5 (mob is 5 levels above), XP bonus rate = 2, SP bonus rate = 3.17 diff = -8 (mob is 8 levels below), XP bonus rate = 0.4, SP bonus rate = 0.16
@@ -467,74 +467,74 @@ public final class Config {
 	public static float ALT_GAME_EXPONENT_SP;
 	
 	/** Rate Common herbs */
-	public static float RATE_DROP_COMMON_HERBS;
+	public static float RATE_DROP_COMMON_HERBS = rates().getRateCommonHerbs();
 	/** Rate MP/HP herbs */
-	public static float RATE_DROP_MP_HP_HERBS;
+	public static float RATE_DROP_MP_HP_HERBS = rates().getRateHpMpHerbs();
 	/** Rate Common herbs */
-	public static float RATE_DROP_GREATER_HERBS;
+	public static float RATE_DROP_GREATER_HERBS = rates().getRateGreaterHerbs();
 	/** Rate Common herbs */
-	public static float RATE_DROP_SUPERIOR_HERBS;
+	public static float RATE_DROP_SUPERIOR_HERBS = rates().getRateSuperiorHerbs();
 	/** Rate Common herbs */
-	public static float RATE_DROP_SPECIAL_HERBS;
+	public static float RATE_DROP_SPECIAL_HERBS = rates().getRateSpecialHerbs();
 	
 	// Player Drop Rate control
 	/** Limit for player drop */
-	public static int PLAYER_DROP_LIMIT;
+	public static int PLAYER_DROP_LIMIT = rates().getPlayerDropLimit();
 	/** Rate for drop */
-	public static int PLAYER_RATE_DROP;
+	public static int PLAYER_RATE_DROP = rates().getPlayerRateDrop();
 	/** Rate for player's item drop */
-	public static int PLAYER_RATE_DROP_ITEM;
+	public static int PLAYER_RATE_DROP_ITEM = rates().getPlayerRateDropItem();
 	/** Rate for player's equipment drop */
-	public static int PLAYER_RATE_DROP_EQUIP;
+	public static int PLAYER_RATE_DROP_EQUIP = rates().getPlayerRateDropEquip();
 	/** Rate for player's equipment and weapon drop */
-	public static int PLAYER_RATE_DROP_EQUIP_WEAPON;
+	public static int PLAYER_RATE_DROP_EQUIP_WEAPON = rates().getPlayerRateDropEquipWeapon();
 	
 	// Pet Rates (Multipliers)
 	/** Rate for experience rewards of the pet */
-	public static float PET_XP_RATE;
+	public static float PET_XP_RATE = rates().getPetXpRate();
 	/** Rate for food consumption of the pet */
-	public static int PET_FOOD_RATE;
+	public static int PET_FOOD_RATE = rates().getPetFoodRate();
 	/** Rate for experience rewards of the Sin Eater */
-	public static float SINEATER_XP_RATE;
+	public static float SINEATER_XP_RATE = rates().getSinEaterXpRate();
 	
 	// Karma Drop Rate control
 	/** Karma drop limit */
-	public static int KARMA_DROP_LIMIT;
+	public static int KARMA_DROP_LIMIT = rates().getKarmaDropLimit();
 	/** Karma drop rate */
-	public static int KARMA_RATE_DROP;
+	public static int KARMA_RATE_DROP = rates().getKarmaRateDrop();
 	/** Karma drop rate for item */
-	public static int KARMA_RATE_DROP_ITEM;
+	public static int KARMA_RATE_DROP_ITEM = rates().getKarmaRateDropItem();
 	/** Karma drop rate for equipment */
-	public static int KARMA_RATE_DROP_EQUIP;
+	public static int KARMA_RATE_DROP_EQUIP = rates().getKarmaRateDropEquip();
 	/** Karma drop rate for equipment and weapon */
-	public static int KARMA_RATE_DROP_EQUIP_WEAPON;
+	public static int KARMA_RATE_DROP_EQUIP_WEAPON = rates().getKarmaRateDropEquipWeapon();
 	
 	/** Time after which item will auto-destroy */
-	public static int AUTODESTROY_ITEM_AFTER;
+	public static int AUTODESTROY_ITEM_AFTER = options().getAutoDestroyDroppedItemAfter();
 	/** Auto destroy herb time */
-	public static int HERB_AUTO_DESTROY_TIME;
+	public static int HERB_AUTO_DESTROY_TIME = options().getAutoDestroyHerbTime();
 	/** List of items that will not be destroyed (separated by ",") */
-	public static String PROTECTED_ITEMS;
+	public static String PROTECTED_ITEMS = options().getListOfProtectedItems();
 	/** List of items that will not be destroyed */
 	public static List<Integer> LIST_PROTECTED_ITEMS = new FastList<>();
 	
 	/** Auto destroy nonequipable items dropped by players */
-	public static boolean DESTROY_DROPPED_PLAYER_ITEM;
+	public static boolean DESTROY_DROPPED_PLAYER_ITEM = options().getDestroyPlayerDroppedItem();
 	/** Auto destroy equipable items dropped by players */
-	public static boolean DESTROY_EQUIPABLE_PLAYER_ITEM;
+	public static boolean DESTROY_EQUIPABLE_PLAYER_ITEM = options().getDestroyEquipableItem();
 	/** Save items on ground for restoration on server restart */
-	public static boolean SAVE_DROPPED_ITEM;
+	public static boolean SAVE_DROPPED_ITEM = options().getSaveDroppedItem();
 	/** Empty table ItemsOnGround after load all items */
-	public static boolean EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD;
+	public static boolean EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = options().getEmptyDroppedItemTableAfterLoad();
 	/** Time interval to save into db items on ground */
-	public static int SAVE_DROPPED_ITEM_INTERVAL;
+	public static int SAVE_DROPPED_ITEM_INTERVAL = options().getSaveDroppedItemInterval();
 	/** Clear all items stored in ItemsOnGround table */
-	public static boolean CLEAR_DROPPED_ITEM_TABLE;
+	public static boolean CLEAR_DROPPED_ITEM_TABLE = options().getClearDroppedItemTable();
 	
 	/** Accept precise drop calculation ? */
-	public static boolean PRECISE_DROP_CALCULATION;
+	public static boolean PRECISE_DROP_CALCULATION = options().getPreciseDropCalculation();
 	/** Accept multi-items drop ? */
-	public static boolean MULTIPLE_ITEM_DROP;
+	public static boolean MULTIPLE_ITEM_DROP = options().getMultipleItemDrop();
 	
 	/**
 	 * This is setting of experimental Client <--> Server Player coordinates synchronization<br>
@@ -545,22 +545,22 @@ public final class Config {
 	 * <li>3 - full synchronization Client <--> Server</li>
 	 * <li>-1 - Old system: will synchronize Z only</li>
 	 */
-	public static int COORD_SYNCHRONIZE;
+	public static int COORD_SYNCHRONIZE = options().getCoordSynchronize();
 	
 	/** Period in days after which character is deleted */
-	public static int DELETE_DAYS;
+	public static int DELETE_DAYS = options().getDeleteCharAfterDays();
 	
 	/** Datapack root directory */
 	public static File DATAPACK_ROOT;
 	
 	/** Maximum range mobs can randomly go from spawn point */
-	public static int MAX_DRIFT_RANGE;
+	public static int MAX_DRIFT_RANGE = options().getMaxDriftRange();
 	
 	/** Allow fishing ? */
-	public static boolean ALLOWFISHING;
+	public static boolean ALLOWFISHING = options().getAllowFishing();
 	
 	/** Allow Manor system */
-	public static boolean ALLOW_MANOR;
+	public static boolean ALLOW_MANOR = options().getAllowManor();
 	
 	/** Jail config **/
 	public static boolean JAIL_IS_PVP;
@@ -576,47 +576,47 @@ public final class Config {
 	/** Allow the use of L2Walker client ? */
 	public static L2WalkerAllowed ALLOW_L2WALKER_CLIENT;
 	/** Auto-ban client that use L2Walker ? */
-	public static boolean AUTOBAN_L2WALKER_ACC;
+	public static boolean AUTOBAN_L2WALKER_ACC = options().getAutobanL2WalkerAcc();
 	/** Revision of L2Walker */
-	public static int L2WALKER_REVISION;
+	public static int L2WALKER_REVISION = options().getL2WalkerRevision();
 	
 	/** FloodProtector initial capacity */
-	public static int FLOODPROTECTOR_INITIALSIZE;
+	public static int FLOODPROTECTOR_INITIALSIZE = options().getFloodProtectorInitialSize();
 	
 	/** Allow Discard item ? */
-	public static boolean ALLOW_DISCARDITEM;
+	public static boolean ALLOW_DISCARDITEM = options().getAllowDiscardItem();
 	/** Allow freight ? */
-	public static boolean ALLOW_FREIGHT;
+	public static boolean ALLOW_FREIGHT = options().getAllowFreight();
 	/** Allow warehouse ? */
-	public static boolean ALLOW_WAREHOUSE;
+	public static boolean ALLOW_WAREHOUSE = options().getAllowWarehouse();
 	/** Allow warehouse cache? */
-	public static boolean WAREHOUSE_CACHE;
+	public static boolean WAREHOUSE_CACHE = options().getWarehouseCache();
 	/** How long store WH datas */
-	public static int WAREHOUSE_CACHE_TIME;
+	public static int WAREHOUSE_CACHE_TIME = options().getWarehouseCacheTime();
 	/** Allow wear ? (try on in shop) */
-	public static boolean ALLOW_WEAR;
+	public static boolean ALLOW_WEAR = options().getAllowWear();
 	/** Duration of the try on after which items are taken back */
-	public static int WEAR_DELAY;
+	public static int WEAR_DELAY = options().getWearDelay();
 	/** Price of the try on of one item */
-	public static int WEAR_PRICE;
+	public static int WEAR_PRICE = options().getWearPrice();
 	/** Allow lottery ? */
-	public static boolean ALLOW_LOTTERY;
+	public static boolean ALLOW_LOTTERY = options().getAllowLottery();
 	/** Allow race ? */
-	public static boolean ALLOW_RACE;
+	public static boolean ALLOW_RACE = options().getAllowRace();
 	/** Allow water ? */
-	public static boolean ALLOW_WATER;
+	public static boolean ALLOW_WATER = options().getAllowWater();
 	/** Allow rent pet ? */
-	public static boolean ALLOW_RENTPET;
+	public static boolean ALLOW_RENTPET = options().getAllowRentPet();
 	/** Allow boat ? */
-	public static boolean ALLOW_BOAT;
+	public static boolean ALLOW_BOAT = options().getAllowBoat();
 	/** Allow cursed weapons ? */
-	public static boolean ALLOW_CURSED_WEAPONS;
+	public static boolean ALLOW_CURSED_WEAPONS = options().getAllowCursedWeapons();
 	
 	// WALKER NPC
-	public static boolean ALLOW_NPC_WALKERS;
+	public static boolean ALLOW_NPC_WALKERS = options().getAllowNpcWalkers();
 	
 	/** Time after which a packet is considered as lost */
-	public static int PACKET_LIFETIME;
+	public static int PACKET_LIFETIME = options().getPacketLifeTime();
 	
 	// Pets
 	/** Speed of Weverns */
@@ -634,31 +634,31 @@ public final class Config {
 	
 	// random animation interval
 	/** Minimal time between 2 animations of a NPC */
-	public static int MIN_NPC_ANIMATION;
+	public static int MIN_NPC_ANIMATION = options().getMinNPCAnimation();
 	/** Maximal time between 2 animations of a NPC */
-	public static int MAX_NPC_ANIMATION;
+	public static int MAX_NPC_ANIMATION = options().getMaxNPCAnimation();
 	/** Minimal time between animations of a MONSTER */
-	public static int MIN_MONSTER_ANIMATION;
+	public static int MIN_MONSTER_ANIMATION = options().getMinMonsterAnimation();
 	/** Maximal time between animations of a MONSTER */
-	public static int MAX_MONSTER_ANIMATION;
+	public static int MAX_MONSTER_ANIMATION = options().getMaxMonsterAnimation();
 	
 	/** Activate position recorder ? */
-	public static boolean ACTIVATE_POSITION_RECORDER;
+	public static boolean ACTIVATE_POSITION_RECORDER = options().getActivatePositionRecorder();
 	/** Use 3D Map ? */
 	public static boolean USE_3D_MAP;
 	
 	// Community Board
 	/** Type of community */
-	public static String COMMUNITY_TYPE;
-	public static String BBS_DEFAULT;
+	public static String COMMUNITY_TYPE = options().getCommunityType();
+	public static String BBS_DEFAULT = options().getBBSDefault();
 	/** Show level of the community board ? */
-	public static boolean SHOW_LEVEL_COMMUNITYBOARD;
+	public static boolean SHOW_LEVEL_COMMUNITYBOARD = options().getShowLevelOnCommunityBoard();
 	/** Show status of the community board ? */
-	public static boolean SHOW_STATUS_COMMUNITYBOARD;
+	public static boolean SHOW_STATUS_COMMUNITYBOARD = options().getShowStatusOnCommunityBoard();
 	/** Size of the name page on the community board */
-	public static int NAME_PAGE_SIZE_COMMUNITYBOARD;
+	public static int NAME_PAGE_SIZE_COMMUNITYBOARD = options().getNamePageSizeOnCommunityBoard();
 	/** Name per row on community board */
-	public static int NAME_PER_ROW_COMMUNITYBOARD;
+	public static int NAME_PER_ROW_COMMUNITYBOARD = options().getNamePerRowOnCommunityBoard();
 	
 	// Configuration files
 	/**
@@ -717,15 +717,15 @@ public final class Config {
 	public static String NEW_NODE_TYPE;
 	
 	/** Show "data/html/servnews.htm" whenever a character enters world. */
-	public static boolean SERVER_NEWS;
+	public static boolean SERVER_NEWS = options().getShowServerNews();
 	/** Show L2Monster level and aggro ? */
-	public static boolean SHOW_NPC_LVL;
+	public static boolean SHOW_NPC_LVL = options().getShowNpcLevel();
 	
 	/**
 	 * Force full item inventory packet to be sent for any item change ?<br>
 	 * <u><i>Note:</i></u> This can increase network traffic
 	 */
-	public static boolean FORCE_INVENTORY_UPDATE;
+	public static boolean FORCE_INVENTORY_UPDATE = options().getForceInventoryUpdate();
 	/** Disable the use of guards against agressive monsters ? */
 	public static boolean ALLOW_GUARDS;
 	/** Allow use Event Managers for change occupation ? */
@@ -734,7 +734,7 @@ public final class Config {
 	public static int IP_UPDATE_TIME;
 	
 	/** Zone Setting */
-	public static int ZONE_TOWN;
+	public static int ZONE_TOWN = options().getZoneTown();
 	
 	/** Crafting Enabled? */
 	public static boolean IS_CRAFTING_ENABLED;
@@ -813,53 +813,53 @@ public final class Config {
 	
 	/** define L2JMODS */
 	/** Champion Mod */
-	public static boolean L2JMOD_CHAMPION_ENABLE;
-	public static int L2JMOD_CHAMPION_FREQUENCY;
-	public static int L2JMOD_CHAMP_MIN_LVL;
-	public static int L2JMOD_CHAMP_MAX_LVL;
-	public static int L2JMOD_CHAMPION_HP;
-	public static int L2JMOD_CHAMPION_REWARDS;
-	public static int L2JMOD_CHAMPION_ADENAS_REWARDS;
-	public static float L2JMOD_CHAMPION_HP_REGEN;
-	public static float L2JMOD_CHAMPION_ATK;
-	public static float L2JMOD_CHAMPION_SPD_ATK;
-	public static int L2JMOD_CHAMPION_REWARD;
-	public static int L2JMOD_CHAMPION_REWARD_ID;
-	public static int L2JMOD_CHAMPION_REWARD_QTY;
+	public static boolean L2JMOD_CHAMPION_ENABLE = l2JMods().getChampionEnable();
+	public static int L2JMOD_CHAMPION_FREQUENCY = l2JMods().getChampionFrequency();
+	public static int L2JMOD_CHAMP_MIN_LVL = l2JMods().getChampionMinLevel();
+	public static int L2JMOD_CHAMP_MAX_LVL = l2JMods().getChampionMaxLevel();
+	public static int L2JMOD_CHAMPION_HP = l2JMods().getChampionHp();
+	public static int L2JMOD_CHAMPION_REWARDS = l2JMods().getChampionRewards();
+	public static int L2JMOD_CHAMPION_ADENAS_REWARDS = l2JMods().getChampionAdenasRewards();
+	public static float L2JMOD_CHAMPION_HP_REGEN = l2JMods().getChampionRegenHp();
+	public static float L2JMOD_CHAMPION_ATK = l2JMods().getChampionAtk();
+	public static float L2JMOD_CHAMPION_SPD_ATK = l2JMods().getChampionSpdAtk();
+	public static int L2JMOD_CHAMPION_REWARD = l2JMods().getChampionRewardItem();
+	public static int L2JMOD_CHAMPION_REWARD_ID = l2JMods().getChampionRewardItemID();
+	public static int L2JMOD_CHAMPION_REWARD_QTY = l2JMods().getChampionRewardItemQty();
 	
 	/** Team vs. Team Event Engine */
-	public static boolean TVT_EVENT_ENABLED;
-	public static int TVT_EVENT_INTERVAL;
-	public static int TVT_EVENT_PARTICIPATION_TIME;
-	public static int TVT_EVENT_RUNNING_TIME;
-	public static int TVT_EVENT_PARTICIPATION_NPC_ID;
+	public static boolean TVT_EVENT_ENABLED = l2JMods().getTvTEventEnabled();
+	public static int TVT_EVENT_INTERVAL = l2JMods().getTvTEventInterval();
+	public static int TVT_EVENT_PARTICIPATION_TIME = l2JMods().getTvTEventParticipationTime();
+	public static int TVT_EVENT_RUNNING_TIME = l2JMods().getTvTEventRunningTime();
+	public static int TVT_EVENT_PARTICIPATION_NPC_ID = l2JMods().getTvTEventParticipationNpcId();
 	public static int[] TVT_EVENT_PARTICIPATION_NPC_COORDINATES = new int[3];
-	public static int TVT_EVENT_MIN_PLAYERS_IN_TEAMS;
-	public static int TVT_EVENT_MAX_PLAYERS_IN_TEAMS;
-	public static int TVT_EVENT_RESPAWN_TELEPORT_DELAY;
-	public static int TVT_EVENT_START_LEAVE_TELEPORT_DELAY;
-	public static String TVT_EVENT_TEAM_1_NAME;
+	public static int TVT_EVENT_MIN_PLAYERS_IN_TEAMS = l2JMods().getTvTEventMinPlayersInTeams();
+	public static int TVT_EVENT_MAX_PLAYERS_IN_TEAMS = l2JMods().getTvTEventMaxPlayersInTeams();
+	public static int TVT_EVENT_RESPAWN_TELEPORT_DELAY = l2JMods().getTvTEventRespawnTeleportDelay();
+	public static int TVT_EVENT_START_LEAVE_TELEPORT_DELAY = l2JMods().getTvTEventStartLeaveTeleportDelay();
+	public static String TVT_EVENT_TEAM_1_NAME = l2JMods().getTvTEventTeam1Name();
 	public static int[] TVT_EVENT_TEAM_1_COORDINATES = new int[3];
-	public static String TVT_EVENT_TEAM_2_NAME;
+	public static String TVT_EVENT_TEAM_2_NAME = l2JMods().getTvTEventTeam2Name();
 	public static int[] TVT_EVENT_TEAM_2_COORDINATES = new int[3];
 	public static List<int[]> TVT_EVENT_REWARDS = new FastList<>();
-	public static boolean TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED;
-	public static boolean TVT_EVENT_POTIONS_ALLOWED;
-	public static boolean TVT_EVENT_SUMMON_BY_ITEM_ALLOWED;
+	public static boolean TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED = l2JMods().getTvTEventTargetTeamMembersAllowed();
+	public static boolean TVT_EVENT_POTIONS_ALLOWED = l2JMods().getTvTEventPotionsAllowed();
+	public static boolean TVT_EVENT_SUMMON_BY_ITEM_ALLOWED = l2JMods().getTvTEventSummonByItemAllowed();
 	public static List<Integer> TVT_EVENT_DOOR_IDS = new FastList<>();
-	public static byte TVT_EVENT_MIN_LVL;
-	public static byte TVT_EVENT_MAX_LVL;
+	public static byte TVT_EVENT_MIN_LVL = l2JMods().getTvTEventMinPlayerLevel();
+	public static byte TVT_EVENT_MAX_LVL = l2JMods().getTvTEventMaxPlayerLevel();
 	
 	/** L2JMOD Wedding system */
-	public static boolean L2JMOD_ALLOW_WEDDING;
-	public static int L2JMOD_WEDDING_PRICE;
-	public static boolean L2JMOD_WEDDING_PUNISH_INFIDELITY;
-	public static boolean L2JMOD_WEDDING_TELEPORT;
-	public static int L2JMOD_WEDDING_TELEPORT_PRICE;
-	public static int L2JMOD_WEDDING_TELEPORT_DURATION;
-	public static boolean L2JMOD_WEDDING_SAMESEX;
-	public static boolean L2JMOD_WEDDING_FORMALWEAR;
-	public static int L2JMOD_WEDDING_DIVORCE_COSTS;
+	public static boolean L2JMOD_ALLOW_WEDDING = l2JMods().getAllowWedding();
+	public static int L2JMOD_WEDDING_PRICE = l2JMods().getWeddingPrice();
+	public static boolean L2JMOD_WEDDING_PUNISH_INFIDELITY = l2JMods().getWeddingPunishInfidelity();
+	public static boolean L2JMOD_WEDDING_TELEPORT = l2JMods().getWeddingTeleport();
+	public static int L2JMOD_WEDDING_TELEPORT_PRICE = l2JMods().getWeddingTeleportPrice();
+	public static int L2JMOD_WEDDING_TELEPORT_DURATION = l2JMods().getWeddingTeleportDuration();
+	public static boolean L2JMOD_WEDDING_SAMESEX = l2JMods().getWeddingAllowSameSex();
+	public static boolean L2JMOD_WEDDING_FORMALWEAR = l2JMods().getWeddingFormalWear();
+	public static int L2JMOD_WEDDING_DIVORCE_COSTS = l2JMods().getWeddingDivorceCosts();
 	
 	// Packet information
 	/** Count the amount of packets per minute ? */
@@ -905,7 +905,7 @@ public final class Config {
 	public static boolean EFFECT_CANCELING;
 	
 	/** Auto-delete invalid quest data ? */
-	public static boolean AUTODELETE_INVALID_QUEST_DATA;
+	public static boolean AUTODELETE_INVALID_QUEST_DATA = options().getAutoDeleteInvalidQuestData();
 	
 	/** Chance that an item will succesfully be enchanted */
 	public static int ENCHANT_CHANCE_WEAPON;
@@ -989,9 +989,9 @@ public final class Config {
 	public static boolean FORCE_GGAUTH;
 	
 	/** Default punishment for illegal actions */
-	public static int DEFAULT_PUNISH;
+	public static int DEFAULT_PUNISH = options().getDefaultPunish();
 	/** Parameter for default punishment */
-	public static int DEFAULT_PUNISH_PARAM;
+	public static int DEFAULT_PUNISH_PARAM = options().getDefaultPunishParam();
 	
 	/** Accept new game server ? */
 	public static boolean ACCEPT_NEW_GAMESERVER;
@@ -1012,7 +1012,7 @@ public final class Config {
 	public static int MINIMUN_UPDATE_TIME;
 	
 	public static boolean ANNOUNCE_MAMMON_SPAWN;
-	public static boolean LAZY_CACHE;
+	public static boolean LAZY_CACHE = options().getLazyCache();
 	
 	/** Enable colored name for GM ? */
 	public static boolean GM_NAME_COLOR_ENABLED;
@@ -1041,13 +1041,13 @@ public final class Config {
 	public static int MAX_PETITIONS_PENDING;
 	
 	/** Bypass exploit protection ? */
-	public static boolean BYPASS_VALIDATION;
+	public static boolean BYPASS_VALIDATION = options().getBypassValidation();
 	
 	/** Only GM buy items for free **/
-	public static boolean ONLY_GM_ITEMS_FREE;
+	public static boolean ONLY_GM_ITEMS_FREE = options().getOnlyGMItemsFree();
 	
 	/** GM Audit ? */
-	public static boolean GMAUDIT;
+	public static boolean GMAUDIT = options().getGMAudit();
 	
 	/** Allow auto-create account ? */
 	public static boolean AUTO_CREATE_ACCOUNTS;
@@ -1059,18 +1059,18 @@ public final class Config {
 	public static int MAX_CONNECTION_PER_IP;
 	
 	/** Enforce gameguard query on character login ? */
-	public static boolean GAMEGUARD_ENFORCE;
+	public static boolean GAMEGUARD_ENFORCE = options().getGameGuardEnforce();
 	/** Don't allow player to perform trade,talk with npc and move until gameguard reply received ? */
-	public static boolean GAMEGUARD_PROHIBITACTION;
+	public static boolean GAMEGUARD_PROHIBITACTION = options().getGameGuardProhibitAction();
 	
 	/** Recipebook limits */
 	public static int DWARF_RECIPE_LIMIT;
 	public static int COMMON_RECIPE_LIMIT;
 	
 	/** Grid Options */
-	public static boolean GRIDS_ALWAYS_ON;
-	public static int GRID_NEIGHBOR_TURNON_TIME;
-	public static int GRID_NEIGHBOR_TURNOFF_TIME;
+	public static boolean GRIDS_ALWAYS_ON = options().getGridsAlwaysOn();
+	public static int GRID_NEIGHBOR_TURNON_TIME = options().getGridNeighborTurnOnTime();
+	public static int GRID_NEIGHBOR_TURNOFF_TIME = options().getGridNeighborTurnOffTime();
 	
 	/** Clan Hall function related configs */
 	public static long CH_TELE_FEE_RATIO;
@@ -1127,8 +1127,8 @@ public final class Config {
 	/** GeoData 0/1/2 */
 	public static int GEODATA = options().getGeoData();
 	/** Force loading GeoData to physical memory */
-	public static boolean FORCE_GEODATA;
-	public static boolean ACCEPT_GEOEDITOR_CONN;
+	public static boolean FORCE_GEODATA = options().getForceGeodata();
+	public static boolean ACCEPT_GEOEDITOR_CONN = options().getAcceptGeoeditorConn();
 	
 	/** Max amount of buffs */
 	public static byte BUFFS_MAX_AMOUNT;
@@ -1144,168 +1144,142 @@ public final class Config {
 	 */
 	public static void load() {
 		_log.info("Loading Game Server config...");
+
+		if (MIN_PROTOCOL_REVISION > MAX_PROTOCOL_REVISION) {
+			throw new Error("MinProtocolRevision is bigger than MaxProtocolRevision in server configuration file.");
+		}
+
 		try {
-			Properties serverSettings = new Properties();
-			InputStream is = new FileInputStream(new File(CONFIGURATION_FILE));
-			serverSettings.load(is);
-			is.close();
-
-//			GAMESERVER_HOSTNAME = server().getGameserverHostname();
-//			PORT_GAME = server().getGameserverPort();
-
-//			GAME_SERVER_LOGIN_PORT = Integer.parseInt(serverSettings.getProperty("LoginPort", "9014"));
-//			GAME_SERVER_LOGIN_HOST = serverSettings.getProperty("LoginHost", "127.0.0.1");
-
-//			REQUEST_ID = Integer.parseInt(serverSettings.getProperty("RequestServerID", "0"));
-//			ACCEPT_ALTERNATE_ID = Boolean.parseBoolean(serverSettings.getProperty("AcceptAlternateID", "True"));
-
-//			DATABASE_DRIVER = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
-//			DATABASE_URL = serverSettings.getProperty("URL", "jdbc:mysql://localhost/l2jdb");
-//			DATABASE_LOGIN = serverSettings.getProperty("Login", "root");
-//			DATABASE_PASSWORD = serverSettings.getProperty("Password", "");
-//			DATABASE_MAX_CONNECTIONS = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "10"));
-
-			DATAPACK_ROOT = new File(serverSettings.getProperty("DatapackRoot", ".")).getCanonicalFile();
-			
-//			CNAME_TEMPLATE = serverSettings.getProperty("CnameTemplate", ".*");
-//			PET_NAME_TEMPLATE = serverSettings.getProperty("PetNameTemplate", ".*");
-			
-//			MAX_CHARACTERS_NUMBER_PER_ACCOUNT = Integer.parseInt(serverSettings.getProperty("CharMaxNumber", "0"));
-//			MAXIMUM_ONLINE_USERS = Integer.parseInt(serverSettings.getProperty("MaximumOnlineUsers", "100"));
-			
-//			MIN_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MinProtocolRevision", "660"));
-//			MAX_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MaxProtocolRevision", "665"));
-			
-			if (MIN_PROTOCOL_REVISION > MAX_PROTOCOL_REVISION) {
-				throw new Error("MinProtocolRevision is bigger than MaxProtocolRevision in server configuration file.");
-			}
+			DATAPACK_ROOT = new File(server().getDatapackRoot()).getCanonicalFile();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Error("Failed to Load " + CONFIGURATION_FILE + " File.");
 		}
+
 		try {
 			Properties optionsSettings = new Properties();
 			InputStream is = new FileInputStream(new File(OPTIONS_FILE));
 			optionsSettings.load(is);
 			is.close();
 			
-			EVERYBODY_HAS_ADMIN_RIGHTS = Boolean.parseBoolean(optionsSettings.getProperty("EverybodyHasAdminRights", "false"));
+//			EVERYBODY_HAS_ADMIN_RIGHTS = Boolean.parseBoolean(optionsSettings.getProperty("EverybodyHasAdminRights", "false"));
 			
-			DEBUG = Boolean.parseBoolean(optionsSettings.getProperty("Debug", "false"));
-			ASSERT = Boolean.parseBoolean(optionsSettings.getProperty("Assert", "false"));
-			DEVELOPER = Boolean.parseBoolean(optionsSettings.getProperty("Developer", "false"));
-			TEST_SERVER = Boolean.parseBoolean(optionsSettings.getProperty("TestServer", "false"));
-			SERVER_LIST_TESTSERVER = Boolean.parseBoolean(optionsSettings.getProperty("TestServer", "false"));
+//			DEBUG = Boolean.parseBoolean(optionsSettings.getProperty("Debug", "false"));
+//			ASSERT = Boolean.parseBoolean(optionsSettings.getProperty("Assert", "false"));
+//			DEVELOPER = Boolean.parseBoolean(optionsSettings.getProperty("Developer", "false"));
+//			TEST_SERVER = Boolean.parseBoolean(optionsSettings.getProperty("TestServer", "false"));
+//			SERVER_LIST_TESTSERVER = Boolean.parseBoolean(optionsSettings.getProperty("TestServer", "false"));
 			
-			SERVER_LIST_BRACKET = Boolean.valueOf(optionsSettings.getProperty("ServerListBrackets", "false"));
-			SERVER_LIST_CLOCK = Boolean.valueOf(optionsSettings.getProperty("ServerListClock", "false"));
-			SERVER_GMONLY = Boolean.valueOf(optionsSettings.getProperty("ServerGMOnly", "false"));
+//			SERVER_LIST_BRACKET = Boolean.valueOf(optionsSettings.getProperty("ServerListBrackets", "false"));
+//			SERVER_LIST_CLOCK = Boolean.valueOf(optionsSettings.getProperty("ServerListClock", "false"));
+//			SERVER_GMONLY = Boolean.valueOf(optionsSettings.getProperty("ServerGMOnly", "false"));
 			
-			AUTODESTROY_ITEM_AFTER = Integer.parseInt(optionsSettings.getProperty("AutoDestroyDroppedItemAfter", "0"));
+//			AUTODESTROY_ITEM_AFTER = Integer.parseInt(optionsSettings.getProperty("AutoDestroyDroppedItemAfter", "0"));
 			HERB_AUTO_DESTROY_TIME = Integer.parseInt(optionsSettings.getProperty("AutoDestroyHerbTime", "15")) * 1000;
-			PROTECTED_ITEMS = optionsSettings.getProperty("ListOfProtectedItems");
+//			PROTECTED_ITEMS = optionsSettings.getProperty("ListOfProtectedItems");
 			LIST_PROTECTED_ITEMS = new FastList<>();
 			for (String id : PROTECTED_ITEMS.split(",")) {
 				LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
 			}
-			DESTROY_DROPPED_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyPlayerDroppedItem", "false"));
-			DESTROY_EQUIPABLE_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyEquipableItem", "false"));
-			SAVE_DROPPED_ITEM = Boolean.valueOf(optionsSettings.getProperty("SaveDroppedItem", "false"));
-			EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = Boolean.valueOf(optionsSettings.getProperty("EmptyDroppedItemTableAfterLoad", "false"));
+//			DESTROY_DROPPED_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyPlayerDroppedItem", "false"));
+//			DESTROY_EQUIPABLE_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyEquipableItem", "false"));
+//			SAVE_DROPPED_ITEM = Boolean.valueOf(optionsSettings.getProperty("SaveDroppedItem", "false"));
+//			EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = Boolean.valueOf(optionsSettings.getProperty("EmptyDroppedItemTableAfterLoad", "false"));
 			SAVE_DROPPED_ITEM_INTERVAL = Integer.parseInt(optionsSettings.getProperty("SaveDroppedItemInterval", "0")) * 60000;
-			CLEAR_DROPPED_ITEM_TABLE = Boolean.valueOf(optionsSettings.getProperty("ClearDroppedItemTable", "false"));
+//			CLEAR_DROPPED_ITEM_TABLE = Boolean.valueOf(optionsSettings.getProperty("ClearDroppedItemTable", "false"));
+
+//			PRECISE_DROP_CALCULATION = Boolean.valueOf(optionsSettings.getProperty("PreciseDropCalculation", "True"));
+//			MULTIPLE_ITEM_DROP = Boolean.valueOf(optionsSettings.getProperty("MultipleItemDrop", "True"));
 			
-			PRECISE_DROP_CALCULATION = Boolean.valueOf(optionsSettings.getProperty("PreciseDropCalculation", "True"));
-			MULTIPLE_ITEM_DROP = Boolean.valueOf(optionsSettings.getProperty("MultipleItemDrop", "True"));
+//			COORD_SYNCHRONIZE = Integer.parseInt(optionsSettings.getProperty("CoordSynchronize", "-1"));
 			
-			COORD_SYNCHRONIZE = Integer.parseInt(optionsSettings.getProperty("CoordSynchronize", "-1"));
+//			ONLY_GM_ITEMS_FREE = Boolean.valueOf(optionsSettings.getProperty("OnlyGMItemsFree", "True"));
 			
-			ONLY_GM_ITEMS_FREE = Boolean.valueOf(optionsSettings.getProperty("OnlyGMItemsFree", "True"));
+//			ALLOW_WAREHOUSE = Boolean.valueOf(optionsSettings.getProperty("AllowWarehouse", "True"));
+//			WAREHOUSE_CACHE = Boolean.valueOf(optionsSettings.getProperty("WarehouseCache", "False"));
+//			WAREHOUSE_CACHE_TIME = Integer.parseInt(optionsSettings.getProperty("WarehouseCacheTime", "15"));
+//			ALLOW_FREIGHT = Boolean.valueOf(optionsSettings.getProperty("AllowFreight", "True"));
+//			ALLOW_WEAR = Boolean.valueOf(optionsSettings.getProperty("AllowWear", "False"));
+//			WEAR_DELAY = Integer.parseInt(optionsSettings.getProperty("WearDelay", "5"));
+//			WEAR_PRICE = Integer.parseInt(optionsSettings.getProperty("WearPrice", "10"));
+//			ALLOW_LOTTERY = Boolean.valueOf(optionsSettings.getProperty("AllowLottery", "False"));
+//			ALLOW_RACE = Boolean.valueOf(optionsSettings.getProperty("AllowRace", "False"));
+//			ALLOW_WATER = Boolean.valueOf(optionsSettings.getProperty("AllowWater", "False"));
+//			ALLOW_RENTPET = Boolean.valueOf(optionsSettings.getProperty("AllowRentPet", "False"));
+//			FLOODPROTECTOR_INITIALSIZE = Integer.parseInt(optionsSettings.getProperty("FloodProtectorInitialSize", "50"));
+//			ALLOW_DISCARDITEM = Boolean.valueOf(optionsSettings.getProperty("AllowDiscardItem", "True"));
+//			ALLOWFISHING = Boolean.valueOf(optionsSettings.getProperty("AllowFishing", "False"));
+//			ALLOW_MANOR = Boolean.parseBoolean(optionsSettings.getProperty("AllowManor", "False"));
+//			ALLOW_BOAT = Boolean.valueOf(optionsSettings.getProperty("AllowBoat", "False"));
+//			ALLOW_NPC_WALKERS = Boolean.valueOf(optionsSettings.getProperty("AllowNpcWalkers", "true"));
+//			ALLOW_CURSED_WEAPONS = Boolean.valueOf(optionsSettings.getProperty("AllowCursedWeapons", "False"));
 			
-			ALLOW_WAREHOUSE = Boolean.valueOf(optionsSettings.getProperty("AllowWarehouse", "True"));
-			WAREHOUSE_CACHE = Boolean.valueOf(optionsSettings.getProperty("WarehouseCache", "False"));
-			WAREHOUSE_CACHE_TIME = Integer.parseInt(optionsSettings.getProperty("WarehouseCacheTime", "15"));
-			ALLOW_FREIGHT = Boolean.valueOf(optionsSettings.getProperty("AllowFreight", "True"));
-			ALLOW_WEAR = Boolean.valueOf(optionsSettings.getProperty("AllowWear", "False"));
-			WEAR_DELAY = Integer.parseInt(optionsSettings.getProperty("WearDelay", "5"));
-			WEAR_PRICE = Integer.parseInt(optionsSettings.getProperty("WearPrice", "10"));
-			ALLOW_LOTTERY = Boolean.valueOf(optionsSettings.getProperty("AllowLottery", "False"));
-			ALLOW_RACE = Boolean.valueOf(optionsSettings.getProperty("AllowRace", "False"));
-			ALLOW_WATER = Boolean.valueOf(optionsSettings.getProperty("AllowWater", "False"));
-			ALLOW_RENTPET = Boolean.valueOf(optionsSettings.getProperty("AllowRentPet", "False"));
-			FLOODPROTECTOR_INITIALSIZE = Integer.parseInt(optionsSettings.getProperty("FloodProtectorInitialSize", "50"));
-			ALLOW_DISCARDITEM = Boolean.valueOf(optionsSettings.getProperty("AllowDiscardItem", "True"));
-			ALLOWFISHING = Boolean.valueOf(optionsSettings.getProperty("AllowFishing", "False"));
-			ALLOW_MANOR = Boolean.parseBoolean(optionsSettings.getProperty("AllowManor", "False"));
-			ALLOW_BOAT = Boolean.valueOf(optionsSettings.getProperty("AllowBoat", "False"));
-			ALLOW_NPC_WALKERS = Boolean.valueOf(optionsSettings.getProperty("AllowNpcWalkers", "true"));
-			ALLOW_CURSED_WEAPONS = Boolean.valueOf(optionsSettings.getProperty("AllowCursedWeapons", "False"));
+//			ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(optionsSettings.getProperty("AllowL2Walker", "False"));
+			ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(options().getAllowL2Walker());
+//			L2WALKER_REVISION = Integer.parseInt(optionsSettings.getProperty("L2WalkerRevision", "537"));
+//			AUTOBAN_L2WALKER_ACC = Boolean.valueOf(optionsSettings.getProperty("AutobanL2WalkerAcc", "False"));
 			
-			ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(optionsSettings.getProperty("AllowL2Walker", "False"));
-			L2WALKER_REVISION = Integer.parseInt(optionsSettings.getProperty("L2WalkerRevision", "537"));
-			AUTOBAN_L2WALKER_ACC = Boolean.valueOf(optionsSettings.getProperty("AutobanL2WalkerAcc", "False"));
+//			ACTIVATE_POSITION_RECORDER = Boolean.valueOf(optionsSettings.getProperty("ActivatePositionRecorder", "False"));
 			
-			ACTIVATE_POSITION_RECORDER = Boolean.valueOf(optionsSettings.getProperty("ActivatePositionRecorder", "False"));
+//			DEFAULT_GLOBAL_CHAT = optionsSettings.getProperty("GlobalChat", "ON");
+//			DEFAULT_TRADE_CHAT = optionsSettings.getProperty("TradeChat", "ON");
 			
-			DEFAULT_GLOBAL_CHAT = optionsSettings.getProperty("GlobalChat", "ON");
-			DEFAULT_TRADE_CHAT = optionsSettings.getProperty("TradeChat", "ON");
+//			LOG_CHAT = Boolean.valueOf(optionsSettings.getProperty("LogChat", "false"));
+//			LOG_ITEMS = Boolean.valueOf(optionsSettings.getProperty("LogItems", "false"));
 			
-			LOG_CHAT = Boolean.valueOf(optionsSettings.getProperty("LogChat", "false"));
-			LOG_ITEMS = Boolean.valueOf(optionsSettings.getProperty("LogItems", "false"));
+//			GMAUDIT = Boolean.valueOf(optionsSettings.getProperty("GMAudit", "False"));
 			
-			GMAUDIT = Boolean.valueOf(optionsSettings.getProperty("GMAudit", "False"));
+//			COMMUNITY_TYPE = optionsSettings.getProperty("CommunityType", "old").toLowerCase();
+//			BBS_DEFAULT = optionsSettings.getProperty("BBSDefault", "_bbshome");
+//			SHOW_LEVEL_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowLevelOnCommunityBoard", "False"));
+//			SHOW_STATUS_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowStatusOnCommunityBoard", "True"));
+//			NAME_PAGE_SIZE_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePageSizeOnCommunityBoard", "50"));
+//			NAME_PER_ROW_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePerRowOnCommunityBoard", "5"));
 			
-			COMMUNITY_TYPE = optionsSettings.getProperty("CommunityType", "old").toLowerCase();
-			BBS_DEFAULT = optionsSettings.getProperty("BBSDefault", "_bbshome");
-			SHOW_LEVEL_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowLevelOnCommunityBoard", "False"));
-			SHOW_STATUS_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowStatusOnCommunityBoard", "True"));
-			NAME_PAGE_SIZE_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePageSizeOnCommunityBoard", "50"));
-			NAME_PER_ROW_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePerRowOnCommunityBoard", "5"));
+//			ZONE_TOWN = Integer.parseInt(optionsSettings.getProperty("ZoneTown", "0"));
 			
-			ZONE_TOWN = Integer.parseInt(optionsSettings.getProperty("ZoneTown", "0"));
+//			MAX_DRIFT_RANGE = Integer.parseInt(optionsSettings.getProperty("MaxDriftRange", "300"));
 			
-			MAX_DRIFT_RANGE = Integer.parseInt(optionsSettings.getProperty("MaxDriftRange", "300"));
+//			MIN_NPC_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MinNPCAnimation", "10"));
+//			MAX_NPC_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MaxNPCAnimation", "20"));
+//			MIN_MONSTER_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MinMonsterAnimation", "5"));
+//			MAX_MONSTER_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MaxMonsterAnimation", "20"));
 			
-			MIN_NPC_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MinNPCAnimation", "10"));
-			MAX_NPC_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MaxNPCAnimation", "20"));
-			MIN_MONSTER_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MinMonsterAnimation", "5"));
-			MAX_MONSTER_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MaxMonsterAnimation", "20"));
+//			SERVER_NEWS = Boolean.valueOf(optionsSettings.getProperty("ShowServerNews", "False"));
+//			SHOW_NPC_LVL = Boolean.valueOf(optionsSettings.getProperty("ShowNpcLevel", "False"));
 			
-			SERVER_NEWS = Boolean.valueOf(optionsSettings.getProperty("ShowServerNews", "False"));
-			SHOW_NPC_LVL = Boolean.valueOf(optionsSettings.getProperty("ShowNpcLevel", "False"));
+//			FORCE_INVENTORY_UPDATE = Boolean.valueOf(optionsSettings.getProperty("ForceInventoryUpdate", "False"));
 			
-			FORCE_INVENTORY_UPDATE = Boolean.valueOf(optionsSettings.getProperty("ForceInventoryUpdate", "False"));
+//			AUTODELETE_INVALID_QUEST_DATA = Boolean.valueOf(optionsSettings.getProperty("AutoDeleteInvalidQuestData", "False"));
 			
-			AUTODELETE_INVALID_QUEST_DATA = Boolean.valueOf(optionsSettings.getProperty("AutoDeleteInvalidQuestData", "False"));
+//			THREAD_P_EFFECTS = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeEffects", "6"));
+//			THREAD_P_GENERAL = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeGeneral", "15"));
+//			GENERAL_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralPacketThreadCoreSize", "4"));
+//			IO_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("UrgentPacketThreadCoreSize", "2"));
+//			AI_MAX_THREAD = Integer.parseInt(optionsSettings.getProperty("AiMaxThread", "10"));
+//			GENERAL_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralThreadCoreSize", "4"));
 			
-			THREAD_P_EFFECTS = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeEffects", "6"));
-			THREAD_P_GENERAL = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeGeneral", "15"));
-			GENERAL_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralPacketThreadCoreSize", "4"));
-			IO_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("UrgentPacketThreadCoreSize", "2"));
-			AI_MAX_THREAD = Integer.parseInt(optionsSettings.getProperty("AiMaxThread", "10"));
-			GENERAL_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralThreadCoreSize", "4"));
+//			DELETE_DAYS = Integer.parseInt(optionsSettings.getProperty("DeleteCharAfterDays", "7"));
 			
-			DELETE_DAYS = Integer.parseInt(optionsSettings.getProperty("DeleteCharAfterDays", "7"));
+//			DEFAULT_PUNISH = Integer.parseInt(optionsSettings.getProperty("DefaultPunish", "2"));
+//			DEFAULT_PUNISH_PARAM = Integer.parseInt(optionsSettings.getProperty("DefaultPunishParam", "0"));
 			
-			DEFAULT_PUNISH = Integer.parseInt(optionsSettings.getProperty("DefaultPunish", "2"));
-			DEFAULT_PUNISH_PARAM = Integer.parseInt(optionsSettings.getProperty("DefaultPunishParam", "0"));
+//			LAZY_CACHE = Boolean.valueOf(optionsSettings.getProperty("LazyCache", "False"));
 			
-			LAZY_CACHE = Boolean.valueOf(optionsSettings.getProperty("LazyCache", "False"));
+//			PACKET_LIFETIME = Integer.parseInt(optionsSettings.getProperty("PacketLifeTime", "0"));
 			
-			PACKET_LIFETIME = Integer.parseInt(optionsSettings.getProperty("PacketLifeTime", "0"));
+//			BYPASS_VALIDATION = Boolean.valueOf(optionsSettings.getProperty("BypassValidation", "True"));
 			
-			BYPASS_VALIDATION = Boolean.valueOf(optionsSettings.getProperty("BypassValidation", "True"));
+//			GAMEGUARD_ENFORCE = Boolean.valueOf(optionsSettings.getProperty("GameGuardEnforce", "False"));
+//			GAMEGUARD_PROHIBITACTION = Boolean.valueOf(optionsSettings.getProperty("GameGuardProhibitAction", "False"));
 			
-			GAMEGUARD_ENFORCE = Boolean.valueOf(optionsSettings.getProperty("GameGuardEnforce", "False"));
-			GAMEGUARD_PROHIBITACTION = Boolean.valueOf(optionsSettings.getProperty("GameGuardProhibitAction", "False"));
-			
-			GRIDS_ALWAYS_ON = Boolean.parseBoolean(optionsSettings.getProperty("GridsAlwaysOn", "False"));
-			GRID_NEIGHBOR_TURNON_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOnTime", "30"));
-			GRID_NEIGHBOR_TURNOFF_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOffTime", "300"));
+//			GRIDS_ALWAYS_ON = Boolean.parseBoolean(optionsSettings.getProperty("GridsAlwaysOn", "False"));
+//			GRID_NEIGHBOR_TURNON_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOnTime", "30"));
+//			GRID_NEIGHBOR_TURNOFF_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOffTime", "300"));
 			
 //			GEODATA = Integer.parseInt(optionsSettings.getProperty("GeoData", "0"));
-			FORCE_GEODATA = Boolean.parseBoolean(optionsSettings.getProperty("ForceGeoData", "True"));
-			ACCEPT_GEOEDITOR_CONN = Boolean.parseBoolean(optionsSettings.getProperty("AcceptGeoeditorConn", "False"));
+//			FORCE_GEODATA = Boolean.parseBoolean(optionsSettings.getProperty("ForceGeoData", "True"));
+//			ACCEPT_GEOEDITOR_CONN = Boolean.parseBoolean(optionsSettings.getProperty("AcceptGeoeditorConn", "False"));
 			
 			// ---------------------------------------------------
 			// Configuration values not found in config files
@@ -1479,53 +1453,6 @@ public final class Config {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Error("Failed to Load " + OTHER_CONFIG_FILE + " File.");
-		}
-		
-		// rates
-		try {
-			Properties ratesSettings = new Properties();
-			InputStream is = new FileInputStream(new File(RATES_CONFIG_FILE));
-			ratesSettings.load(is);
-			is.close();
-			
-			RATE_XP = Float.parseFloat(ratesSettings.getProperty("RateXp", "1."));
-			RATE_SP = Float.parseFloat(ratesSettings.getProperty("RateSp", "1."));
-			RATE_PARTY_XP = Float.parseFloat(ratesSettings.getProperty("RatePartyXp", "1."));
-			RATE_PARTY_SP = Float.parseFloat(ratesSettings.getProperty("RatePartySp", "1."));
-			RATE_QUESTS_REWARD = Float.parseFloat(ratesSettings.getProperty("RateQuestsReward", "1."));
-			RATE_DROP_ADENA = Float.parseFloat(ratesSettings.getProperty("RateDropAdena", "1."));
-			RATE_CONSUMABLE_COST = Float.parseFloat(ratesSettings.getProperty("RateConsumableCost", "1."));
-			RATE_DROP_ITEMS = Float.parseFloat(ratesSettings.getProperty("RateDropItems", "1."));
-			RATE_DROP_SPOIL = Float.parseFloat(ratesSettings.getProperty("RateDropSpoil", "1."));
-			RATE_DROP_MANOR = Integer.parseInt(ratesSettings.getProperty("RateDropManor", "1"));
-			RATE_DROP_QUEST = Float.parseFloat(ratesSettings.getProperty("RateDropQuest", "1."));
-			RATE_KARMA_EXP_LOST = Float.parseFloat(ratesSettings.getProperty("RateKarmaExpLost", "1."));
-			RATE_SIEGE_GUARDS_PRICE = Float.parseFloat(ratesSettings.getProperty("RateSiegeGuardsPrice", "1."));
-			RATE_DROP_COMMON_HERBS = Float.parseFloat(ratesSettings.getProperty("RateCommonHerbs", "15."));
-			RATE_DROP_MP_HP_HERBS = Float.parseFloat(ratesSettings.getProperty("RateHpMpHerbs", "10."));
-			RATE_DROP_GREATER_HERBS = Float.parseFloat(ratesSettings.getProperty("RateGreaterHerbs", "4."));
-			RATE_DROP_SUPERIOR_HERBS = Float.parseFloat(ratesSettings.getProperty("RateSuperiorHerbs", "0.8")) * 10;
-			RATE_DROP_SPECIAL_HERBS = Float.parseFloat(ratesSettings.getProperty("RateSpecialHerbs", "0.2")) * 10;
-			
-			PLAYER_DROP_LIMIT = Integer.parseInt(ratesSettings.getProperty("PlayerDropLimit", "3"));
-			PLAYER_RATE_DROP = Integer.parseInt(ratesSettings.getProperty("PlayerRateDrop", "5"));
-			PLAYER_RATE_DROP_ITEM = Integer.parseInt(ratesSettings.getProperty("PlayerRateDropItem", "70"));
-			PLAYER_RATE_DROP_EQUIP = Integer.parseInt(ratesSettings.getProperty("PlayerRateDropEquip", "25"));
-			PLAYER_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(ratesSettings.getProperty("PlayerRateDropEquipWeapon", "5"));
-			
-			PET_XP_RATE = Float.parseFloat(ratesSettings.getProperty("PetXpRate", "1."));
-			PET_FOOD_RATE = Integer.parseInt(ratesSettings.getProperty("PetFoodRate", "1"));
-			SINEATER_XP_RATE = Float.parseFloat(ratesSettings.getProperty("SinEaterXpRate", "1."));
-			
-			KARMA_DROP_LIMIT = Integer.parseInt(ratesSettings.getProperty("KarmaDropLimit", "10"));
-			KARMA_RATE_DROP = Integer.parseInt(ratesSettings.getProperty("KarmaRateDrop", "70"));
-			KARMA_RATE_DROP_ITEM = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropItem", "50"));
-			KARMA_RATE_DROP_EQUIP = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropEquip", "40"));
-			KARMA_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropEquipWeapon", "10"));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + RATES_CONFIG_FILE + " File.");
 		}
 		
 		// alternative settings
@@ -1721,129 +1648,11 @@ public final class Config {
 			e.printStackTrace();
 			throw new Error("Failed to Load " + CLANHALL_CONFIG_FILE + " File.");
 		}
-		try {
-			Properties L2JModSettings = new Properties();
-			InputStream is = new FileInputStream(new File(L2JMOD_CONFIG_FILE));
-			L2JModSettings.load(is);
-			is.close();
-			
-			L2JMOD_CHAMPION_ENABLE = Boolean.parseBoolean(L2JModSettings.getProperty("ChampionEnable", "false"));
-			L2JMOD_CHAMPION_FREQUENCY = Integer.parseInt(L2JModSettings.getProperty("ChampionFrequency", "0"));
-			L2JMOD_CHAMP_MIN_LVL = Integer.parseInt(L2JModSettings.getProperty("ChampionMinLevel", "20"));
-			L2JMOD_CHAMP_MAX_LVL = Integer.parseInt(L2JModSettings.getProperty("ChampionMaxLevel", "60"));
-			L2JMOD_CHAMPION_HP = Integer.parseInt(L2JModSettings.getProperty("ChampionHp", "7"));
-			L2JMOD_CHAMPION_HP_REGEN = Float.parseFloat(L2JModSettings.getProperty("ChampionHpRegen", "1."));
-			L2JMOD_CHAMPION_REWARDS = Integer.parseInt(L2JModSettings.getProperty("ChampionRewards", "8"));
-			L2JMOD_CHAMPION_ADENAS_REWARDS = Integer.parseInt(L2JModSettings.getProperty("ChampionAdenasRewards", "1"));
-			L2JMOD_CHAMPION_ATK = Float.parseFloat(L2JModSettings.getProperty("ChampionAtk", "1."));
-			L2JMOD_CHAMPION_SPD_ATK = Float.parseFloat(L2JModSettings.getProperty("ChampionSpdAtk", "1."));
-			L2JMOD_CHAMPION_REWARD = Integer.parseInt(L2JModSettings.getProperty("ChampionRewardItem", "0"));
-			L2JMOD_CHAMPION_REWARD_ID = Integer.parseInt(L2JModSettings.getProperty("ChampionRewardItemID", "6393"));
-			L2JMOD_CHAMPION_REWARD_QTY = Integer.parseInt(L2JModSettings.getProperty("ChampionRewardItemQty", "1"));
-			
-			TVT_EVENT_ENABLED = Boolean.parseBoolean(L2JModSettings.getProperty("TvTEventEnabled", "false"));
-			TVT_EVENT_INTERVAL = Integer.parseInt(L2JModSettings.getProperty("TvTEventInterval", "18000"));
-			TVT_EVENT_PARTICIPATION_TIME = Integer.parseInt(L2JModSettings.getProperty("TvTEventParticipationTime", "3600"));
-			TVT_EVENT_RUNNING_TIME = Integer.parseInt(L2JModSettings.getProperty("TvTEventRunningTime", "1800"));
-			TVT_EVENT_PARTICIPATION_NPC_ID = Integer.parseInt(L2JModSettings.getProperty("TvTEventParticipationNpcId", "0"));
-			
-			/** L2JMOD Wedding system */
-			L2JMOD_ALLOW_WEDDING = Boolean.valueOf(L2JModSettings.getProperty("AllowWedding", "False"));
-			L2JMOD_WEDDING_PRICE = Integer.parseInt(L2JModSettings.getProperty("WeddingPrice", "250000000"));
-			L2JMOD_WEDDING_PUNISH_INFIDELITY = Boolean.parseBoolean(L2JModSettings.getProperty("WeddingPunishInfidelity", "True"));
-			L2JMOD_WEDDING_TELEPORT = Boolean.parseBoolean(L2JModSettings.getProperty("WeddingTeleport", "True"));
-			L2JMOD_WEDDING_TELEPORT_PRICE = Integer.parseInt(L2JModSettings.getProperty("WeddingTeleportPrice", "50000"));
-			L2JMOD_WEDDING_TELEPORT_DURATION = Integer.parseInt(L2JModSettings.getProperty("WeddingTeleportDuration", "60"));
-			L2JMOD_WEDDING_SAMESEX = Boolean.parseBoolean(L2JModSettings.getProperty("WeddingAllowSameSex", "False"));
-			L2JMOD_WEDDING_FORMALWEAR = Boolean.parseBoolean(L2JModSettings.getProperty("WeddingFormalWear", "True"));
-			L2JMOD_WEDDING_DIVORCE_COSTS = Integer.parseInt(L2JModSettings.getProperty("WeddingDivorceCosts", "20"));
-			
-			if (TVT_EVENT_PARTICIPATION_NPC_ID == 0) {
-				TVT_EVENT_ENABLED = false;
-				System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcId");
-			} else {
-				String[] propertySplit = L2JModSettings.getProperty("TvTEventParticipationNpcCoordinates", "0,0,0").split(",");
-				
-				if (propertySplit.length < 3) {
-					TVT_EVENT_ENABLED = false;
-					System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcCoordinates");
-				} else {
-					TVT_EVENT_PARTICIPATION_NPC_COORDINATES[0] = Integer.parseInt(propertySplit[0]);
-					TVT_EVENT_PARTICIPATION_NPC_COORDINATES[1] = Integer.parseInt(propertySplit[1]);
-					TVT_EVENT_PARTICIPATION_NPC_COORDINATES[2] = Integer.parseInt(propertySplit[2]);
-					
-					TVT_EVENT_MIN_PLAYERS_IN_TEAMS = Integer.parseInt(L2JModSettings.getProperty("TvTEventMinPlayersInTeams", "1"));
-					TVT_EVENT_MAX_PLAYERS_IN_TEAMS = Integer.parseInt(L2JModSettings.getProperty("TvTEventMaxPlayersInTeams", "20"));
-					TVT_EVENT_MIN_LVL = (byte) Integer.parseInt(L2JModSettings.getProperty("TvTEventMinPlayerLevel", "1"));
-					TVT_EVENT_MAX_LVL = (byte) Integer.parseInt(L2JModSettings.getProperty("TvTEventMaxPlayerLevel", "80"));
-					TVT_EVENT_RESPAWN_TELEPORT_DELAY = Integer.parseInt(L2JModSettings.getProperty("TvTEventRespawnTeleportDelay", "20"));
-					TVT_EVENT_START_LEAVE_TELEPORT_DELAY = Integer.parseInt(L2JModSettings.getProperty("TvTEventStartLeaveTeleportDelay", "20"));
-					
-					TVT_EVENT_TEAM_1_NAME = L2JModSettings.getProperty("TvTEventTeam1Name", "Team1");
-					propertySplit = L2JModSettings.getProperty("TvTEventTeam1Coordinates", "0,0,0").split(",");
-					
-					if (propertySplit.length < 3) {
-						TVT_EVENT_ENABLED = false;
-						System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventTeam1Coordinates");
-					} else {
-						TVT_EVENT_TEAM_1_COORDINATES[0] = Integer.parseInt(propertySplit[0]);
-						TVT_EVENT_TEAM_1_COORDINATES[1] = Integer.parseInt(propertySplit[1]);
-						TVT_EVENT_TEAM_1_COORDINATES[2] = Integer.parseInt(propertySplit[2]);
-						
-						TVT_EVENT_TEAM_2_NAME = L2JModSettings.getProperty("TvTEventTeam2Name", "Team2");
-						propertySplit = L2JModSettings.getProperty("TvTEventTeam2Coordinates", "0,0,0").split(",");
-						
-						if (propertySplit.length < 3) {
-							TVT_EVENT_ENABLED = false;
-							System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventTeam2Coordinates");
-						} else {
-							TVT_EVENT_TEAM_2_COORDINATES[0] = Integer.parseInt(propertySplit[0]);
-							TVT_EVENT_TEAM_2_COORDINATES[1] = Integer.parseInt(propertySplit[1]);
-							TVT_EVENT_TEAM_2_COORDINATES[2] = Integer.parseInt(propertySplit[2]);
-							propertySplit = L2JModSettings.getProperty("TvTEventReward", "57,100000").split(";");
-							
-							for (String reward : propertySplit) {
-								String[] rewardSplit = reward.split(",");
-								
-								if (rewardSplit.length != 2) {
-									System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
-								} else {
-									try {
-										TVT_EVENT_REWARDS.add(new int[] {
-											Integer.valueOf(rewardSplit[0]),
-											Integer.valueOf(rewardSplit[1])
-										});
-									} catch (NumberFormatException nfe) {
-										if (!reward.equals("")) {
-											System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
-										}
-									}
-								}
-							}
-							
-							TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED = Boolean.parseBoolean(L2JModSettings.getProperty("TvTEventTargetTeamMembersAllowed", "true"));
-							TVT_EVENT_POTIONS_ALLOWED = Boolean.parseBoolean(L2JModSettings.getProperty("TvTEventPotionsAllowed", "false"));
-							TVT_EVENT_SUMMON_BY_ITEM_ALLOWED = Boolean.parseBoolean(L2JModSettings.getProperty("TvTEventSummonByItemAllowed", "false"));
-							propertySplit = L2JModSettings.getProperty("TvTEventDoorsCloseOpenOnStartEnd", "").split(";");
-							
-							for (String door : propertySplit) {
-								try {
-									TVT_EVENT_DOOR_IDS.add(Integer.valueOf(door));
-								} catch (NumberFormatException nfe) {
-									if (!door.equals("")) {
-										System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventDoorsCloseOpenOnStartEnd \"" + door + "\"");
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + L2JMOD_CONFIG_FILE + " File.");
+
+		if (TVT_EVENT_ENABLED) {
+			loadTvTConfig();
 		}
+
 		// pvp config
 		try {
 			Properties pvpSettings = new Properties();
@@ -1941,17 +1750,8 @@ public final class Config {
 			e.printStackTrace();
 			throw new Error("Failed to Load " + GM_ACCESS_FILE + " File.");
 		}
-		
-		try {
-			Properties Settings = new Properties();
-			InputStream is = new FileInputStream(HEXID_FILE);
-			Settings.load(is);
-			is.close();
-//			SERVER_ID = Integer.parseInt(Settings.getProperty("ServerID"));
-			HEX_ID = new BigInteger(hexID().getHexID(), 16).toByteArray();
-		} catch (Exception e) {
-			_log.warning("Could not load HexID file (" + HEXID_FILE + "). Hopefully login will give us one.");
-		}
+
+		HEX_ID = new BigInteger(hexID().getHexID(), 16).toByteArray();
 	}
 	
 	/**
@@ -2385,5 +2185,77 @@ public final class Config {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private static void loadTvTConfig() {
+		String[] participationNpcCoordinates = l2JMods().getTvTEventParticipationNpcCoordinates().split(",");
+		String[] team1Coordinates = l2JMods().getTvTEventTeam1Coordinates().split(",");
+		String[] team2Coordinates = l2JMods().getTvTEventTeam2Coordinates().split(",");
+		String[] eventDoors = l2JMods().getTvTEventDoorsCloseOpenOnStartEnd().split(";");
+		String[] eventRewards = l2JMods().getTvTEventReward().split(";");
+
+		if (TVT_EVENT_PARTICIPATION_NPC_ID == 0) {
+			TVT_EVENT_ENABLED = false;
+			System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcId");
+		}
+
+		if (participationNpcCoordinates.length < 3) {
+			TVT_EVENT_ENABLED = false;
+			System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcCoordinates");
+		}
+
+		if (team1Coordinates.length < 3) {
+			TVT_EVENT_ENABLED = false;
+			System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventTeam1Coordinates");
+		}
+
+		if (team2Coordinates.length < 3) {
+			TVT_EVENT_ENABLED = false;
+			System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventTeam2Coordinates");
+		}
+
+		if (!TVT_EVENT_ENABLED) {
+			return;
+		}
+
+		TVT_EVENT_PARTICIPATION_NPC_COORDINATES[0] = Integer.parseInt(participationNpcCoordinates[0]);
+		TVT_EVENT_PARTICIPATION_NPC_COORDINATES[1] = Integer.parseInt(participationNpcCoordinates[1]);
+		TVT_EVENT_PARTICIPATION_NPC_COORDINATES[2] = Integer.parseInt(participationNpcCoordinates[2]);
+
+		TVT_EVENT_TEAM_1_COORDINATES[0] = Integer.parseInt(team1Coordinates[0]);
+		TVT_EVENT_TEAM_1_COORDINATES[1] = Integer.parseInt(team1Coordinates[1]);
+		TVT_EVENT_TEAM_1_COORDINATES[2] = Integer.parseInt(team1Coordinates[2]);
+
+		TVT_EVENT_TEAM_2_COORDINATES[0] = Integer.parseInt(team2Coordinates[0]);
+		TVT_EVENT_TEAM_2_COORDINATES[1] = Integer.parseInt(team2Coordinates[1]);
+		TVT_EVENT_TEAM_2_COORDINATES[2] = Integer.parseInt(team2Coordinates[2]);
+
+		for (String door : eventDoors) {
+			try {
+				TVT_EVENT_DOOR_IDS.add(Integer.valueOf(door));
+			} catch (NumberFormatException nfe) {
+				if (door.isEmpty()) {
+					System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventDoorsCloseOpenOnStartEnd \"" + door + "\"");
+				}
+			}
+		}
+
+		for (String reward : eventRewards) {
+			String[] rewardSplit = reward.split(",");
+
+			if (rewardSplit.length != 2) {
+				System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
+			} else {
+				try {
+					TVT_EVENT_REWARDS.add(new int[] {
+							Integer.parseInt(rewardSplit[0]),
+							Integer.parseInt(rewardSplit[1])
+					});
+				} catch (NumberFormatException nfe) {
+					if (reward.isEmpty()) {
+						System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
+					}
+				}
+			}
+		}
+	}
 }
