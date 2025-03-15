@@ -359,4 +359,48 @@ public interface OptionsConfiguration extends Config {
     @Key("ForceGeodata")
     @DefaultValue("false")
     boolean getForceGeodata();
+
+    @Key("Use3DMap")
+    @DefaultValue("false")
+    boolean getUse3DMap();
+
+    @Key("PathNodeRadius")
+    @DefaultValue("50")
+    int getPathNodeRadius();
+
+    @Key("NewNodeId")
+    @DefaultValue("7952")
+    int getNewNodeId();
+
+    @Key("NewNodeType")
+    @DefaultValue("npc")
+    String getNewNodeType();
+
+    @Key("CountPacket")
+    @DefaultValue("false")
+    boolean getCountPacket();
+
+    @Key("DumpPacketCounts")
+    @DefaultValue("false")
+    boolean getDumpPacketCounts();
+
+    @Key("PacketDumpInterval")
+    @DefaultValue("60")
+    int getPacketDumpInterval();
+
+    @Key("MaximumUpdateDistance")
+    @DefaultValue("50")
+    int getMaximumUpdateDistance();
+
+    @Key("MinimumUpdateTime")
+    @DefaultValue("500")
+    int getMinimumUpdateTime();
+
+    @Key("CheckKnownList")
+    @DefaultValue("false")
+    boolean getCheckKnownList();
+
+    @Key("KnownListForgetDelay")
+    @DefaultValue("10000")
+    int getKnownListForgetDelay();
 }

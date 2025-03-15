@@ -473,9 +473,9 @@ public final class Config {
 	/** Rate Common herbs */
 	public static float RATE_DROP_GREATER_HERBS = rates().getRateGreaterHerbs();
 	/** Rate Common herbs */
-	public static float RATE_DROP_SUPERIOR_HERBS = rates().getRateSuperiorHerbs();
+	public static float RATE_DROP_SUPERIOR_HERBS = rates().getRateSuperiorHerbs() * 10;
 	/** Rate Common herbs */
-	public static float RATE_DROP_SPECIAL_HERBS = rates().getRateSpecialHerbs();
+	public static float RATE_DROP_SPECIAL_HERBS = rates().getRateSpecialHerbs() * 10;
 	
 	// Player Drop Rate control
 	/** Limit for player drop */
@@ -512,7 +512,7 @@ public final class Config {
 	/** Time after which item will auto-destroy */
 	public static int AUTODESTROY_ITEM_AFTER = options().getAutoDestroyDroppedItemAfter();
 	/** Auto destroy herb time */
-	public static int HERB_AUTO_DESTROY_TIME = options().getAutoDestroyHerbTime();
+	public static int HERB_AUTO_DESTROY_TIME = options().getAutoDestroyHerbTime() * 1000;
 	/** List of items that will not be destroyed (separated by ",") */
 	public static String PROTECTED_ITEMS = options().getListOfProtectedItems();
 	/** List of items that will not be destroyed */
@@ -527,7 +527,7 @@ public final class Config {
 	/** Empty table ItemsOnGround after load all items */
 	public static boolean EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = options().getEmptyDroppedItemTableAfterLoad();
 	/** Time interval to save into db items on ground */
-	public static int SAVE_DROPPED_ITEM_INTERVAL = options().getSaveDroppedItemInterval();
+	public static int SAVE_DROPPED_ITEM_INTERVAL = options().getSaveDroppedItemInterval() * 60000;
 	/** Clear all items stored in ItemsOnGround table */
 	public static boolean CLEAR_DROPPED_ITEM_TABLE = options().getClearDroppedItemTable();
 	
@@ -574,7 +574,7 @@ public final class Config {
 	}
 	
 	/** Allow the use of L2Walker client ? */
-	public static L2WalkerAllowed ALLOW_L2WALKER_CLIENT;
+	public static L2WalkerAllowed ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(options().getAllowL2Walker());;
 	/** Auto-ban client that use L2Walker ? */
 	public static boolean AUTOBAN_L2WALKER_ACC = options().getAutobanL2WalkerAcc();
 	/** Revision of L2Walker */
@@ -645,7 +645,7 @@ public final class Config {
 	/** Activate position recorder ? */
 	public static boolean ACTIVATE_POSITION_RECORDER = options().getActivatePositionRecorder();
 	/** Use 3D Map ? */
-	public static boolean USE_3D_MAP;
+	public static boolean USE_3D_MAP = options().getUse3DMap();
 	
 	// Community Board
 	/** Type of community */
@@ -704,17 +704,17 @@ public final class Config {
 	public static final String L2JMOD_CONFIG_FILE = "./config/l2jmods.properties";
 	public static int MAX_ITEM_IN_PACKET;
 	
-	public static boolean CHECK_KNOWN;
+	public static boolean CHECK_KNOWN = options().getCheckKnownList();
 	
 	/** Game Server login port */
 	public static int GAME_SERVER_LOGIN_PORT = server().getLoginPort();
 	/** Game Server login Host */
 	public static String GAME_SERVER_LOGIN_HOST = server().getLoginHost();
-	public static int PATH_NODE_RADIUS;
-	public static int NEW_NODE_ID;
-	public static int SELECTED_NODE_ID;
-	public static int LINKED_NODE_ID;
-	public static String NEW_NODE_TYPE;
+	public static int PATH_NODE_RADIUS = options().getPathNodeRadius();
+	public static int NEW_NODE_ID = options().getNewNodeId();
+	public static int SELECTED_NODE_ID = options().getNewNodeId();
+	public static int LINKED_NODE_ID = options().getNewNodeId();
+	public static String NEW_NODE_TYPE = options().getNewNodeType();
 	
 	/** Show "data/html/servnews.htm" whenever a character enters world. */
 	public static boolean SERVER_NEWS = options().getShowServerNews();
@@ -863,11 +863,11 @@ public final class Config {
 	
 	// Packet information
 	/** Count the amount of packets per minute ? */
-	public static boolean COUNT_PACKETS = false;
+	public static boolean COUNT_PACKETS = options().getCountPacket();
 	/** Dump packet count ? */
-	public static boolean DUMP_PACKET_COUNTS = false;
+	public static boolean DUMP_PACKET_COUNTS = options().getDumpPacketCounts();
 	/** Time interval between 2 dumps */
-	public static int DUMP_INTERVAL_SECONDS = 60;
+	public static int DUMP_INTERVAL_SECONDS = options().getPacketDumpInterval();
 	
 	/** Enumeration for type of ID Factory */
 	public static enum IdFactoryType {
@@ -1007,9 +1007,9 @@ public final class Config {
 	public static int REQUEST_ID = server().getRequestServerID();
 	public static boolean RESERVE_HOST_ON_LOGIN = false;
 	
-	public static int MINIMUM_UPDATE_DISTANCE;
-	public static int KNOWNLIST_FORGET_DELAY;
-	public static int MINIMUN_UPDATE_TIME;
+	public static int MINIMUM_UPDATE_DISTANCE = options().getMaximumUpdateDistance();
+	public static int KNOWNLIST_FORGET_DELAY = options().getKnownListForgetDelay();
+	public static int MINIMUN_UPDATE_TIME = options().getMinimumUpdateTime();
 	
 	public static boolean ANNOUNCE_MAMMON_SPAWN;
 	public static boolean LAZY_CACHE = options().getLazyCache();
@@ -1153,159 +1153,14 @@ public final class Config {
 			DATAPACK_ROOT = new File(server().getDatapackRoot()).getCanonicalFile();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Error("Failed to Load " + CONFIGURATION_FILE + " File.");
+			throw new Error("Failed to Load data pack, check DatapackRoot configuration.");
 		}
 
-		try {
-			Properties optionsSettings = new Properties();
-			InputStream is = new FileInputStream(new File(OPTIONS_FILE));
-			optionsSettings.load(is);
-			is.close();
-			
-//			EVERYBODY_HAS_ADMIN_RIGHTS = Boolean.parseBoolean(optionsSettings.getProperty("EverybodyHasAdminRights", "false"));
-			
-//			DEBUG = Boolean.parseBoolean(optionsSettings.getProperty("Debug", "false"));
-//			ASSERT = Boolean.parseBoolean(optionsSettings.getProperty("Assert", "false"));
-//			DEVELOPER = Boolean.parseBoolean(optionsSettings.getProperty("Developer", "false"));
-//			TEST_SERVER = Boolean.parseBoolean(optionsSettings.getProperty("TestServer", "false"));
-//			SERVER_LIST_TESTSERVER = Boolean.parseBoolean(optionsSettings.getProperty("TestServer", "false"));
-			
-//			SERVER_LIST_BRACKET = Boolean.valueOf(optionsSettings.getProperty("ServerListBrackets", "false"));
-//			SERVER_LIST_CLOCK = Boolean.valueOf(optionsSettings.getProperty("ServerListClock", "false"));
-//			SERVER_GMONLY = Boolean.valueOf(optionsSettings.getProperty("ServerGMOnly", "false"));
-			
-//			AUTODESTROY_ITEM_AFTER = Integer.parseInt(optionsSettings.getProperty("AutoDestroyDroppedItemAfter", "0"));
-			HERB_AUTO_DESTROY_TIME = Integer.parseInt(optionsSettings.getProperty("AutoDestroyHerbTime", "15")) * 1000;
-//			PROTECTED_ITEMS = optionsSettings.getProperty("ListOfProtectedItems");
-			LIST_PROTECTED_ITEMS = new FastList<>();
-			for (String id : PROTECTED_ITEMS.split(",")) {
-				LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
-			}
-//			DESTROY_DROPPED_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyPlayerDroppedItem", "false"));
-//			DESTROY_EQUIPABLE_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyEquipableItem", "false"));
-//			SAVE_DROPPED_ITEM = Boolean.valueOf(optionsSettings.getProperty("SaveDroppedItem", "false"));
-//			EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = Boolean.valueOf(optionsSettings.getProperty("EmptyDroppedItemTableAfterLoad", "false"));
-			SAVE_DROPPED_ITEM_INTERVAL = Integer.parseInt(optionsSettings.getProperty("SaveDroppedItemInterval", "0")) * 60000;
-//			CLEAR_DROPPED_ITEM_TABLE = Boolean.valueOf(optionsSettings.getProperty("ClearDroppedItemTable", "false"));
-
-//			PRECISE_DROP_CALCULATION = Boolean.valueOf(optionsSettings.getProperty("PreciseDropCalculation", "True"));
-//			MULTIPLE_ITEM_DROP = Boolean.valueOf(optionsSettings.getProperty("MultipleItemDrop", "True"));
-			
-//			COORD_SYNCHRONIZE = Integer.parseInt(optionsSettings.getProperty("CoordSynchronize", "-1"));
-			
-//			ONLY_GM_ITEMS_FREE = Boolean.valueOf(optionsSettings.getProperty("OnlyGMItemsFree", "True"));
-			
-//			ALLOW_WAREHOUSE = Boolean.valueOf(optionsSettings.getProperty("AllowWarehouse", "True"));
-//			WAREHOUSE_CACHE = Boolean.valueOf(optionsSettings.getProperty("WarehouseCache", "False"));
-//			WAREHOUSE_CACHE_TIME = Integer.parseInt(optionsSettings.getProperty("WarehouseCacheTime", "15"));
-//			ALLOW_FREIGHT = Boolean.valueOf(optionsSettings.getProperty("AllowFreight", "True"));
-//			ALLOW_WEAR = Boolean.valueOf(optionsSettings.getProperty("AllowWear", "False"));
-//			WEAR_DELAY = Integer.parseInt(optionsSettings.getProperty("WearDelay", "5"));
-//			WEAR_PRICE = Integer.parseInt(optionsSettings.getProperty("WearPrice", "10"));
-//			ALLOW_LOTTERY = Boolean.valueOf(optionsSettings.getProperty("AllowLottery", "False"));
-//			ALLOW_RACE = Boolean.valueOf(optionsSettings.getProperty("AllowRace", "False"));
-//			ALLOW_WATER = Boolean.valueOf(optionsSettings.getProperty("AllowWater", "False"));
-//			ALLOW_RENTPET = Boolean.valueOf(optionsSettings.getProperty("AllowRentPet", "False"));
-//			FLOODPROTECTOR_INITIALSIZE = Integer.parseInt(optionsSettings.getProperty("FloodProtectorInitialSize", "50"));
-//			ALLOW_DISCARDITEM = Boolean.valueOf(optionsSettings.getProperty("AllowDiscardItem", "True"));
-//			ALLOWFISHING = Boolean.valueOf(optionsSettings.getProperty("AllowFishing", "False"));
-//			ALLOW_MANOR = Boolean.parseBoolean(optionsSettings.getProperty("AllowManor", "False"));
-//			ALLOW_BOAT = Boolean.valueOf(optionsSettings.getProperty("AllowBoat", "False"));
-//			ALLOW_NPC_WALKERS = Boolean.valueOf(optionsSettings.getProperty("AllowNpcWalkers", "true"));
-//			ALLOW_CURSED_WEAPONS = Boolean.valueOf(optionsSettings.getProperty("AllowCursedWeapons", "False"));
-			
-//			ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(optionsSettings.getProperty("AllowL2Walker", "False"));
-			ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(options().getAllowL2Walker());
-//			L2WALKER_REVISION = Integer.parseInt(optionsSettings.getProperty("L2WalkerRevision", "537"));
-//			AUTOBAN_L2WALKER_ACC = Boolean.valueOf(optionsSettings.getProperty("AutobanL2WalkerAcc", "False"));
-			
-//			ACTIVATE_POSITION_RECORDER = Boolean.valueOf(optionsSettings.getProperty("ActivatePositionRecorder", "False"));
-			
-//			DEFAULT_GLOBAL_CHAT = optionsSettings.getProperty("GlobalChat", "ON");
-//			DEFAULT_TRADE_CHAT = optionsSettings.getProperty("TradeChat", "ON");
-			
-//			LOG_CHAT = Boolean.valueOf(optionsSettings.getProperty("LogChat", "false"));
-//			LOG_ITEMS = Boolean.valueOf(optionsSettings.getProperty("LogItems", "false"));
-			
-//			GMAUDIT = Boolean.valueOf(optionsSettings.getProperty("GMAudit", "False"));
-			
-//			COMMUNITY_TYPE = optionsSettings.getProperty("CommunityType", "old").toLowerCase();
-//			BBS_DEFAULT = optionsSettings.getProperty("BBSDefault", "_bbshome");
-//			SHOW_LEVEL_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowLevelOnCommunityBoard", "False"));
-//			SHOW_STATUS_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowStatusOnCommunityBoard", "True"));
-//			NAME_PAGE_SIZE_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePageSizeOnCommunityBoard", "50"));
-//			NAME_PER_ROW_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePerRowOnCommunityBoard", "5"));
-			
-//			ZONE_TOWN = Integer.parseInt(optionsSettings.getProperty("ZoneTown", "0"));
-			
-//			MAX_DRIFT_RANGE = Integer.parseInt(optionsSettings.getProperty("MaxDriftRange", "300"));
-			
-//			MIN_NPC_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MinNPCAnimation", "10"));
-//			MAX_NPC_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MaxNPCAnimation", "20"));
-//			MIN_MONSTER_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MinMonsterAnimation", "5"));
-//			MAX_MONSTER_ANIMATION = Integer.parseInt(optionsSettings.getProperty("MaxMonsterAnimation", "20"));
-			
-//			SERVER_NEWS = Boolean.valueOf(optionsSettings.getProperty("ShowServerNews", "False"));
-//			SHOW_NPC_LVL = Boolean.valueOf(optionsSettings.getProperty("ShowNpcLevel", "False"));
-			
-//			FORCE_INVENTORY_UPDATE = Boolean.valueOf(optionsSettings.getProperty("ForceInventoryUpdate", "False"));
-			
-//			AUTODELETE_INVALID_QUEST_DATA = Boolean.valueOf(optionsSettings.getProperty("AutoDeleteInvalidQuestData", "False"));
-			
-//			THREAD_P_EFFECTS = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeEffects", "6"));
-//			THREAD_P_GENERAL = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeGeneral", "15"));
-//			GENERAL_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralPacketThreadCoreSize", "4"));
-//			IO_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("UrgentPacketThreadCoreSize", "2"));
-//			AI_MAX_THREAD = Integer.parseInt(optionsSettings.getProperty("AiMaxThread", "10"));
-//			GENERAL_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralThreadCoreSize", "4"));
-			
-//			DELETE_DAYS = Integer.parseInt(optionsSettings.getProperty("DeleteCharAfterDays", "7"));
-			
-//			DEFAULT_PUNISH = Integer.parseInt(optionsSettings.getProperty("DefaultPunish", "2"));
-//			DEFAULT_PUNISH_PARAM = Integer.parseInt(optionsSettings.getProperty("DefaultPunishParam", "0"));
-			
-//			LAZY_CACHE = Boolean.valueOf(optionsSettings.getProperty("LazyCache", "False"));
-			
-//			PACKET_LIFETIME = Integer.parseInt(optionsSettings.getProperty("PacketLifeTime", "0"));
-			
-//			BYPASS_VALIDATION = Boolean.valueOf(optionsSettings.getProperty("BypassValidation", "True"));
-			
-//			GAMEGUARD_ENFORCE = Boolean.valueOf(optionsSettings.getProperty("GameGuardEnforce", "False"));
-//			GAMEGUARD_PROHIBITACTION = Boolean.valueOf(optionsSettings.getProperty("GameGuardProhibitAction", "False"));
-			
-//			GRIDS_ALWAYS_ON = Boolean.parseBoolean(optionsSettings.getProperty("GridsAlwaysOn", "False"));
-//			GRID_NEIGHBOR_TURNON_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOnTime", "30"));
-//			GRID_NEIGHBOR_TURNOFF_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOffTime", "300"));
-			
-//			GEODATA = Integer.parseInt(optionsSettings.getProperty("GeoData", "0"));
-//			FORCE_GEODATA = Boolean.parseBoolean(optionsSettings.getProperty("ForceGeoData", "True"));
-//			ACCEPT_GEOEDITOR_CONN = Boolean.parseBoolean(optionsSettings.getProperty("AcceptGeoeditorConn", "False"));
-			
-			// ---------------------------------------------------
-			// Configuration values not found in config files
-			// ---------------------------------------------------
-			
-			USE_3D_MAP = Boolean.valueOf(optionsSettings.getProperty("Use3DMap", "False"));
-			
-			PATH_NODE_RADIUS = Integer.parseInt(optionsSettings.getProperty("PathNodeRadius", "50"));
-			NEW_NODE_ID = Integer.parseInt(optionsSettings.getProperty("NewNodeId", "7952"));
-			SELECTED_NODE_ID = Integer.parseInt(optionsSettings.getProperty("NewNodeId", "7952"));
-			LINKED_NODE_ID = Integer.parseInt(optionsSettings.getProperty("NewNodeId", "7952"));
-			NEW_NODE_TYPE = optionsSettings.getProperty("NewNodeType", "npc");
-			
-			COUNT_PACKETS = Boolean.valueOf(optionsSettings.getProperty("CountPacket", "false"));
-			DUMP_PACKET_COUNTS = Boolean.valueOf(optionsSettings.getProperty("DumpPacketCounts", "false"));
-			DUMP_INTERVAL_SECONDS = Integer.parseInt(optionsSettings.getProperty("PacketDumpInterval", "60"));
-			
-			MINIMUM_UPDATE_DISTANCE = Integer.parseInt(optionsSettings.getProperty("MaximumUpdateDistance", "50"));
-			MINIMUN_UPDATE_TIME = Integer.parseInt(optionsSettings.getProperty("MinimumUpdateTime", "500"));
-			CHECK_KNOWN = Boolean.valueOf(optionsSettings.getProperty("CheckKnownList", "false"));
-			KNOWNLIST_FORGET_DELAY = Integer.parseInt(optionsSettings.getProperty("KnownListForgetDelay", "10000"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + OPTIONS_FILE + " File.");
+		LIST_PROTECTED_ITEMS = new FastList<>();
+		for (String id : PROTECTED_ITEMS.split(",")) {
+			LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
 		}
-		
+
 		// telnet
 		try {
 			Properties telnetSettings = new Properties();
@@ -2247,8 +2102,8 @@ public final class Config {
 			} else {
 				try {
 					TVT_EVENT_REWARDS.add(new int[] {
-							Integer.parseInt(rewardSplit[0]),
-							Integer.parseInt(rewardSplit[1])
+						Integer.parseInt(rewardSplit[0]),
+						Integer.parseInt(rewardSplit[1])
 					});
 				} catch (NumberFormatException nfe) {
 					if (reward.isEmpty()) {
