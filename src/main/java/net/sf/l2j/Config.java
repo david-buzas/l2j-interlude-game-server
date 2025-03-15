@@ -171,10 +171,10 @@ public final class Config {
 	public static boolean ALT_GAME_MAGICFAILURES;
 	
 	/** Alternative gaming - player must be in a castle-owning clan or ally to sign up for Dawn. */
-	public static boolean ALT_GAME_REQUIRE_CASTLE_DAWN;
+	public static boolean ALT_GAME_REQUIRE_CASTLE_DAWN = sevenSigns().getAltRequireCastleForDawn();
 	
 	/** Alternative gaming - allow clan-based castle ownage check rather than ally-based. */
-	public static boolean ALT_GAME_REQUIRE_CLAN_CASTLE;
+	public static boolean ALT_GAME_REQUIRE_CLAN_CASTLE = sevenSigns().getAltRequireClanCastle();
 	
 	/** Alternative gaming - allow free teleporting around the world. */
 	public static boolean ALT_GAME_FREE_TELEPORT;
@@ -189,34 +189,34 @@ public final class Config {
 	public static boolean ALT_GAME_VIEWNPC;
 	
 	/** Minimum number of player to participate in SevenSigns Festival */
-	public static int ALT_FESTIVAL_MIN_PLAYER;
+	public static int ALT_FESTIVAL_MIN_PLAYER = sevenSigns().getAltFestivalMinPlayer();
 	
 	/** Maximum of player contrib during Festival */
-	public static int ALT_MAXIMUM_PLAYER_CONTRIB;
+	public static int ALT_MAXIMUM_PLAYER_CONTRIB = sevenSigns().getAltMaxPlayerContrib();
 	
 	/** Festival Manager start time. */
-	public static long ALT_FESTIVAL_MANAGER_START;
+	public static long ALT_FESTIVAL_MANAGER_START = sevenSigns().getAltFestivalManagerStart();
 	
 	/** Festival Length */
-	public static long ALT_FESTIVAL_LENGTH;
+	public static long ALT_FESTIVAL_LENGTH = sevenSigns().getAltFestivalLength();
 	
 	/** Festival Cycle Length */
-	public static long ALT_FESTIVAL_CYCLE_LENGTH;
+	public static long ALT_FESTIVAL_CYCLE_LENGTH = sevenSigns().getAltFestivalCycleLength();
 	
 	/** Festival First Spawn */
-	public static long ALT_FESTIVAL_FIRST_SPAWN;
+	public static long ALT_FESTIVAL_FIRST_SPAWN = sevenSigns().getAltFestivalFirstSpawn();
 	
 	/** Festival First Swarm */
-	public static long ALT_FESTIVAL_FIRST_SWARM;
+	public static long ALT_FESTIVAL_FIRST_SWARM = sevenSigns().getAltFestivalFirstSwarm();
 	
 	/** Festival Second Spawn */
-	public static long ALT_FESTIVAL_SECOND_SPAWN;
+	public static long ALT_FESTIVAL_SECOND_SPAWN = sevenSigns().getAltFestivalSecondSpawn();
 	
 	/** Festival Second Swarm */
-	public static long ALT_FESTIVAL_SECOND_SWARM;
+	public static long ALT_FESTIVAL_SECOND_SWARM = sevenSigns().getAltFestivalSecondSwarm();
 	
 	/** Festival Chest Spawn */
-	public static long ALT_FESTIVAL_CHEST_SPAWN;
+	public static long ALT_FESTIVAL_CHEST_SPAWN = sevenSigns().getAltFestivalChestSpawn();
 	
 	/** Number of members needed to request a clan war */
 	public static int ALT_CLAN_MEMBERS_FOR_WAR;
@@ -1288,30 +1288,6 @@ public final class Config {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Error("Failed to Load " + ALT_SETTINGS_FILE + " File.");
-		}
-		
-		// Seven Signs Config
-		try {
-			Properties SevenSettings = new Properties();
-			InputStream is = new FileInputStream(new File(SEVENSIGNS_FILE));
-			SevenSettings.load(is);
-			is.close();
-			
-			ALT_GAME_REQUIRE_CASTLE_DAWN = Boolean.parseBoolean(SevenSettings.getProperty("AltRequireCastleForDawn", "False"));
-			ALT_GAME_REQUIRE_CLAN_CASTLE = Boolean.parseBoolean(SevenSettings.getProperty("AltRequireClanCastle", "False"));
-			ALT_FESTIVAL_MIN_PLAYER = Integer.parseInt(SevenSettings.getProperty("AltFestivalMinPlayer", "5"));
-			ALT_MAXIMUM_PLAYER_CONTRIB = Integer.parseInt(SevenSettings.getProperty("AltMaxPlayerContrib", "1000000"));
-			ALT_FESTIVAL_MANAGER_START = Long.parseLong(SevenSettings.getProperty("AltFestivalManagerStart", "120000"));
-			ALT_FESTIVAL_LENGTH = Long.parseLong(SevenSettings.getProperty("AltFestivalLength", "1080000"));
-			ALT_FESTIVAL_CYCLE_LENGTH = Long.parseLong(SevenSettings.getProperty("AltFestivalCycleLength", "2280000"));
-			ALT_FESTIVAL_FIRST_SPAWN = Long.parseLong(SevenSettings.getProperty("AltFestivalFirstSpawn", "120000"));
-			ALT_FESTIVAL_FIRST_SWARM = Long.parseLong(SevenSettings.getProperty("AltFestivalFirstSwarm", "300000"));
-			ALT_FESTIVAL_SECOND_SPAWN = Long.parseLong(SevenSettings.getProperty("AltFestivalSecondSpawn", "540000"));
-			ALT_FESTIVAL_SECOND_SWARM = Long.parseLong(SevenSettings.getProperty("AltFestivalSecondSwarm", "720000"));
-			ALT_FESTIVAL_CHEST_SPAWN = Long.parseLong(SevenSettings.getProperty("AltFestivalChestSpawn", "900000"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + SEVENSIGNS_FILE + " File.");
 		}
 		
 		// clanhall settings

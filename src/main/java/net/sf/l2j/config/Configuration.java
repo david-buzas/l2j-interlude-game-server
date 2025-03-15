@@ -19,6 +19,8 @@ public class Configuration {
 
     private static final OtherConfiguration other = ConfigFactory.create(OtherConfiguration.class);
 
+    private static final SevenSignsConfiguration sevenSigns = ConfigFactory.create(SevenSignsConfiguration.class);
+
     public static ServerConfiguration server() {
         return server;
     }
@@ -49,5 +51,9 @@ public class Configuration {
 
     public static OtherConfiguration other() {
         return other;
+    }
+
+    public static SevenSignsConfiguration sevenSigns() {
+        return sevenSigns;
     }
 }
