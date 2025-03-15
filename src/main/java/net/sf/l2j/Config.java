@@ -877,9 +877,9 @@ public final class Config {
 	}
 	
 	/** ID Factory type */
-	public static IdFactoryType IDFACTORY_TYPE;
+	public static IdFactoryType IDFACTORY_TYPE = IdFactoryType.valueOf(idFactory().getIDFactory());
 	/** Check for bad ID ? */
-	public static boolean BAD_ID_CHECKING;
+	public static boolean BAD_ID_CHECKING = idFactory().getBadIdChecking();
 	
 	/** Enumeration for type of maps object */
 	public static enum ObjectMapType {
@@ -894,9 +894,9 @@ public final class Config {
 	}
 	
 	/** Type of map object */
-	public static ObjectMapType MAP_TYPE;
+	public static ObjectMapType MAP_TYPE = ObjectMapType.valueOf(idFactory().getL2Map());
 	/** Type of set object */
-	public static ObjectSetType SET_TYPE;
+	public static ObjectSetType SET_TYPE = ObjectSetType.valueOf(idFactory().getL2Set());
 	
 	/**
 	 * Allow lesser effects to be canceled if stronger effects are used when effects of the same stack group are used.<br>
@@ -1168,35 +1168,6 @@ public final class Config {
 		LIST_PROTECTED_ITEMS = new FastList<>();
 		for (String id : PROTECTED_ITEMS.split(",")) {
 			LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
-		}
-
-		// telnet
-		try {
-			Properties telnetSettings = new Properties();
-			InputStream is = new FileInputStream(new File(TELNET_FILE));
-			telnetSettings.load(is);
-			is.close();
-			
-			IS_TELNET_ENABLED = Boolean.valueOf(telnetSettings.getProperty("EnableTelnet", "false"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + TELNET_FILE + " File.");
-		}
-		
-		// id factory
-		try {
-			Properties idSettings = new Properties();
-			InputStream is = new FileInputStream(new File(ID_CONFIG_FILE));
-			idSettings.load(is);
-			is.close();
-			
-			MAP_TYPE = ObjectMapType.valueOf(idSettings.getProperty("L2Map", "WorldObjectMap"));
-			SET_TYPE = ObjectSetType.valueOf(idSettings.getProperty("L2Set", "WorldObjectSet"));
-			IDFACTORY_TYPE = IdFactoryType.valueOf(idSettings.getProperty("IDFactory", "Compaction"));
-			BAD_ID_CHECKING = Boolean.valueOf(idSettings.getProperty("BadIdChecking", "True"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + ID_CONFIG_FILE + " File.");
 		}
 		
 		// other

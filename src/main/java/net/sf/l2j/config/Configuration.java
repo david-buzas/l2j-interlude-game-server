@@ -15,6 +15,8 @@ public class Configuration {
 
     private static final TelnetConfiguration telnet = ConfigFactory.create(TelnetConfiguration.class);
 
+    private static final IDFactoryConfiguration idFactory = ConfigFactory.create(IDFactoryConfiguration.class);
+
     public static ServerConfiguration server() {
         return server;
     }
@@ -37,5 +39,9 @@ public class Configuration {
 
     public static TelnetConfiguration telnet() {
         return telnet;
+    }
+
+    public static IDFactoryConfiguration idFactory() {
+        return idFactory;
     }
 }
