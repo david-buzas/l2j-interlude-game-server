@@ -21,6 +21,8 @@ public class Configuration {
 
     private static final SevenSignsConfiguration sevenSigns = ConfigFactory.create(SevenSignsConfiguration.class);
 
+    private static final MessagingConfiguration messaging = ConfigFactory.create(MessagingConfiguration.class);
+
     public static ServerConfiguration server() {
         return server;
     }
@@ -55,5 +57,9 @@ public class Configuration {
 
     public static SevenSignsConfiguration sevenSigns() {
         return sevenSigns;
+    }
+
+    public static MessagingConfiguration messaging() {
+        return messaging;
     }
 }

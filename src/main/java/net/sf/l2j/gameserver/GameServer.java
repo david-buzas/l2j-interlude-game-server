@@ -233,6 +233,9 @@ import net.sf.l2j.gameserver.taskmanager.TaskManager;
 import net.sf.l2j.gameserver.util.DynamicExtension;
 import net.sf.l2j.gameserver.util.FloodProtector;
 import net.sf.l2j.gameserver.util.IPv4Filter;
+import net.sf.l2j.messaging.factory.ConsumerFactory;
+import net.sf.l2j.messaging.factory.ProducerFactory;
+import net.sf.l2j.messaging.producer.Producer;
 import net.sf.l2j.status.Status;
 
 /**
@@ -267,6 +270,8 @@ public class GameServer
 	private final ThreadPoolManager _threadpools;
 	
 	public static final Calendar dateTimeServerStarted = Calendar.getInstance();
+
+	private static Producer producer = ProducerFactory.create("boot");
 	
 	public long getUsedMemoryMB()
 	{
@@ -703,6 +708,8 @@ public class GameServer
 	
 	public static void main(String[] args) throws Exception
 	{
+		producer.createMessage("Game server initialization...");
+
 		// Local Constants
 		final String LOG_FOLDER = "log"; // Name of folder for log file
 		final String LOG_NAME = "./config/log.cfg"; // Name of log file
@@ -731,5 +738,9 @@ public class GameServer
 		{
 			System.out.println("Telnet server is currently disabled.");
 		}
+
+		producer.createMessage("Game server booted.");
+
+		ConsumerFactory.create().consume();
 	}
 }
