@@ -102,5 +102,10 @@
 			<artifactId>l2j-server-commons</artifactId>
 			<version>2.6.4.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.aeonbits.owner</groupId>
+			<artifactId>owner</artifactId>
+			<version>1.0.12</version>
+		</dependency>
 	</dependencies>
 </project>
