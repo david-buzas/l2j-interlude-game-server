@@ -7,21 +7,26 @@ import net.sf.l2j.messaging.producer.KafkaMessageProducer;
 import net.sf.l2j.messaging.producer.NullProducer;
 import net.sf.l2j.messaging.producer.Producer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProducerFactory {
-    private static Producer instance;
+    private static final Map<String, Producer> instances = new HashMap<>();
 
     public static Producer create(String topic)
     {
-        if (instance != null) {
-            return instance;
+        if (instances.containsKey(topic)) {
+            return instances.get(topic);
         }
 
         MessagingConfiguration config = messaging();
 
         if (config.getProducer().equals("kafka")) {
-            return instance = new KafkaMessageProducer(config, topic);
+            instances.put(topic, new KafkaMessageProducer(config, topic));
+        } else {
+            instances.put(topic, new NullProducer());
         }
 
-        return instance = new NullProducer();
+        return instances.get(topic);
     }
 }

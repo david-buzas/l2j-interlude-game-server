@@ -10,10 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.util.logging.Logger;
 
 public class HandlerFactory {
-    public static Handler create(String key) {
-        Logger.getLogger(Config.class.getName()).info(key);
-
-        return switch (key) {
+    public static Handler create(String topic) {
+        return switch (topic) {
             case "service" -> new ServiceMessageHandler();
             case "admin" -> new AdminMessageHandler();
             default -> new NullMessageHandler();

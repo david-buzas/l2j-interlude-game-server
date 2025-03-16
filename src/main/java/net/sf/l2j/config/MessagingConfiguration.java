@@ -48,6 +48,6 @@ public interface MessagingConfiguration extends Config {
     String getConsumerGroup();
 
     @Key("ConsumerPollInterval")
-    @DefaultValue("100")
+    @DefaultValue("1000")
     int getConsumerPollInterval();
 }
