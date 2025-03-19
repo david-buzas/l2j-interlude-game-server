@@ -6,6 +6,8 @@ import net.sf.l2j.messaging.consumer.KafkaMessageConsumer;
 import net.sf.l2j.messaging.consumer.NullConsumer;
 import org.aeonbits.owner.ConfigFactory;
 
+import static net.sf.l2j.config.Configuration.*;
+
 public class ConsumerFactory {
     private static Consumer instance;
 
@@ -14,10 +16,11 @@ public class ConsumerFactory {
             return instance;
         }
 
-        MessagingConfiguration config = ConfigFactory.create(MessagingConfiguration.class);
+        MessagingConfiguration config = messaging();
+        String key = hexID().getHexID();
 
         if (config.getProducer().equals("kafka")) {
-            return instance = new KafkaMessageConsumer(config);
+            return instance = new KafkaMessageConsumer(config, key);
         }
 
         return instance = new NullConsumer();

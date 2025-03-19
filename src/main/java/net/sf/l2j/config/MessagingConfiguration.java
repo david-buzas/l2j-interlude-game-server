@@ -36,11 +36,11 @@ public interface MessagingConfiguration extends Config {
     String getValueDeserializer();
 
     @Key("Producer")
-    @DefaultValue("kafka")
+    @DefaultValue("")
     String getProducer();
 
     @Key("SubscribedTopics")
-    @DefaultValue("boot,admin,service")
+    @DefaultValue("admin,service")
     String getSubscribedTopics();
 
     @Key("ConsumerGroup")

@@ -720,7 +720,7 @@ public class GameServer
 		logFolder.mkdir();
 		
 		// Create input stream for log file -- or store file data into memory
-		InputStream is = new FileInputStream(new File(LOG_NAME));
+		InputStream is = new FileInputStream(LOG_NAME);
 		LogManager.getLogManager().readConfiguration(is);
 		is.close();
 		

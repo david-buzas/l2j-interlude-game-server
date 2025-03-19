@@ -4,21 +4,31 @@ import net.sf.l2j.messaging.consumer.Consumer;
 import net.sf.l2j.messaging.factory.ConsumerFactory;
 import net.sf.l2j.messaging.factory.ProducerFactory;
 import net.sf.l2j.messaging.producer.Producer;
+import net.sf.l2j.messaging.response.MessageResponse;
+import net.sf.l2j.messaging.response.Response;
+import org.json.JSONObject;
 
 public class ServiceMessageHandler implements Handler {
-    public void handleMessage(String key, String message) {
-        Consumer consumer = ConsumerFactory.create();
-        Producer producer = ProducerFactory.create("server-response");
+    private final Producer producer;
 
-        switch (key) {
+    public ServiceMessageHandler() {
+        producer = ProducerFactory.create("server-response");
+    }
+
+    public void handleMessage(String command, String message, JSONObject jsonObject) {
+        Consumer consumer = ConsumerFactory.create();
+        Response response = new MessageResponse(producer, jsonObject);
+
+        switch (command) {
             case "stop-consumer":
                 consumer.stopConsumer();
-                producer.createMessage("Message consumer stopped.");
                 break;
             case "change-poll-interval":
                 int interval = Integer.parseInt(message);
                 consumer.setPollInterval(interval);
-                producer.createMessage("Message consumer poll interval changed to " + message + " milliseconds.");
+                break;
+            case "ping":
+                response.sendSuccess("pong");
                 break;
         }
     }

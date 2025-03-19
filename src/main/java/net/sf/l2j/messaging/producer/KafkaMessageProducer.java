@@ -11,21 +11,23 @@ import java.util.Properties;
 public class KafkaMessageProducer implements Producer {
     private final KafkaProducer<String, String> producer;
     private final String topic;
+    private final String key;
 
-    public KafkaMessageProducer(MessagingConfiguration config, String topic) {
+    public KafkaMessageProducer(MessagingConfiguration config, String topic, String key) {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", config.getBootstrapServers());
         properties.put("key.serializer", config.getKeySerializer());
         properties.put("value.serializer", config.getValueSerializer());
 
-        this.producer = new KafkaProducer<>(properties);
+        producer = new KafkaProducer<>(properties);
         this.topic = topic;
+        this.key = key;
     }
 
     public void createMessage(String key, String message) {
-        ProducerRecord<String, String> record = new ProducerRecord<>(this.topic, key, message);
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, message);
 
-        this.producer.send(record, new Callback() {
+        producer.send(record, new Callback() {
             @Override
             public void onCompletion(RecordMetadata metadata, Exception exception) {
                 if (exception == null) {
@@ -38,6 +40,6 @@ public class KafkaMessageProducer implements Producer {
     }
 
     public void createMessage(String message) {
-        this.createMessage("", message);
+        createMessage(key, message);
     }
 }

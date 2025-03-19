@@ -30,8 +30,6 @@ import java.util.logging.Logger;
 
 import javolution.util.FastList;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
-import net.sf.l2j.messaging.factory.ProducerFactory;
-import net.sf.l2j.messaging.producer.Producer;
 
 import static net.sf.l2j.config.Configuration.*;
 
@@ -1149,8 +1147,6 @@ public final class Config {
 	public static boolean ALT_DEV_NO_QUESTS;
 	public static boolean ALT_DEV_NO_SPAWNS;
 
-	private static Producer producer = ProducerFactory.create("boot");
-	
 	/**
 	 * This class initializes all global variables for configuration.<br>
 	 * If key doesn't appear in properties file, a default value is setting on by this class.
@@ -1158,7 +1154,6 @@ public final class Config {
 	 */
 	public static void load() {
 		_log.info("Loading Game Server config...");
-		producer.createMessage("Loading game server config...");
 
 		if (MIN_PROTOCOL_REVISION > MAX_PROTOCOL_REVISION) {
 			throw new Error("MinProtocolRevision is bigger than MaxProtocolRevision in server configuration file.");
@@ -1459,8 +1454,6 @@ public final class Config {
 		}
 
 		HEX_ID = new BigInteger(hexID().getHexID(), 16).toByteArray();
-
-		producer.createMessage("Game server configuration loaded.");
 	}
 	
 	/**

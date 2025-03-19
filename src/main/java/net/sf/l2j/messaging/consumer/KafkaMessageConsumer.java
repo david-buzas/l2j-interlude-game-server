@@ -6,6 +6,7 @@ import net.sf.l2j.messaging.handler.Handler;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.json.JSONObject;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -16,36 +17,48 @@ public class KafkaMessageConsumer implements Consumer {
     private final String[] topics;
     private static boolean consume = true;
     private Duration pollInterval;
+    private final String key;
 
-    public KafkaMessageConsumer(MessagingConfiguration config) {
+    public KafkaMessageConsumer(MessagingConfiguration config, String key) {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", config.getBootstrapServers());
         properties.put("key.deserializer", config.getKeyDeserializer());
         properties.put("value.deserializer", config.getValueDeserializer());
         properties.put("group.id", config.getConsumerGroup());
 
-        this.consumer = new KafkaConsumer<>(properties);
-        this.topics = config.getSubscribedTopics().split(",");
+        consumer = new KafkaConsumer<>(properties);
+        topics = config.getSubscribedTopics().split(",");
+        this.key = key;
 
-        this.setPollInterval(config.getConsumerPollInterval());
+        setPollInterval(config.getConsumerPollInterval());
     }
 
     public void consume() {
-        this.consumer.subscribe(Arrays.asList(this.topics));
+        consumer.subscribe(Arrays.asList(topics));
 
         while (consume) {
             // Start consuming messages
-            ConsumerRecords<String, String> records = this.consumer.poll(this.pollInterval);
+            ConsumerRecords<String, String> records = consumer.poll(pollInterval);
             for (ConsumerRecord<String, String> record : records) {
                 String key = record.key() != null ? record.key() : "";
-                String value = record.value() != null ? record.value() : "";
+
+                if (!key.equals("*") && !key.equals(this.key)) {
+                    continue;
+                }
+
+                String value = record.value() != null ? record.value() : "{}";
+
+                JSONObject jsonObject = new JSONObject(value);
+
+                String command = jsonObject.has("command") ? jsonObject.getString("command") : "";
+                String message = jsonObject.has("message") ? jsonObject.getString("message") : "";
 
                 Handler handler = HandlerFactory.create(record.topic());
-                handler.handleMessage(key, value);
+                handler.handleMessage(command, message, jsonObject);
             }
 
             // Commit the offsets manually
-            this.consumer.commitSync();
+            consumer.commitSync();
         }
 
         // Close the consumer
@@ -57,6 +70,6 @@ public class KafkaMessageConsumer implements Consumer {
     }
 
     public void setPollInterval(int milliseconds) {
-        this.pollInterval = Duration.ofMillis(milliseconds);
+        pollInterval = Duration.ofMillis(milliseconds);
     }
 }
