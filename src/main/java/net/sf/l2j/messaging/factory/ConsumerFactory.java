@@ -4,7 +4,6 @@ import net.sf.l2j.config.MessagingConfiguration;
 import net.sf.l2j.messaging.consumer.Consumer;
 import net.sf.l2j.messaging.consumer.KafkaMessageConsumer;
 import net.sf.l2j.messaging.consumer.NullConsumer;
-import org.aeonbits.owner.ConfigFactory;
 
 import static net.sf.l2j.config.Configuration.*;
 

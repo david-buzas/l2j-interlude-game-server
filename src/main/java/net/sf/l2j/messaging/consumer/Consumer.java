@@ -2,9 +2,9 @@ package net.sf.l2j.messaging.consumer;
 
 public interface Consumer {
 
-    public void consume();
+    void consume();
 
-    public void stopConsumer();
+    void stopConsumer();
 
-    public void setPollInterval(int milliseconds);
+    void setPollInterval(int milliseconds);
 }

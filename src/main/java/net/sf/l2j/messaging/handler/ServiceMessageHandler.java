@@ -1,35 +1,25 @@
 package net.sf.l2j.messaging.handler;
 
 import net.sf.l2j.messaging.consumer.Consumer;
+import net.sf.l2j.messaging.dto.MessageDTO;
 import net.sf.l2j.messaging.factory.ConsumerFactory;
-import net.sf.l2j.messaging.factory.ProducerFactory;
-import net.sf.l2j.messaging.producer.Producer;
-import net.sf.l2j.messaging.response.MessageResponse;
-import net.sf.l2j.messaging.response.Response;
-import org.json.JSONObject;
 
-public class ServiceMessageHandler implements Handler {
-    private final Producer producer;
+public class ServiceMessageHandler implements MessageHandler {
+    private final Consumer consumer;
 
     public ServiceMessageHandler() {
-        producer = ProducerFactory.create("server-response");
+        consumer = ConsumerFactory.create();
     }
 
-    public void handleMessage(String command, String message, JSONObject jsonObject) {
-        Consumer consumer = ConsumerFactory.create();
-        Response response = new MessageResponse(producer, jsonObject);
+    public void handleMessage(MessageDTO messageDTO) {
+        String command = messageDTO.getValue("command");
 
-        switch (command) {
-            case "stop-consumer":
-                consumer.stopConsumer();
-                break;
-            case "change-poll-interval":
-                int interval = Integer.parseInt(message);
-                consumer.setPollInterval(interval);
-                break;
-            case "ping":
-                response.sendSuccess("pong");
-                break;
+        if (command.equals("stop-consumer")) {
+            consumer.stopConsumer();
+        }
+
+        if (command.equals("change-poll-interval") && messageDTO.hasValue("interval")) {
+            consumer.setPollInterval(messageDTO.getIntegerValue("interval"));
         }
     }
 }

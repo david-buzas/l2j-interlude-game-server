@@ -1,12 +1,13 @@
 package net.sf.l2j.messaging.consumer;
 
 import net.sf.l2j.config.MessagingConfiguration;
+import net.sf.l2j.messaging.dto.MessageDTO;
 import net.sf.l2j.messaging.factory.HandlerFactory;
-import net.sf.l2j.messaging.handler.Handler;
+import net.sf.l2j.messaging.factory.MessageDTOFactory;
+import net.sf.l2j.messaging.handler.MessageHandler;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.json.JSONObject;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -40,21 +41,7 @@ public class KafkaMessageConsumer implements Consumer {
             // Start consuming messages
             ConsumerRecords<String, String> records = consumer.poll(pollInterval);
             for (ConsumerRecord<String, String> record : records) {
-                String key = record.key() != null ? record.key() : "";
-
-                if (!key.equals("*") && !key.equals(this.key)) {
-                    continue;
-                }
-
-                String value = record.value() != null ? record.value() : "{}";
-
-                JSONObject jsonObject = new JSONObject(value);
-
-                String command = jsonObject.has("command") ? jsonObject.getString("command") : "";
-                String message = jsonObject.has("message") ? jsonObject.getString("message") : "";
-
-                Handler handler = HandlerFactory.create(record.topic());
-                handler.handleMessage(command, message, jsonObject);
+                consumeRecord(record);
             }
 
             // Commit the offsets manually
@@ -71,5 +58,22 @@ public class KafkaMessageConsumer implements Consumer {
 
     public void setPollInterval(int milliseconds) {
         pollInterval = Duration.ofMillis(milliseconds);
+    }
+
+    private void consumeRecord(ConsumerRecord<String, String> record) {
+        String key = record.key() != null ? record.key() : "";
+
+        if (!key.equals("*") && !key.equals(this.key)) {
+            return;
+        }
+
+        if (record.value() != null) {
+            return;
+        }
+
+        MessageHandler messageHandler = HandlerFactory.create(record.topic());
+        MessageDTO dto = MessageDTOFactory.create(record.value());
+
+        messageHandler.handleMessage(dto);
     }
 }

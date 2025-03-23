@@ -4,79 +4,61 @@ import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
-import net.sf.l2j.messaging.factory.ProducerFactory;
-import net.sf.l2j.messaging.producer.Producer;
-import net.sf.l2j.messaging.response.MessageResponse;
-import org.json.JSONObject;
+import net.sf.l2j.messaging.dto.MessageDTO;
 
 import java.util.Arrays;
 
-public class AdminMessageHandler implements Handler {
-    private Producer producer;
+public class AdminMessageHandler implements MessageHandler {
     private final L2PcInstance superAdminPlayer;
-    private String[] allowedCommands = {
-            "kill",
-            "add_level",
-            "set_level",
-            "announce",
-            "changelvl", // change access level
-            "seteh", // PAPERDOLL_HEAD
-            "setec", // PAPERDOLL_CHEST
-            "seteg", // PAPERDOLL_GLOVES
-            "setel", // PAPERDOLL_LEGS
-            "seteb", // PAPERDOLL_FEET
-            "setew", // PAPERDOLL_RHAND
-            "setes", // PAPERDOLL_LHAND
-            "setle", // PAPERDOLL_LEAR
-            "setre", // PAPERDOLL_REAR
-            "setlf", // PAPERDOLL_LFINGER
-            "setrf", // PAPERDOLL_RFINGER
-            "seten", // PAPERDOLL_NECK
-            "setun", // PAPERDOLL_UNDER
-            "setba", // PAPERDOLL_BACK
-            "server_shutdown",
-            "server_restart",
-            "server_abort",
+    private final String[] allowedCommands = {
+            "kill", "add_level", "set_level", "announce", "changelvl", "seteh",
+            "setec", "seteg", "setel", "seteb", "setew", "setes",
+            "setle", "setre", "setlf", "setrf", "seten", "setun",
+            "setba", "server_shutdown", "server_restart", "server_abort",
     };
 
     public AdminMessageHandler() {
-        producer = ProducerFactory.create("server-response");
         superAdminPlayer = L2PcInstance.createDummyPlayer(-1, "Super admin");
         superAdminPlayer.setAccessLevel(100);
         superAdminPlayer.setIsGM(true);
     }
 
-    public void handleMessage(String command, String message, JSONObject jsonObject) {
-        MessageResponse response = new MessageResponse(producer, jsonObject);
+    public void handleMessage(MessageDTO messageDTO) {
+        String command = messageDTO.getValue("command");
+        String adminCommand = messageDTO.getPrefixedValue("command", "admin", "_");
+        String adminCommandWithParam = messageDTO.getPrefixedValue("parameter", adminCommand, " ");
 
-        if (!Arrays.asList(allowedCommands).contains(command)) {
-            response.sendError("Command not allowed!");
-
+        if (!isAllowed(command)) {
             return;
         }
 
-        command = "admin_" + command;
-        IAdminCommandHandler commandHandler = AdminCommandHandler.getInstance().getAdminCommandHandler(command);
-        command += " " + message;
+        IAdminCommandHandler commandHandler = AdminCommandHandler
+                .getInstance()
+                .getAdminCommandHandler(adminCommand);
 
         if (commandHandler == null) {
-            response.sendError("Command handler not found!");
-
             return;
         }
 
-        if (jsonObject.has("target")) {
-            L2PcInstance player = L2World.getInstance().getPlayer(jsonObject.getString("target"));
+        if (messageDTO.hasValue("target")) {
+            String target = messageDTO.getValue("target");
+
+            L2PcInstance player = L2World
+                    .getInstance()
+                    .getPlayer(target);
 
             if (player == null) {
-                response.sendError("Target not found!");
+                return;
             }
 
             superAdminPlayer.setTarget(player);
         }
 
-        boolean success = commandHandler.useAdminCommand(command, superAdminPlayer);
+        commandHandler.useAdminCommand(adminCommandWithParam, superAdminPlayer);
 
-        response.sendResponse(success, null);
+    }
+
+    private boolean isAllowed(String command) {
+        return Arrays.asList(allowedCommands).contains(command);
     }
 }
