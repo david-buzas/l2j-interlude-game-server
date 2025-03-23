@@ -20,6 +20,10 @@ public class StringMessageDTO extends AbstractMessageDTO {
     }
 
     public String getValue(String key) {
+        if (!hasValue(key)) {
+            throw new RuntimeException("HashMap[" + key + "] not found.");
+        }
+
         return parameters.get(key);
     }
 }
