@@ -67,7 +67,7 @@ public class KafkaMessageConsumer implements Consumer {
             return;
         }
 
-        if (record.value() != null) {
+        if (record.value() == null) {
             return;
         }
 

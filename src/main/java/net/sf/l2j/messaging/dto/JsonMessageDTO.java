@@ -14,10 +14,6 @@ public class JsonMessageDTO extends AbstractMessageDTO {
     }
 
     public String getValue(String key) {
-        if (!this.hasValue(key)) {
-            return null;
-        }
-
         return this.parameters.get(key).toString();
     }
 }
