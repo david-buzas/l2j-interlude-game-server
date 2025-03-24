@@ -1146,7 +1146,7 @@ public final class Config {
 	/** Alt Settings for devs */
 	public static boolean ALT_DEV_NO_QUESTS;
 	public static boolean ALT_DEV_NO_SPAWNS;
-	
+
 	/**
 	 * This class initializes all global variables for configuration.<br>
 	 * If key doesn't appear in properties file, a default value is setting on by this class.

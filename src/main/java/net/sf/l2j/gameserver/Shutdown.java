@@ -33,6 +33,7 @@ import net.sf.l2j.gameserver.model.L2World;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.L2GameClient;
 import net.sf.l2j.gameserver.serverpackets.ServerClose;
+import net.sf.l2j.messaging.factory.ConsumerFactory;
 
 /**
  * This class provides the functions for shutting down and restarting the server It closes all open clientconnections and saves all data.
@@ -436,7 +437,9 @@ public class Shutdown extends Thread
 		{
 			_log.log(Level.INFO, "", t);
 		}
-		
+
+		ConsumerFactory.create().stopConsumer();
+
 		// we cannt abort shutdown anymore, so i removed the "if"
 		disconnectAllCharacters();
 		
