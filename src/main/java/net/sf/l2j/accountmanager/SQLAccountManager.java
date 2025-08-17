@@ -35,7 +35,7 @@ import net.sf.l2j.L2DatabaseFactory;
  * This class SQL Account Manager.
  * @author netimperia
  */
-public class SQLAccountManager
+public class  SQLAccountManager
 {
 	private static String _uname = "";
 	private static String _pass = "";

@@ -18,14 +18,14 @@
  */
 package net.sf.l2j.gameserver.handler;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import javolution.util.FastMap;
 import net.sf.l2j.Config;
+import net.sf.l2j.util.CommandPrivileges;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 
 /**
@@ -69,6 +69,17 @@ public class AdminCommandHandler
 			_datatable.put(id, handler);
 		}
 	}
+
+	/**
+	 * Returns all registered admin command strings.
+	 *
+	 * @return an array of registered admin command names
+	 */
+	public String[] listAllAdminCommands()
+	{
+		List<String> keys = new ArrayList<>(_datatable.keySet());
+		return keys.toArray(new String[keys.size()]);
+	}
 	
 	public IAdminCommandHandler getAdminCommandHandler(String adminCommand)
 	{
@@ -83,7 +94,7 @@ public class AdminCommandHandler
 		}
 		return _datatable.get(command);
 	}
-	
+
 	public int size()
 	{
 		return _datatable.size();
@@ -124,28 +135,9 @@ public class AdminCommandHandler
 		
 		if (!_privileges.containsKey(command))
 		{
-			// Try to loaded the command config
-			boolean isLoaded = false;
-			
-			try
-			{
-				Properties Settings = new Properties();
-				InputStream is = new FileInputStream(Config.COMMAND_PRIVILEGES_FILE);
-				Settings.load(is);
-				is.close();
-				
-				String stringLevel = Settings.getProperty(command);
-				
-				if (stringLevel != null)
-				{
-					isLoaded = true;
-					requireLevel = Integer.parseInt(stringLevel);
-				}
-			}
-			catch (Exception e)
-			{
-			}
-			
+			requireLevel = getRequiredLevel(command);
+			boolean isLoaded = (requireLevel >= 0);
+
 			// Secure level?
 			if (!isLoaded)
 			{
@@ -172,5 +164,9 @@ public class AdminCommandHandler
 		}
 		
 		return true;
+	}
+
+	private int getRequiredLevel(String command) {
+		return CommandPrivileges.getRequiredLevel(command);
 	}
 }

@@ -1211,7 +1211,7 @@ public final class L2PcInstance extends L2PlayableInstance
 	 */
 	private L2PcInstance(int objectId)
 	{
-		super(objectId, null);
+		super(objectId, CharTemplateTable.getInstance().getTemplate(0));
 		getKnownList(); // init knownlist
 		getStat(); // init stats
 		getStatus(); // init status
@@ -4773,13 +4773,15 @@ public final class L2PcInstance extends L2PlayableInstance
 		{
 			newTarget = null;
 		}
-		
-		// Prevents /target exploiting
-		if ((newTarget != null) && (Math.abs(newTarget.getZ() - getZ()) > 1000))
-		{
-			newTarget = null;
+
+		if (getObjectId() != -1) {
+			// Prevents /target exploiting
+			if ((newTarget != null) && (Math.abs(newTarget.getZ() - getZ()) > 1000))
+			{
+				newTarget = null;
+			}
 		}
-		
+
 		if (!isGM())
 		{
 			// Can't target and attack festival monsters if not participant

@@ -16,8 +16,10 @@ import static org.aeonbits.owner.Config.LoadType.MERGE;
 @Config.HotReload(value = 20, unit = MINUTES, type = ASYNC)
 public interface HexIDConfiguration extends Config {
     @Key("HexID")
+    @DefaultValue("")
     String getHexID();
 
     @Key("ServerID")
+    @DefaultValue("1")
     int getServerID();
 }

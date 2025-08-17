@@ -103,8 +103,8 @@ public final class Config {
 	public static int AI_MAX_THREAD = options().getAiMaxThread();
 	
 	/** Accept auto-loot ? */
-	public static boolean AUTO_LOOT;
-	public static boolean AUTO_LOOT_HERBS;
+	public static boolean AUTO_LOOT = altSettings().getAutoLoot();
+	public static boolean AUTO_LOOT_HERBS = altSettings().getAutoLootHerbs();
 	
 	/** Character name template */
 	public static String CNAME_TEMPLATE = server().getCnameTemplate();
@@ -120,55 +120,55 @@ public final class Config {
 	/** For test servers - everybody has admin rights */
 	public static boolean EVERYBODY_HAS_ADMIN_RIGHTS = options().getEverybodyHasAdminRights();
 	/** Alternative game crafting */
-	public static boolean ALT_GAME_CREATION;
+	public static boolean ALT_GAME_CREATION = altSettings().getAltGameCreation();
 	/** Alternative game crafting speed mutiplier - default 0 (fastest but still not instant) */
-	public static double ALT_GAME_CREATION_SPEED;
+	public static double ALT_GAME_CREATION_SPEED = altSettings().getAltGameCreationSpeed();
 	/** Alternative game crafting XP rate multiplier - default 1 */
-	public static double ALT_GAME_CREATION_XP_RATE;
+	public static double ALT_GAME_CREATION_XP_RATE = altSettings().getAltGameCreationRateXp();
 	/** Alternative game crafting SP rate multiplier - default 1 */
-	public static double ALT_GAME_CREATION_SP_RATE;
+	public static double ALT_GAME_CREATION_SP_RATE = altSettings().getAltGameCreationRateSp();
 	/** Alternative setting to blacksmith use of recipes to craft - default true */
-	public static boolean ALT_BLACKSMITH_USE_RECIPES;
+	public static boolean ALT_BLACKSMITH_USE_RECIPES = altSettings().getAltBlacksmithUseRecipes();
 	
 	/** Remove Castle circlets after clan lose his castle? - default true */
-	public static boolean REMOVE_CASTLE_CIRCLETS;
+	public static boolean REMOVE_CASTLE_CIRCLETS = altSettings().getRemoveCastleCirclets();
 	/** Alternative game weight limit multiplier - default 1 */
-	public static double ALT_WEIGHT_LIMIT;
+	public static double ALT_WEIGHT_LIMIT = altSettings().getAltWeightLimit();
 	
 	/** Alternative game skill learning */
-	public static boolean ALT_GAME_SKILL_LEARN;
+	public static boolean ALT_GAME_SKILL_LEARN = altSettings().getAltGameSkillLearn();
 	/** Alternative auto skill learning */
-	public static boolean AUTO_LEARN_SKILLS;
+	public static boolean AUTO_LEARN_SKILLS = altSettings().getAutoLearnSkills();
 	/** Cancel attack bow by hit */
-	public static boolean ALT_GAME_CANCEL_BOW;
+	public static boolean ALT_GAME_CANCEL_BOW = altSettings().getAltGameCancelByHit().equalsIgnoreCase("bow") || altSettings().getAltGameCancelByHit().equals("all");
 	/** Cancel cast by hit */
-	public static boolean ALT_GAME_CANCEL_CAST;
+	public static boolean ALT_GAME_CANCEL_CAST = altSettings().getAltGameCancelByHit().equalsIgnoreCase("cast") || altSettings().getAltGameCancelByHit().equals("all");
 	
 	/** Alternative game - use tiredness, instead of CP */
-	public static boolean ALT_GAME_TIREDNESS;
-	public static int ALT_PARTY_RANGE;
-	public static int ALT_PARTY_RANGE2;
+	public static boolean ALT_GAME_TIREDNESS = altSettings().getAltGameTiredness();
+	public static int ALT_PARTY_RANGE = altSettings().getAltPartyRange();
+	public static int ALT_PARTY_RANGE2 = altSettings().getAltPartyRange2();
 	/** Alternative shield defence */
-	public static boolean ALT_GAME_SHIELD_BLOCKS;
+	public static boolean ALT_GAME_SHIELD_BLOCKS = altSettings().getAltShieldBlocks();
 	/** Alternative Perfect shield defence rate */
-	public static int ALT_PERFECT_SHLD_BLOCK;
+	public static int ALT_PERFECT_SHLD_BLOCK = altSettings().getAltPerfectShieldBlockRate();
 	/** Alternative game mob ATTACK AI */
-	public static boolean ALT_GAME_MOB_ATTACK_AI;
-	public static boolean ALT_MOB_AGRO_IN_PEACEZONE;
+	public static boolean ALT_GAME_MOB_ATTACK_AI = altSettings().getAltGameMobAttackAI();
+	public static boolean ALT_MOB_AGRO_IN_PEACEZONE = altSettings().getAltMobAgroInPeaceZone();
 	
 	/** Alternative freight modes - Freights can be withdrawed from any village */
-	public static boolean ALT_GAME_FREIGHTS;
+	public static boolean ALT_GAME_FREIGHTS = altSettings().getAltGameFreights();
 	/** Alternative freight modes - Sets the price value for each freightened item */
-	public static int ALT_GAME_FREIGHT_PRICE;
+	public static int ALT_GAME_FREIGHT_PRICE = altSettings().getAltGameFreightPrice();
 	
 	/** Fast or slow multiply coefficient for skill hit time */
 	public static float ALT_GAME_SKILL_HIT_RATE;
 	
 	/** Alternative gameing - loss of XP on death */
-	public static boolean ALT_GAME_DELEVEL;
+	public static boolean ALT_GAME_DELEVEL = altSettings().getDelevel();
 	
 	/** Alternative gameing - magic dmg failures */
-	public static boolean ALT_GAME_MAGICFAILURES;
+	public static boolean ALT_GAME_MAGICFAILURES = altSettings().getMagicFailures();
 	
 	/** Alternative gaming - player must be in a castle-owning clan or ally to sign up for Dawn. */
 	public static boolean ALT_GAME_REQUIRE_CASTLE_DAWN = sevenSigns().getAltRequireCastleForDawn();
@@ -177,16 +177,16 @@ public final class Config {
 	public static boolean ALT_GAME_REQUIRE_CLAN_CASTLE = sevenSigns().getAltRequireClanCastle();
 	
 	/** Alternative gaming - allow free teleporting around the world. */
-	public static boolean ALT_GAME_FREE_TELEPORT;
+	public static boolean ALT_GAME_FREE_TELEPORT = altSettings().getAltFreeTeleporting();
 	
 	/** Disallow recommend character twice or more a day ? */
-	public static boolean ALT_RECOMMEND;
+	public static boolean ALT_RECOMMEND = altSettings().getAltRecommend();
 	
 	/** Alternative gaming - allow sub-class addition without quest completion. */
-	public static boolean ALT_GAME_SUBCLASS_WITHOUT_QUESTS;
+	public static boolean ALT_GAME_SUBCLASS_WITHOUT_QUESTS = altSettings().getAltSubClassWithoutQuests();
 	
 	/** View npc stats/drop by shift-cliking it for nongm-players */
-	public static boolean ALT_GAME_VIEWNPC;
+	public static boolean ALT_GAME_VIEWNPC = altSettings().getAltGameViewNpc();
 	
 	/** Minimum number of player to participate in SevenSigns Festival */
 	public static int ALT_FESTIVAL_MIN_PLAYER = sevenSigns().getAltFestivalMinPlayer();
@@ -219,37 +219,37 @@ public final class Config {
 	public static long ALT_FESTIVAL_CHEST_SPAWN = sevenSigns().getAltFestivalChestSpawn();
 	
 	/** Number of members needed to request a clan war */
-	public static int ALT_CLAN_MEMBERS_FOR_WAR;
+	public static int ALT_CLAN_MEMBERS_FOR_WAR = altSettings().getAltClanMembersForWar();
 	
 	/** Number of days before joining a new clan */
-	public static int ALT_CLAN_JOIN_DAYS;
+	public static int ALT_CLAN_JOIN_DAYS = altSettings().getDaysBeforeJoinAClan();
 	/** Number of days before creating a new clan */
-	public static int ALT_CLAN_CREATE_DAYS;
+	public static int ALT_CLAN_CREATE_DAYS = altSettings().getDaysBeforeCreateAClan();
 	/** Number of days it takes to dissolve a clan */
-	public static int ALT_CLAN_DISSOLVE_DAYS;
+	public static int ALT_CLAN_DISSOLVE_DAYS = altSettings().getDaysToPassToDissolveAClan();
 	/** Number of days before joining a new alliance when clan voluntarily leave an alliance */
-	public static int ALT_ALLY_JOIN_DAYS_WHEN_LEAVED;
+	public static int ALT_ALLY_JOIN_DAYS_WHEN_LEAVED = altSettings().getDaysBeforeJoinAllyWhenLeaved();
 	/** Number of days before joining a new alliance when clan was dismissed from an alliance */
-	public static int ALT_ALLY_JOIN_DAYS_WHEN_DISMISSED;
+	public static int ALT_ALLY_JOIN_DAYS_WHEN_DISMISSED = altSettings().getDaysBeforeJoinAllyWhenDismissed();
 	/** Number of days before accepting a new clan for alliance when clan was dismissed from an alliance */
-	public static int ALT_ACCEPT_CLAN_DAYS_WHEN_DISMISSED;
+	public static int ALT_ACCEPT_CLAN_DAYS_WHEN_DISMISSED = altSettings().getDaysBeforeAcceptNewClanWhenDismissed();
 	/** Number of days before creating a new alliance when dissolved an alliance */
-	public static int ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED;
+	public static int ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED = altSettings().getDaysBeforeCreateNewAllyWhenDissolved();
 	
 	/** Alternative gaming - all new characters always are newbies. */
-	public static boolean ALT_GAME_NEW_CHAR_ALWAYS_IS_NEWBIE;
+	public static boolean ALT_GAME_NEW_CHAR_ALWAYS_IS_NEWBIE = altSettings().getAltNewCharAlwaysIsNewbie();
 	
 	/** Alternative gaming - clan members with see privilege can also withdraw from clan warehouse. */
-	public static boolean ALT_MEMBERS_CAN_WITHDRAW_FROM_CLANWH;
+	public static boolean ALT_MEMBERS_CAN_WITHDRAW_FROM_CLANWH = altSettings().getAltMembersCanWithdrawFromClanWH();
 	
 	/** Maximum number of clans in ally */
-	public static int ALT_MAX_NUM_OF_CLANS_IN_ALLY;
+	public static int ALT_MAX_NUM_OF_CLANS_IN_ALLY = altSettings().getAltMaxNumOfClansInAlly();
 	/** Life Crystal needed to learn clan skill */
-	public static boolean LIFE_CRYSTAL_NEEDED;
+	public static boolean LIFE_CRYSTAL_NEEDED = altSettings().getLifeCrystalNeeded();
 	/** Spell Book needed to learn skill */
-	public static boolean SP_BOOK_NEEDED;
+	public static boolean SP_BOOK_NEEDED = altSettings().getSpBookNeeded();
 	/** Spell Book needet to enchant skill */
-	public static boolean ES_SP_BOOK_NEEDED;
+	public static boolean ES_SP_BOOK_NEEDED = altSettings().getEnchantSkillSpBookNeeded();
 	/** Logging Chat Window */
 	public static boolean LOG_CHAT = options().getLogChat();
 	/** Logging Item Window */
@@ -263,90 +263,90 @@ public final class Config {
 	public static int ALT_PRIVILEGES_DEFAULT_LEVEL = other().getAltPrivilegesDefaultLevel();
 	
 	/** Olympiad Competition Starting time */
-	public static int ALT_OLY_START_TIME;
+	public static int ALT_OLY_START_TIME = altSettings().getAltOlyStartTime();
 	/** Olympiad Minutes */
-	public static int ALT_OLY_MIN;
+	public static int ALT_OLY_MIN = altSettings().getAltOlyMin();
 	
 	/** Olympiad Competition Period */
-	public static long ALT_OLY_CPERIOD;
+	public static long ALT_OLY_CPERIOD = altSettings().getAltOlyCPeriod();
 	
 	/** Olympiad Battle Period */
-	public static long ALT_OLY_BATTLE;
+	public static long ALT_OLY_BATTLE = altSettings().getAltOlyBattle();
 	
 	/** Olympiad Battle Wait */
-	public static long ALT_OLY_BWAIT;
+	public static long ALT_OLY_BWAIT = altSettings().getAltOlyBWait();
 	
 	/** Olympiad Inital Wait */
-	public static long ALT_OLY_IWAIT;
+	public static long ALT_OLY_IWAIT = altSettings().getAltOlyIWait();
 	
 	/** Olympaid Weekly Period */
-	public static long ALT_OLY_WPERIOD;
+	public static long ALT_OLY_WPERIOD = altSettings().getAltOlyCPeriod();
 	
 	/** Olympaid Validation Period */
-	public static long ALT_OLY_VPERIOD;
+	public static long ALT_OLY_VPERIOD = altSettings().getAltOlyVPeriod();
 	
 	/** Manor Refresh Starting time */
-	public static int ALT_MANOR_REFRESH_TIME;
+	public static int ALT_MANOR_REFRESH_TIME = altSettings().getAltManorRefreshTime();
 	
 	/** Manor Refresh Min */
-	public static int ALT_MANOR_REFRESH_MIN;
+	public static int ALT_MANOR_REFRESH_MIN = altSettings().getAltManorRefreshMin();
 	
 	/** Manor Next Period Approve Starting time */
-	public static int ALT_MANOR_APPROVE_TIME;
+	public static int ALT_MANOR_APPROVE_TIME = altSettings().getAltManorApproveTime();
 	
 	/** Manor Next Period Approve Min */
-	public static int ALT_MANOR_APPROVE_MIN;
+	public static int ALT_MANOR_APPROVE_MIN = altSettings().getAltManorApproveMin();
 	
 	/** Manor Maintenance Time */
-	public static int ALT_MANOR_MAINTENANCE_PERIOD;
+	public static int ALT_MANOR_MAINTENANCE_PERIOD = altSettings().getAltManorMaintenancePeriod();
 	
 	/** Manor Save All Actions */
-	public static boolean ALT_MANOR_SAVE_ALL_ACTIONS;
+	public static boolean ALT_MANOR_SAVE_ALL_ACTIONS = altSettings().getAltManorSaveAllActions();
 	
 	/** Manor Save Period Rate */
-	public static int ALT_MANOR_SAVE_PERIOD_RATE;
+	public static int ALT_MANOR_SAVE_PERIOD_RATE = altSettings().getAltManorSavePeriodRate();
 	
 	/** Initial Lottery prize */
-	public static int ALT_LOTTERY_PRIZE;
+	public static int ALT_LOTTERY_PRIZE = altSettings().getAltLotteryPrize();
 	
 	/** Lottery Ticket Price */
-	public static int ALT_LOTTERY_TICKET_PRICE;
+	public static int ALT_LOTTERY_TICKET_PRICE = altSettings().getAltLotteryTicketPrice();
 	
 	/** What part of jackpot amount should receive characters who pick 5 wining numbers */
-	public static float ALT_LOTTERY_5_NUMBER_RATE;
+	public static float ALT_LOTTERY_5_NUMBER_RATE = altSettings().getAltLottery5NumberRate();
 	
 	/** What part of jackpot amount should receive characters who pick 4 wining numbers */
-	public static float ALT_LOTTERY_4_NUMBER_RATE;
+	public static float ALT_LOTTERY_4_NUMBER_RATE = altSettings().getAltLottery4NumberRate();
 	
 	/** What part of jackpot amount should receive characters who pick 3 wining numbers */
-	public static float ALT_LOTTERY_3_NUMBER_RATE;
+	public static float ALT_LOTTERY_3_NUMBER_RATE = altSettings().getAltLottery3NumberRate();
 	
 	/** How much adena receive characters who pick two or less of the winning number */
-	public static int ALT_LOTTERY_2_AND_1_NUMBER_PRIZE;
+	public static int ALT_LOTTERY_2_AND_1_NUMBER_PRIZE = altSettings().getAltLottery2and1NumberPrize();
 	
 	/** Minimum siz e of a party that may enter dimensional rift */
-	public static int RIFT_MIN_PARTY_SIZE;
+	public static int RIFT_MIN_PARTY_SIZE = altSettings().getRiftMinPartySize();
 	
 	/** Time in ms the party has to wait until the mobs spawn when entering a room */
-	public static int RIFT_SPAWN_DELAY;
+	public static int RIFT_SPAWN_DELAY = altSettings().getRiftSpawnDelay();
 	
 	/** Amount of random rift jumps before party is ported back */
-	public static int RIFT_MAX_JUMPS;
+	public static int RIFT_MAX_JUMPS = altSettings().getMaxRiftJumps();
 	
 	/** Random time between two jumps in dimensional rift - in seconds */
-	public static int RIFT_AUTO_JUMPS_TIME_MIN;
-	public static int RIFT_AUTO_JUMPS_TIME_MAX;
+	public static int RIFT_AUTO_JUMPS_TIME_MIN = altSettings().getAutoJumpsDelayMin();
+	public static int RIFT_AUTO_JUMPS_TIME_MAX = altSettings().getAutoJumpsDelayMax();
 	
 	/** Dimensional Fragment cost for entering rift */
-	public static int RIFT_ENTER_COST_RECRUIT;
-	public static int RIFT_ENTER_COST_SOLDIER;
-	public static int RIFT_ENTER_COST_OFFICER;
-	public static int RIFT_ENTER_COST_CAPTAIN;
-	public static int RIFT_ENTER_COST_COMMANDER;
-	public static int RIFT_ENTER_COST_HERO;
+	public static int RIFT_ENTER_COST_RECRUIT = altSettings().getRecruitCost();
+	public static int RIFT_ENTER_COST_SOLDIER = altSettings().getSoldierCost();
+	public static int RIFT_ENTER_COST_OFFICER = altSettings().getOfficerCost();
+	public static int RIFT_ENTER_COST_CAPTAIN = altSettings().getCaptainCost();
+	public static int RIFT_ENTER_COST_COMMANDER = altSettings().getCommanderCost();
+	public static int RIFT_ENTER_COST_HERO = altSettings().getHeroCost();
 	
 	/** time multiplier for boss room */
-	public static float RIFT_BOSS_ROOM_TIME_MUTIPLY;
+	public static float RIFT_BOSS_ROOM_TIME_MUTIPLY = altSettings().getBossRoomTimeMultiply();
 	
 	/*
 	 * ************************************************************************** GM CONFIG General GM AccessLevel *************************************************************************
@@ -462,9 +462,9 @@ public final class Config {
 	 * rate = 1.52, SP bonus rate = 2 diff = 5 (mob is 5 levels above), XP bonus rate = 2, SP bonus rate = 3.17 diff = -8 (mob is 8 levels below), XP bonus rate = 0.4, SP bonus rate = 0.16
 	 */
 	/** Alternative eXperience Point rewards */
-	public static float ALT_GAME_EXPONENT_XP;
+	public static float ALT_GAME_EXPONENT_XP = altSettings().getAltGameExponentXp();
 	/** Alternative Spirit Point rewards */
-	public static float ALT_GAME_EXPONENT_SP;
+	public static float ALT_GAME_EXPONENT_SP = altSettings().getAltGameExponentSp();
 	
 	/** Rate Common herbs */
 	public static float RATE_DROP_COMMON_HERBS = rates().getRateCommonHerbs();
@@ -574,7 +574,7 @@ public final class Config {
 	}
 	
 	/** Allow the use of L2Walker client ? */
-	public static L2WalkerAllowed ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(options().getAllowL2Walker());;
+	public static L2WalkerAllowed ALLOW_L2WALKER_CLIENT = L2WalkerAllowed.valueOf(options().getAllowL2Walker());
 	/** Auto-ban client that use L2Walker ? */
 	public static boolean AUTOBAN_L2WALKER_ACC = options().getAutobanL2WalkerAcc();
 	/** Revision of L2Walker */
@@ -728,7 +728,7 @@ public final class Config {
 	/** Disable the use of guards against agressive monsters ? */
 	public static boolean ALLOW_GUARDS = other().getAllowGuards();
 	/** Allow use Event Managers for change occupation ? */
-	public static boolean ALLOW_CLASS_MASTERS;
+	public static boolean ALLOW_CLASS_MASTERS = altSettings().getAllowClassMasters();
 	/** Time between 2 updates of IP */
 	public static int IP_UPDATE_TIME;
 	
@@ -736,7 +736,7 @@ public final class Config {
 	public static int ZONE_TOWN = options().getZoneTown();
 	
 	/** Crafting Enabled? */
-	public static boolean IS_CRAFTING_ENABLED;
+	public static boolean IS_CRAFTING_ENABLED = altSettings().getCraftingEnabled();
 	
 	// Inventory slots limit
 	/** Maximum inventory slots limits for non dwarf characters */
@@ -800,17 +800,17 @@ public final class Config {
 	
 	// Karma Punishment
 	/** Allow player with karma to be killed in peace zone ? */
-	public static boolean ALT_GAME_KARMA_PLAYER_CAN_BE_KILLED_IN_PEACEZONE;
+	public static boolean ALT_GAME_KARMA_PLAYER_CAN_BE_KILLED_IN_PEACEZONE = altSettings().getAltKarmaPlayerCanBeKilledInPeaceZone();
 	/** Allow player with karma to shop ? */
-	public static boolean ALT_GAME_KARMA_PLAYER_CAN_SHOP;
+	public static boolean ALT_GAME_KARMA_PLAYER_CAN_SHOP = altSettings().getAltKarmaPlayerCanShop();
 	/** Allow player with karma to use gatekeepers ? */
-	public static boolean ALT_GAME_KARMA_PLAYER_CAN_USE_GK;
+	public static boolean ALT_GAME_KARMA_PLAYER_CAN_USE_GK = altSettings().getAltKarmaPlayerCanUseGK();
 	/** Allow player with karma to use SOE or Return skill ? */
-	public static boolean ALT_GAME_KARMA_PLAYER_CAN_TELEPORT;
+	public static boolean ALT_GAME_KARMA_PLAYER_CAN_TELEPORT = altSettings().getAltKarmaPlayerCanTeleport();
 	/** Allow player with karma to trade ? */
-	public static boolean ALT_GAME_KARMA_PLAYER_CAN_TRADE;
+	public static boolean ALT_GAME_KARMA_PLAYER_CAN_TRADE = altSettings().getAltKarmaPlayerCanTrade();
 	/** Allow player with karma to use warehouse ? */
-	public static boolean ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE;
+	public static boolean ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE = altSettings().getAltKarmaPlayerCanUseWareHouse();
 	
 	/** define L2JMODS */
 	/** Champion Mod */
@@ -1074,8 +1074,8 @@ public final class Config {
 	public static boolean GAMEGUARD_PROHIBITACTION = options().getGameGuardProhibitAction();
 	
 	/** Recipebook limits */
-	public static int DWARF_RECIPE_LIMIT;
-	public static int COMMON_RECIPE_LIMIT;
+	public static int DWARF_RECIPE_LIMIT = altSettings().getDwarfRecipeLimit();
+	public static int COMMON_RECIPE_LIMIT = altSettings().getCommonRecipeLimit();
 	
 	/** Grid Options */
 	public static boolean GRIDS_ALWAYS_ON = options().getGridsAlwaysOn();
@@ -1083,56 +1083,56 @@ public final class Config {
 	public static int GRID_NEIGHBOR_TURNOFF_TIME = options().getGridNeighborTurnOffTime();
 	
 	/** Clan Hall function related configs */
-	public static long CH_TELE_FEE_RATIO;
-	public static int CH_TELE1_FEE;
-	public static int CH_TELE2_FEE;
-	public static long CH_ITEM_FEE_RATIO;
-	public static int CH_ITEM1_FEE;
-	public static int CH_ITEM2_FEE;
-	public static int CH_ITEM3_FEE;
-	public static long CH_MPREG_FEE_RATIO;
-	public static int CH_MPREG1_FEE;
-	public static int CH_MPREG2_FEE;
-	public static int CH_MPREG3_FEE;
-	public static int CH_MPREG4_FEE;
-	public static int CH_MPREG5_FEE;
-	public static long CH_HPREG_FEE_RATIO;
-	public static int CH_HPREG1_FEE;
-	public static int CH_HPREG2_FEE;
-	public static int CH_HPREG3_FEE;
-	public static int CH_HPREG4_FEE;
-	public static int CH_HPREG5_FEE;
-	public static int CH_HPREG6_FEE;
-	public static int CH_HPREG7_FEE;
-	public static int CH_HPREG8_FEE;
-	public static int CH_HPREG9_FEE;
-	public static int CH_HPREG10_FEE;
-	public static int CH_HPREG11_FEE;
-	public static int CH_HPREG12_FEE;
-	public static int CH_HPREG13_FEE;
-	public static long CH_EXPREG_FEE_RATIO;
-	public static int CH_EXPREG1_FEE;
-	public static int CH_EXPREG2_FEE;
-	public static int CH_EXPREG3_FEE;
-	public static int CH_EXPREG4_FEE;
-	public static int CH_EXPREG5_FEE;
-	public static int CH_EXPREG6_FEE;
-	public static int CH_EXPREG7_FEE;
-	public static long CH_SUPPORT_FEE_RATIO;
-	public static int CH_SUPPORT1_FEE;
-	public static int CH_SUPPORT2_FEE;
-	public static int CH_SUPPORT3_FEE;
-	public static int CH_SUPPORT4_FEE;
-	public static int CH_SUPPORT5_FEE;
-	public static int CH_SUPPORT6_FEE;
-	public static int CH_SUPPORT7_FEE;
-	public static int CH_SUPPORT8_FEE;
-	public static long CH_CURTAIN_FEE_RATIO;
-	public static int CH_CURTAIN1_FEE;
-	public static int CH_CURTAIN2_FEE;
-	public static long CH_FRONT_FEE_RATIO;
-	public static int CH_FRONT1_FEE;
-	public static int CH_FRONT2_FEE;
+	public static long CH_TELE_FEE_RATIO = clanHall().getClanHallTeleportFunctionFeeRation();
+	public static int CH_TELE1_FEE = clanHall().getClanHallTeleportFunctionFeeLvl1();
+	public static int CH_TELE2_FEE = clanHall().getClanHallTeleportFunctionFeeLvl2();
+	public static long CH_ITEM_FEE_RATIO = clanHall().getClanHallItemCreationFunctionFeeRation();
+	public static int CH_ITEM1_FEE = clanHall().getClanHallItemCreationFunctionFeeLvl1();
+	public static int CH_ITEM2_FEE = clanHall().getClanHallItemCreationFunctionFeeLvl2();
+	public static int CH_ITEM3_FEE = clanHall().getClanHallItemCreationFunctionFeeLvl3();
+	public static long CH_MPREG_FEE_RATIO = clanHall().getClanHallMpRegenerationFunctionFeeRation();
+	public static int CH_MPREG1_FEE = clanHall().getClanHallMpRegenerationFeeLvl1();
+	public static int CH_MPREG2_FEE = clanHall().getClanHallMpRegenerationFeeLvl2();
+	public static int CH_MPREG3_FEE = clanHall().getClanHallMpRegenerationFeeLvl3();
+	public static int CH_MPREG4_FEE = clanHall().getClanHallMpRegenerationFeeLvl4();
+	public static int CH_MPREG5_FEE = clanHall().getClanHallMpRegenerationFeeLvl5();
+	public static long CH_HPREG_FEE_RATIO = clanHall().getClanHallHpRegenerationFunctionFeeRation();
+	public static int CH_HPREG1_FEE = clanHall().getClanHallHpRegenerationFeeLvl1();
+	public static int CH_HPREG2_FEE = clanHall().getClanHallHpRegenerationFeeLvl2();
+	public static int CH_HPREG3_FEE = clanHall().getClanHallHpRegenerationFeeLvl3();
+	public static int CH_HPREG4_FEE = clanHall().getClanHallHpRegenerationFeeLvl4();
+	public static int CH_HPREG5_FEE = clanHall().getClanHallHpRegenerationFeeLvl5();
+	public static int CH_HPREG6_FEE = clanHall().getClanHallHpRegenerationFeeLvl6();
+	public static int CH_HPREG7_FEE = clanHall().getClanHallHpRegenerationFeeLvl7();
+	public static int CH_HPREG8_FEE = clanHall().getClanHallHpRegenerationFeeLvl8();
+	public static int CH_HPREG9_FEE = clanHall().getClanHallHpRegenerationFeeLvl9();
+	public static int CH_HPREG10_FEE = clanHall().getClanHallHpRegenerationFeeLvl10();
+	public static int CH_HPREG11_FEE = clanHall().getClanHallHpRegenerationFeeLvl11();
+	public static int CH_HPREG12_FEE = clanHall().getClanHallHpRegenerationFeeLvl12();
+	public static int CH_HPREG13_FEE = clanHall().getClanHallHpRegenerationFeeLvl13();
+	public static long CH_EXPREG_FEE_RATIO = clanHall().getClanHallExpRegenerationFunctionFeeRation();
+	public static int CH_EXPREG1_FEE = clanHall().getClanHallExpRegenerationFeeLvl1();
+	public static int CH_EXPREG2_FEE = clanHall().getClanHallExpRegenerationFeeLvl2();
+	public static int CH_EXPREG3_FEE = clanHall().getClanHallExpRegenerationFeeLvl3();
+	public static int CH_EXPREG4_FEE = clanHall().getClanHallExpRegenerationFeeLvl4();
+	public static int CH_EXPREG5_FEE = clanHall().getClanHallExpRegenerationFeeLvl5();
+	public static int CH_EXPREG6_FEE = clanHall().getClanHallExpRegenerationFeeLvl6();
+	public static int CH_EXPREG7_FEE = clanHall().getClanHallExpRegenerationFeeLvl7();
+	public static long CH_SUPPORT_FEE_RATIO = clanHall().getClanHallSupportFunctionFeeRation();
+	public static int CH_SUPPORT1_FEE = clanHall().getClanHallSupportFeeLvl1();
+	public static int CH_SUPPORT2_FEE = clanHall().getClanHallSupportFeeLvl2();
+	public static int CH_SUPPORT3_FEE = clanHall().getClanHallSupportFeeLvl3();
+	public static int CH_SUPPORT4_FEE = clanHall().getClanHallSupportFeeLvl4();
+	public static int CH_SUPPORT5_FEE = clanHall().getClanHallSupportFeeLvl5();
+	public static int CH_SUPPORT6_FEE = clanHall().getClanHallSupportFeeLvl6();
+	public static int CH_SUPPORT7_FEE = clanHall().getClanHallSupportFeeLvl7();
+	public static int CH_SUPPORT8_FEE = clanHall().getClanHallSupportFeeLvl8();
+	public static long CH_CURTAIN_FEE_RATIO = clanHall().getClanHallCurtainFunctionFeeRation();
+	public static int CH_CURTAIN1_FEE = clanHall().getClanHallCurtainFunctionFeeLvl1();
+	public static int CH_CURTAIN2_FEE = clanHall().getClanHallCurtainFunctionFeeLvl2();
+	public static long CH_FRONT_FEE_RATIO = clanHall().getClanHallFrontPlatformFunctionFeeRation();
+	public static int CH_FRONT1_FEE = clanHall().getClanHallFrontPlatformFunctionFeeLvl1();
+	public static int CH_FRONT2_FEE = clanHall().getClanHallFrontPlatformFunctionFeeLvl2();
 	
 	/** GeoData 0/1/2 */
 	public static int GEODATA = options().getGeoData();
@@ -1141,12 +1141,12 @@ public final class Config {
 	public static boolean ACCEPT_GEOEDITOR_CONN = options().getAcceptGeoeditorConn();
 	
 	/** Max amount of buffs */
-	public static byte BUFFS_MAX_AMOUNT;
+	public static byte BUFFS_MAX_AMOUNT = Byte.parseByte(altSettings().getMaxBuffAmount());
 	
 	/** Alt Settings for devs */
-	public static boolean ALT_DEV_NO_QUESTS;
-	public static boolean ALT_DEV_NO_SPAWNS;
-	
+	public static boolean ALT_DEV_NO_QUESTS = altSettings().getAltDevNoQuests();
+	public static boolean ALT_DEV_NO_SPAWNS = altSettings().getAltDevNoSpawns();
+
 	/**
 	 * This class initializes all global variables for configuration.<br>
 	 * If key doesn't appear in properties file, a default value is setting on by this class.
@@ -1179,176 +1179,6 @@ public final class Config {
 		LIST_NONDROPPABLE_ITEMS = new FastList<>();
 		for (String id : NONDROPPABLE_ITEMS.split(",")) {
 			LIST_NONDROPPABLE_ITEMS.add(Integer.parseInt(id));
-		}
-		
-		// alternative settings
-		try {
-			Properties altSettings = new Properties();
-			InputStream is = new FileInputStream(new File(ALT_SETTINGS_FILE));
-			altSettings.load(is);
-			is.close();
-			
-			ALT_GAME_TIREDNESS = Boolean.parseBoolean(altSettings.getProperty("AltGameTiredness", "false"));
-			ALT_GAME_CREATION = Boolean.parseBoolean(altSettings.getProperty("AltGameCreation", "false"));
-			ALT_GAME_CREATION_SPEED = Double.parseDouble(altSettings.getProperty("AltGameCreationSpeed", "1"));
-			ALT_GAME_CREATION_XP_RATE = Double.parseDouble(altSettings.getProperty("AltGameCreationRateXp", "1"));
-			ALT_GAME_CREATION_SP_RATE = Double.parseDouble(altSettings.getProperty("AltGameCreationRateSp", "1"));
-			ALT_WEIGHT_LIMIT = Double.parseDouble(altSettings.getProperty("AltWeightLimit", "1"));
-			ALT_BLACKSMITH_USE_RECIPES = Boolean.parseBoolean(altSettings.getProperty("AltBlacksmithUseRecipes", "true"));
-			ALT_GAME_SKILL_LEARN = Boolean.parseBoolean(altSettings.getProperty("AltGameSkillLearn", "false"));
-			AUTO_LEARN_SKILLS = Boolean.parseBoolean(altSettings.getProperty("AutoLearnSkills", "false"));
-			ALT_GAME_CANCEL_BOW = altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("bow") || altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("all");
-			ALT_GAME_CANCEL_CAST = altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("cast") || altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("all");
-			ALT_GAME_SHIELD_BLOCKS = Boolean.parseBoolean(altSettings.getProperty("AltShieldBlocks", "false"));
-			ALT_PERFECT_SHLD_BLOCK = Integer.parseInt(altSettings.getProperty("AltPerfectShieldBlockRate", "10"));
-			ALT_GAME_DELEVEL = Boolean.parseBoolean(altSettings.getProperty("Delevel", "true"));
-			ALT_GAME_MAGICFAILURES = Boolean.parseBoolean(altSettings.getProperty("MagicFailures", "false"));
-			ALT_GAME_MOB_ATTACK_AI = Boolean.parseBoolean(altSettings.getProperty("AltGameMobAttackAI", "false"));
-			ALT_MOB_AGRO_IN_PEACEZONE = Boolean.parseBoolean(altSettings.getProperty("AltMobAgroInPeaceZone", "true"));
-			ALT_GAME_EXPONENT_XP = Float.parseFloat(altSettings.getProperty("AltGameExponentXp", "0."));
-			ALT_GAME_EXPONENT_SP = Float.parseFloat(altSettings.getProperty("AltGameExponentSp", "0."));
-			ALLOW_CLASS_MASTERS = Boolean.valueOf(altSettings.getProperty("AllowClassMasters", "False"));
-			ALT_GAME_FREIGHTS = Boolean.parseBoolean(altSettings.getProperty("AltGameFreights", "false"));
-			ALT_GAME_FREIGHT_PRICE = Integer.parseInt(altSettings.getProperty("AltGameFreightPrice", "1000"));
-			ALT_PARTY_RANGE = Integer.parseInt(altSettings.getProperty("AltPartyRange", "1600"));
-			ALT_PARTY_RANGE2 = Integer.parseInt(altSettings.getProperty("AltPartyRange2", "1400"));
-			REMOVE_CASTLE_CIRCLETS = Boolean.parseBoolean(altSettings.getProperty("RemoveCastleCirclets", "true"));
-			IS_CRAFTING_ENABLED = Boolean.parseBoolean(altSettings.getProperty("CraftingEnabled", "true"));
-			LIFE_CRYSTAL_NEEDED = Boolean.parseBoolean(altSettings.getProperty("LifeCrystalNeeded", "true"));
-			SP_BOOK_NEEDED = Boolean.parseBoolean(altSettings.getProperty("SpBookNeeded", "true"));
-			ES_SP_BOOK_NEEDED = Boolean.parseBoolean(altSettings.getProperty("EnchantSkillSpBookNeeded", "true"));
-			AUTO_LOOT = altSettings.getProperty("AutoLoot").equalsIgnoreCase("True");
-			AUTO_LOOT_HERBS = altSettings.getProperty("AutoLootHerbs").equalsIgnoreCase("True");
-			ALT_GAME_KARMA_PLAYER_CAN_BE_KILLED_IN_PEACEZONE = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanBeKilledInPeaceZone", "false"));
-			ALT_GAME_KARMA_PLAYER_CAN_SHOP = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanShop", "true"));
-			ALT_GAME_KARMA_PLAYER_CAN_USE_GK = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanUseGK", "false"));
-			ALT_GAME_KARMA_PLAYER_CAN_TELEPORT = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanTeleport", "true"));
-			ALT_GAME_KARMA_PLAYER_CAN_TRADE = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanTrade", "true"));
-			ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanUseWareHouse", "true"));
-			ALT_GAME_FREE_TELEPORT = Boolean.parseBoolean(altSettings.getProperty("AltFreeTeleporting", "False"));
-			ALT_RECOMMEND = Boolean.parseBoolean(altSettings.getProperty("AltRecommend", "False"));
-			ALT_GAME_SUBCLASS_WITHOUT_QUESTS = Boolean.parseBoolean(altSettings.getProperty("AltSubClassWithoutQuests", "False"));
-			ALT_GAME_VIEWNPC = Boolean.parseBoolean(altSettings.getProperty("AltGameViewNpc", "False"));
-			ALT_GAME_NEW_CHAR_ALWAYS_IS_NEWBIE = Boolean.parseBoolean(altSettings.getProperty("AltNewCharAlwaysIsNewbie", "False"));
-			ALT_MEMBERS_CAN_WITHDRAW_FROM_CLANWH = Boolean.parseBoolean(altSettings.getProperty("AltMembersCanWithdrawFromClanWH", "False"));
-			ALT_MAX_NUM_OF_CLANS_IN_ALLY = Integer.parseInt(altSettings.getProperty("AltMaxNumOfClansInAlly", "3"));
-			DWARF_RECIPE_LIMIT = Integer.parseInt(altSettings.getProperty("DwarfRecipeLimit", "50"));
-			COMMON_RECIPE_LIMIT = Integer.parseInt(altSettings.getProperty("CommonRecipeLimit", "50"));
-			
-			ALT_CLAN_MEMBERS_FOR_WAR = Integer.parseInt(altSettings.getProperty("AltClanMembersForWar", "15"));
-			ALT_CLAN_JOIN_DAYS = Integer.parseInt(altSettings.getProperty("DaysBeforeJoinAClan", "5"));
-			ALT_CLAN_CREATE_DAYS = Integer.parseInt(altSettings.getProperty("DaysBeforeCreateAClan", "10"));
-			ALT_CLAN_DISSOLVE_DAYS = Integer.parseInt(altSettings.getProperty("DaysToPassToDissolveAClan", "7"));
-			ALT_ALLY_JOIN_DAYS_WHEN_LEAVED = Integer.parseInt(altSettings.getProperty("DaysBeforeJoinAllyWhenLeaved", "1"));
-			ALT_ALLY_JOIN_DAYS_WHEN_DISMISSED = Integer.parseInt(altSettings.getProperty("DaysBeforeJoinAllyWhenDismissed", "1"));
-			ALT_ACCEPT_CLAN_DAYS_WHEN_DISMISSED = Integer.parseInt(altSettings.getProperty("DaysBeforeAcceptNewClanWhenDismissed", "1"));
-			ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED = Integer.parseInt(altSettings.getProperty("DaysBeforeCreateNewAllyWhenDissolved", "10"));
-			
-			ALT_OLY_START_TIME = Integer.parseInt(altSettings.getProperty("AltOlyStartTime", "18"));
-			ALT_OLY_MIN = Integer.parseInt(altSettings.getProperty("AltOlyMin", "00"));
-			ALT_OLY_CPERIOD = Long.parseLong(altSettings.getProperty("AltOlyCPeriod", "21600000"));
-			ALT_OLY_BATTLE = Long.parseLong(altSettings.getProperty("AltOlyBattle", "360000"));
-			ALT_OLY_BWAIT = Long.parseLong(altSettings.getProperty("AltOlyBWait", "600000"));
-			ALT_OLY_IWAIT = Long.parseLong(altSettings.getProperty("AltOlyIWait", "300000"));
-			ALT_OLY_WPERIOD = Long.parseLong(altSettings.getProperty("AltOlyWPeriod", "604800000"));
-			ALT_OLY_VPERIOD = Long.parseLong(altSettings.getProperty("AltOlyVPeriod", "86400000"));
-			
-			ALT_MANOR_REFRESH_TIME = Integer.parseInt(altSettings.getProperty("AltManorRefreshTime", "20"));
-			ALT_MANOR_REFRESH_MIN = Integer.parseInt(altSettings.getProperty("AltManorRefreshMin", "00"));
-			ALT_MANOR_APPROVE_TIME = Integer.parseInt(altSettings.getProperty("AltManorApproveTime", "6"));
-			ALT_MANOR_APPROVE_MIN = Integer.parseInt(altSettings.getProperty("AltManorApproveMin", "00"));
-			ALT_MANOR_MAINTENANCE_PERIOD = Integer.parseInt(altSettings.getProperty("AltManorMaintenancePeriod", "360000"));
-			ALT_MANOR_SAVE_ALL_ACTIONS = Boolean.parseBoolean(altSettings.getProperty("AltManorSaveAllActions", "false"));
-			ALT_MANOR_SAVE_PERIOD_RATE = Integer.parseInt(altSettings.getProperty("AltManorSavePeriodRate", "2"));
-			
-			ALT_LOTTERY_PRIZE = Integer.parseInt(altSettings.getProperty("AltLotteryPrize", "50000"));
-			ALT_LOTTERY_TICKET_PRICE = Integer.parseInt(altSettings.getProperty("AltLotteryTicketPrice", "2000"));
-			ALT_LOTTERY_5_NUMBER_RATE = Float.parseFloat(altSettings.getProperty("AltLottery5NumberRate", "0.6"));
-			ALT_LOTTERY_4_NUMBER_RATE = Float.parseFloat(altSettings.getProperty("AltLottery4NumberRate", "0.2"));
-			ALT_LOTTERY_3_NUMBER_RATE = Float.parseFloat(altSettings.getProperty("AltLottery3NumberRate", "0.2"));
-			ALT_LOTTERY_2_AND_1_NUMBER_PRIZE = Integer.parseInt(altSettings.getProperty("AltLottery2and1NumberPrize", "200"));
-			BUFFS_MAX_AMOUNT = Byte.parseByte(altSettings.getProperty("maxbuffamount", "24"));
-			
-			ALT_DEV_NO_QUESTS = Boolean.parseBoolean(altSettings.getProperty("AltDevNoQuests", "False"));
-			ALT_DEV_NO_SPAWNS = Boolean.parseBoolean(altSettings.getProperty("AltDevNoSpawns", "False"));
-			
-			// Dimensional Rift Config
-			RIFT_MIN_PARTY_SIZE = Integer.parseInt(altSettings.getProperty("RiftMinPartySize", "5"));
-			RIFT_MAX_JUMPS = Integer.parseInt(altSettings.getProperty("MaxRiftJumps", "4"));
-			RIFT_SPAWN_DELAY = Integer.parseInt(altSettings.getProperty("RiftSpawnDelay", "10000"));
-			RIFT_AUTO_JUMPS_TIME_MIN = Integer.parseInt(altSettings.getProperty("AutoJumpsDelayMin", "480"));
-			RIFT_AUTO_JUMPS_TIME_MAX = Integer.parseInt(altSettings.getProperty("AutoJumpsDelayMax", "600"));
-			RIFT_ENTER_COST_RECRUIT = Integer.parseInt(altSettings.getProperty("RecruitCost", "18"));
-			RIFT_ENTER_COST_SOLDIER = Integer.parseInt(altSettings.getProperty("SoldierCost", "21"));
-			RIFT_ENTER_COST_OFFICER = Integer.parseInt(altSettings.getProperty("OfficerCost", "24"));
-			RIFT_ENTER_COST_CAPTAIN = Integer.parseInt(altSettings.getProperty("CaptainCost", "27"));
-			RIFT_ENTER_COST_COMMANDER = Integer.parseInt(altSettings.getProperty("CommanderCost", "30"));
-			RIFT_ENTER_COST_HERO = Integer.parseInt(altSettings.getProperty("HeroCost", "33"));
-			RIFT_BOSS_ROOM_TIME_MUTIPLY = Float.parseFloat(altSettings.getProperty("BossRoomTimeMultiply", "1.5"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + ALT_SETTINGS_FILE + " File.");
-		}
-		
-		// clanhall settings
-		try {
-			Properties clanhallSettings = new Properties();
-			InputStream is = new FileInputStream(new File(CLANHALL_CONFIG_FILE));
-			clanhallSettings.load(is);
-			is.close();
-			CH_TELE_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallTeleportFunctionFeeRation", "86400000"));
-			CH_TELE1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallTeleportFunctionFeeLvl1", "86400000"));
-			CH_TELE2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallTeleportFunctionFeeLvl2", "86400000"));
-			CH_SUPPORT_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallSupportFunctionFeeRation", "86400000"));
-			CH_SUPPORT1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl1", "86400000"));
-			CH_SUPPORT2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl2", "86400000"));
-			CH_SUPPORT3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl3", "86400000"));
-			CH_SUPPORT4_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl4", "86400000"));
-			CH_SUPPORT5_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl5", "86400000"));
-			CH_SUPPORT6_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl6", "86400000"));
-			CH_SUPPORT7_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl7", "86400000"));
-			CH_SUPPORT8_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl8", "86400000"));
-			CH_MPREG_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFunctionFeeRation", "86400000"));
-			CH_MPREG1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl1", "86400000"));
-			CH_MPREG2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl2", "86400000"));
-			CH_MPREG3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl3", "86400000"));
-			CH_MPREG4_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl4", "86400000"));
-			CH_MPREG5_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl5", "86400000"));
-			CH_HPREG_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFunctionFeeRation", "86400000"));
-			CH_HPREG1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl1", "86400000"));
-			CH_HPREG2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl2", "86400000"));
-			CH_HPREG3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl3", "86400000"));
-			CH_HPREG4_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl4", "86400000"));
-			CH_HPREG5_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl5", "86400000"));
-			CH_HPREG6_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl6", "86400000"));
-			CH_HPREG7_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl7", "86400000"));
-			CH_HPREG8_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl8", "86400000"));
-			CH_HPREG9_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl9", "86400000"));
-			CH_HPREG10_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl10", "86400000"));
-			CH_HPREG11_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl11", "86400000"));
-			CH_HPREG12_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl12", "86400000"));
-			CH_HPREG13_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl13", "86400000"));
-			CH_EXPREG_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFunctionFeeRation", "86400000"));
-			CH_EXPREG1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl1", "86400000"));
-			CH_EXPREG2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl2", "86400000"));
-			CH_EXPREG3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl3", "86400000"));
-			CH_EXPREG4_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl4", "86400000"));
-			CH_EXPREG5_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl5", "86400000"));
-			CH_EXPREG6_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl6", "86400000"));
-			CH_EXPREG7_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl7", "86400000"));
-			CH_ITEM_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeRation", "86400000"));
-			CH_ITEM1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl1", "86400000"));
-			CH_ITEM2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl2", "86400000"));
-			CH_ITEM3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl3", "86400000"));
-			CH_CURTAIN_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeRation", "86400000"));
-			CH_CURTAIN1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeLvl1", "86400000"));
-			CH_CURTAIN2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeLvl2", "86400000"));
-			CH_FRONT_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeRation", "86400000"));
-			CH_FRONT1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeLvl1", "86400000"));
-			CH_FRONT2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeLvl2", "86400000"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Error("Failed to Load " + CLANHALL_CONFIG_FILE + " File.");
 		}
 
 		if (TVT_EVENT_ENABLED) {
