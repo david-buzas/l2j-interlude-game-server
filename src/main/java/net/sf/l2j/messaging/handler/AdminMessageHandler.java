@@ -12,12 +12,7 @@ import java.util.Arrays;
 public class AdminMessageHandler implements MessageHandler {
     private final Logger logger = Logger.getLogger(AdminMessageHandler.class.getName());
     private final L2PcInstance superAdminPlayer;
-    private final String[] allowedCommands = {
-            "kill", "add_level", "set_level", "announce", "changelvl", "seteh",
-            "setec", "seteg", "setel", "seteb", "setew", "setes",
-            "setle", "setre", "setlf", "setrf", "seten", "setun",
-            "setba", "server_shutdown", "server_restart", "server_abort",
-    };
+    private final String[] allowedCommands = AdminCommandHandler.getInstance().listAllAdminCommands();
 
     public AdminMessageHandler() {
         superAdminPlayer = L2PcInstance.createDummyPlayer(-1, "Super admin");

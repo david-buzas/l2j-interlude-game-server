@@ -44,7 +44,7 @@ public interface ServerConfiguration extends Config {
     String getDriver();
 
     @Key("URL")
-    @DefaultValue("jdbc:mysql://localhost/l2jdb")
+    @DefaultValue("jdbc:mariadb://127.0.0.1:3307/l2j_bartz")
     String getURL();
 
     @Key("Login")
@@ -52,7 +52,7 @@ public interface ServerConfiguration extends Config {
     String getLogin();
 
     @Key("Password")
-    @DefaultValue("")
+    @DefaultValue("root")
     String getPassword();
 
     @Key("MaximumDbConnections")
@@ -80,10 +80,10 @@ public interface ServerConfiguration extends Config {
     int getMaximumOnlineUsers();
 
     @Key("MinProtocolRevision")
-    @DefaultValue("660")
+    @DefaultValue("740")
     int getMinProtocolRevision();
 
     @Key("MaxProtocolRevision")
-    @DefaultValue("665")
+    @DefaultValue("746")
     int getMaxProtocolRevision();
 }

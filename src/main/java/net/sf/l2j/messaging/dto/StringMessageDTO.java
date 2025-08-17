@@ -11,6 +11,11 @@ public class StringMessageDTO extends AbstractMessageDTO {
 
         for (String segment: segments) {
             String[] keyValue = segment.split("=");
+
+            if (keyValue.length != 2) {
+                continue;
+            }
+
             parameters.put(keyValue[0], keyValue[1]);
         }
     }

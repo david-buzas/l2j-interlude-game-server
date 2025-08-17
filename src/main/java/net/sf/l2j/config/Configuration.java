@@ -23,6 +23,12 @@ public class Configuration {
 
     private static final MessagingConfiguration messaging = ConfigFactory.create(MessagingConfiguration.class);
 
+    private static final AltSettingsConfiguration altSettings = ConfigFactory.create(AltSettingsConfiguration.class);
+
+    private static final ClanHallConfiguration clanHall = ConfigFactory.create(ClanHallConfiguration.class);
+
+    private static final CommandPrivilegesConfiguration commandPrivileges = ConfigFactory.create(CommandPrivilegesConfiguration.class);
+
     public static ServerConfiguration server() {
         return server;
     }
@@ -62,4 +68,18 @@ public class Configuration {
     public static MessagingConfiguration messaging() {
         return messaging;
     }
+
+    public static AltSettingsConfiguration altSettings() {
+        return altSettings;
+    }
+
+    public static ClanHallConfiguration clanHall() {
+        return clanHall;
+    }
+
+    public static CommandPrivilegesConfiguration commandPrivileges() {
+        return commandPrivileges;
+    }
+
+
 }
